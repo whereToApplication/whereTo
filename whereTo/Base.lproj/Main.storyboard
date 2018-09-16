@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ghn-6L-ag9">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Launch View Controller-->
+        <scene sceneID="tne-QT-ifu">
+            <objects>
+                <viewController id="BYZ-38-t0r" customClass="LaunchViewController" customModule="whereTo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w5F-fG-ZIW">
+                                <rect key="frame" x="0.0" y="52" width="375" height="162"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="162" id="RBB-ki-zjI"/>
+                                </constraints>
+                            </pickerView>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HEG-7n-AeD">
+                                <rect key="frame" x="0.0" y="252" width="375" height="162"/>
+                            </pickerView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jx4-zp-Eqo">
+                                <rect key="frame" x="157" y="587" width="60" height="60"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="60" id="DJN-YJ-vhf"/>
+                                </constraints>
+                                <state key="normal" title="Go"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="borderColor">
+                                        <color key="value" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowRadius">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="size" keyPath="shadowOffset">
+                                        <size key="value" width="0.0" height="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="shadowOpacity">
+                                        <real key="value" value="-1"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="goBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Z5-pp-jcZ"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <constraints>
+                            <constraint firstItem="w5F-fG-ZIW" firstAttribute="trailing" secondItem="HEG-7n-AeD" secondAttribute="trailing" id="17X-vs-eR2"/>
+                            <constraint firstItem="w5F-fG-ZIW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="35F-rO-vXh"/>
+                            <constraint firstAttribute="bottom" secondItem="Jx4-zp-Eqo" secondAttribute="bottom" constant="20" symbolic="YES" id="Dso-TH-2uq"/>
+                            <constraint firstItem="HEG-7n-AeD" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="EOX-Ka-DP4"/>
+                            <constraint firstItem="w5F-fG-ZIW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="Lh9-XX-r7n"/>
+                            <constraint firstItem="HEG-7n-AeD" firstAttribute="centerX" secondItem="Jx4-zp-Eqo" secondAttribute="centerX" id="PXd-b4-CR8"/>
+                            <constraint firstItem="Jx4-zp-Eqo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="157" id="VFV-Nd-4nf"/>
+                            <constraint firstItem="HEG-7n-AeD" firstAttribute="top" secondItem="w5F-fG-ZIW" secondAttribute="bottom" constant="38" id="gLL-3Z-EyN"/>
+                            <constraint firstItem="w5F-fG-ZIW" firstAttribute="leading" secondItem="HEG-7n-AeD" secondAttribute="leading" id="lqM-db-3gC"/>
+                            <constraint firstAttribute="trailing" secondItem="w5F-fG-ZIW" secondAttribute="trailing" id="sgs-Vz-qk3"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
+                    </view>
+                    <connections>
+                        <outlet property="actionPicker" destination="w5F-fG-ZIW" id="hAQ-lD-HEn"/>
+                        <outlet property="distancePicker" destination="HEG-7n-AeD" id="hAy-dk-CJh"/>
+                        <segue destination="pM2-r4-k7T" kind="show" identifier="mapSegue" id="31H-38-h73"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-65" y="133"/>
+        </scene>
+        <!--Map View Controller-->
+        <scene sceneID="bea-pT-sFw">
+            <objects>
+                <viewController id="pM2-r4-k7T" customClass="MapViewController" customModule="whereTo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="jSj-G8-0DV">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <mapView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" mapType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="nXr-zz-C0L">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </mapView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T1F-dr-Sgk">
+                                <rect key="frame" x="16" y="617" width="85" height="30"/>
+                                <state key="normal" title="Go Together"/>
+                                <connections>
+                                    <action selector="goTogetherBtn:" destination="pM2-r4-k7T" eventType="touchUpInside" id="Lge-iN-nOE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJy-KB-cco">
+                                <rect key="frame" x="313" y="617" width="46" height="30"/>
+                                <state key="normal" title="Re-roll"/>
+                                <connections>
+                                    <action selector="reRollBtn:" destination="pM2-r4-k7T" eventType="touchUpInside" id="9yP-qX-u6X"/>
+                                </connections>
+                            </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="z58-aR-3vn">
+                                <rect key="frame" x="166" y="74" width="42" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pwZ-lX-gdu">
+                                <rect key="frame" x="172" y="617" width="30" height="30"/>
+                                <state key="normal" title="Go"/>
+                                <connections>
+                                    <action selector="goBtn:" destination="pM2-r4-k7T" eventType="touchUpInside" id="5HW-Pg-zNj"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstAttribute="bottom" secondItem="T1F-dr-Sgk" secondAttribute="bottom" constant="20" symbolic="YES" id="0qg-hq-K4N"/>
+                            <constraint firstAttribute="trailing" secondItem="nXr-zz-C0L" secondAttribute="trailing" id="15R-wk-det"/>
+                            <constraint firstItem="nXr-zz-C0L" firstAttribute="leading" secondItem="jSj-G8-0DV" secondAttribute="leading" id="2Ny-KD-K5z"/>
+                            <constraint firstItem="T1F-dr-Sgk" firstAttribute="baseline" secondItem="pwZ-lX-gdu" secondAttribute="baseline" id="EFH-R4-Ytc"/>
+                            <constraint firstItem="nXr-zz-C0L" firstAttribute="top" secondItem="jSj-G8-0DV" secondAttribute="top" id="MM6-3l-2XA"/>
+                            <constraint firstItem="wJy-KB-cco" firstAttribute="trailing" secondItem="jSj-G8-0DV" secondAttribute="trailingMargin" id="Qq6-Z5-F6G"/>
+                            <constraint firstItem="T1F-dr-Sgk" firstAttribute="leading" secondItem="jSj-G8-0DV" secondAttribute="leadingMargin" id="Tzo-Cx-MEz"/>
+                            <constraint firstItem="z58-aR-3vn" firstAttribute="centerX" secondItem="pwZ-lX-gdu" secondAttribute="centerX" id="Xt1-en-xff"/>
+                            <constraint firstItem="nXr-zz-C0L" firstAttribute="centerX" secondItem="z58-aR-3vn" secondAttribute="centerX" id="ZA3-IB-rE3"/>
+                            <constraint firstItem="nXr-zz-C0L" firstAttribute="bottom" secondItem="c15-oY-BKF" secondAttribute="bottom" id="blW-3T-HOG"/>
+                            <constraint firstItem="pwZ-lX-gdu" firstAttribute="baseline" secondItem="wJy-KB-cco" secondAttribute="baseline" id="iZC-lI-Y1S"/>
+                            <constraint firstItem="z58-aR-3vn" firstAttribute="top" secondItem="c15-oY-BKF" secondAttribute="top" constant="54" id="lFL-9v-BFq"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="c15-oY-BKF"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="nXr-zz-C0L" id="Tll-t9-Uic"/>
+                        <outlet property="placeName" destination="z58-aR-3vn" id="wDG-82-3fb"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uxG-0m-14f" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="714" y="133"/>
+        </scene>
+        <!--New Map View Controller-->
+        <scene sceneID="caZ-xF-4HX">
+            <objects>
+                <viewController id="Ghn-6L-ag9" customClass="newMapViewController" customModule="whereTo" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="LOz-Cj-Hlv">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <viewLayoutGuide key="safeArea" id="da4-bi-wIb"/>
+                    </view>
+                    <connections>
+                        <outlet property="mapView" destination="LOz-Cj-Hlv" id="x1J-Eb-imh"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="teS-g9-Isr" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1518" y="130"/>
+        </scene>
+    </scenes>
+</document>
