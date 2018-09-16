@@ -5,24 +5,28 @@ PODS:
   - GoogleMaps/Base (2.7.0)
   - GoogleMaps/Maps (2.7.0):
     - GoogleMaps/Base
+  - Pulsator (0.5.1)
   - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - GoogleMaps
+  - Pulsator
   - SwiftyJSON
 
 SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - GoogleMaps
+    - Pulsator
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
+  Pulsator: f465ca37212d826523fe8c79b07c1a4c1a941f5e
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: 9569803fb73ec1ffba80fdd737644028c43785d5
+PODFILE CHECKSUM: c7323f1851618e90e6130edc0b3a63350b8365d5
 
 COCOAPODS: 1.5.3

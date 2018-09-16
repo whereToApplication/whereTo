@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Ghn-6L-ag9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14113" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -20,13 +20,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="w5F-fG-ZIW">
-                                <rect key="frame" x="0.0" y="52" width="375" height="162"/>
+                                <rect key="frame" x="0.0" y="252" width="375" height="162"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="162" id="RBB-ki-zjI"/>
                                 </constraints>
                             </pickerView>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="HEG-7n-AeD">
-                                <rect key="frame" x="0.0" y="252" width="375" height="162"/>
+                                <rect key="frame" x="0.0" y="432" width="375" height="162"/>
                             </pickerView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Jx4-zp-Eqo">
                                 <rect key="frame" x="157" y="587" width="60" height="60"/>
@@ -58,17 +58,21 @@
                                     <action selector="goBtn:" destination="BYZ-38-t0r" eventType="touchUpInside" id="5Z5-pp-jcZ"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Logo2" translatesAutoresizingMaskIntoConstraints="NO" id="2hr-MA-rek">
+                                <rect key="frame" x="125" y="65" width="124" height="107"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="w5F-fG-ZIW" firstAttribute="trailing" secondItem="HEG-7n-AeD" secondAttribute="trailing" id="17X-vs-eR2"/>
                             <constraint firstItem="w5F-fG-ZIW" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="35F-rO-vXh"/>
                             <constraint firstAttribute="bottom" secondItem="Jx4-zp-Eqo" secondAttribute="bottom" constant="20" symbolic="YES" id="Dso-TH-2uq"/>
-                            <constraint firstItem="HEG-7n-AeD" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="EOX-Ka-DP4"/>
-                            <constraint firstItem="w5F-fG-ZIW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="32" id="Lh9-XX-r7n"/>
+                            <constraint firstItem="HEG-7n-AeD" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" constant="179.5" id="EOX-Ka-DP4"/>
+                            <constraint firstItem="w5F-fG-ZIW" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="232" id="Lh9-XX-r7n"/>
                             <constraint firstItem="HEG-7n-AeD" firstAttribute="centerX" secondItem="Jx4-zp-Eqo" secondAttribute="centerX" id="PXd-b4-CR8"/>
                             <constraint firstItem="Jx4-zp-Eqo" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="157" id="VFV-Nd-4nf"/>
-                            <constraint firstItem="HEG-7n-AeD" firstAttribute="top" secondItem="w5F-fG-ZIW" secondAttribute="bottom" constant="38" id="gLL-3Z-EyN"/>
+                            <constraint firstItem="HEG-7n-AeD" firstAttribute="top" secondItem="w5F-fG-ZIW" secondAttribute="bottom" constant="18" id="gLL-3Z-EyN"/>
                             <constraint firstItem="w5F-fG-ZIW" firstAttribute="leading" secondItem="HEG-7n-AeD" secondAttribute="leading" id="lqM-db-3gC"/>
                             <constraint firstAttribute="trailing" secondItem="w5F-fG-ZIW" secondAttribute="trailing" id="sgs-Vz-qk3"/>
                         </constraints>
@@ -77,12 +81,13 @@
                     <connections>
                         <outlet property="actionPicker" destination="w5F-fG-ZIW" id="hAQ-lD-HEn"/>
                         <outlet property="distancePicker" destination="HEG-7n-AeD" id="hAy-dk-CJh"/>
+                        <outlet property="testLaunch" destination="2hr-MA-rek" id="QQL-Cy-s2W"/>
                         <segue destination="pM2-r4-k7T" kind="show" identifier="mapSegue" id="31H-38-h73"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-65" y="133"/>
+            <point key="canvasLocation" x="-66.400000000000006" y="132.68365817091455"/>
         </scene>
         <!--Map View Controller-->
         <scene sceneID="bea-pT-sFw">
@@ -97,14 +102,33 @@
                             </mapView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="T1F-dr-Sgk">
                                 <rect key="frame" x="16" y="617" width="85" height="30"/>
-                                <state key="normal" title="Go Together"/>
+                                <color key="backgroundColor" red="0.8784313725490196" green="0.8784313725490196" blue="0.8784313725490196" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Go Together">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="goTogetherBtn:" destination="pM2-r4-k7T" eventType="touchUpInside" id="Lge-iN-nOE"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wJy-KB-cco">
                                 <rect key="frame" x="313" y="617" width="46" height="30"/>
-                                <state key="normal" title="Re-roll"/>
+                                <color key="backgroundColor" red="0.8913190038071066" green="0.8913190038071066" blue="0.8913190038071066" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Re-roll">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
                                     <action selector="reRollBtn:" destination="pM2-r4-k7T" eventType="touchUpInside" id="9yP-qX-u6X"/>
                                 </connections>
@@ -117,9 +141,36 @@
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="pwZ-lX-gdu">
                                 <rect key="frame" x="172" y="617" width="30" height="30"/>
-                                <state key="normal" title="Go"/>
+                                <color key="backgroundColor" red="0.862132197422116" green="0.862132197422116" blue="0.862132197422116" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Go">
+                                    <color key="titleColor" cocoaTouchSystemColor="darkTextColor"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                                 <connections>
-                                    <action selector="goBtn:" destination="pM2-r4-k7T" eventType="touchUpInside" id="5HW-Pg-zNj"/>
+                                    <action selector="goBtn:" destination="pM2-r4-k7T" eventType="touchUpInside" id="UsL-pR-npT"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="kfC-qU-gLz">
+                                <rect key="frame" x="16" y="617" width="85" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <color key="backgroundColor" red="0.87843137250000003" green="0.87843137250000003" blue="0.87843137250000003" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                <state key="normal" title="Go Together">
+                                    <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="2"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="borderWidth">
+                                        <real key="value" value="0.0"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                                <connections>
+                                    <action selector="goTogetherBtn:" destination="pM2-r4-k7T" eventType="touchUpInside" id="mhV-aj-SvC"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -168,4 +219,7 @@
             <point key="canvasLocation" x="1518" y="130"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="Logo2" width="990" height="990"/>
+    </resources>
 </document>

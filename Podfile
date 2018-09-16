@@ -9,6 +9,7 @@ target 'whereTo' do
 	pod 'Alamofire', '~> 4.7'
     pod 'SwiftyJSON'
     pod 'GoogleMaps'
+    pod 'Pulsator'
   target 'whereToTests' do
     inherit! :search_paths
     # Pods for testing

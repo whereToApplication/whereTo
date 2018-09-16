@@ -10,7 +10,7 @@ import UIKit
 import Alamofire
 import MapKit
 import SwiftyJSON
-
+import Pulsator
 
 class LaunchViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, CLLocationManagerDelegate{
     @IBOutlet weak var actionPicker: UIPickerView!
@@ -19,6 +19,8 @@ class LaunchViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     
     let actions = ["places to go", "things to do", "stuff to eat"]
     let distances = ["walk", "drive", "travel"]
+    
+    @IBOutlet weak var testLaunch: UIImageView!
     
     var actionTxt: String = ""
     var distanceTxt: String = ""
@@ -33,7 +35,10 @@ class LaunchViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         super.viewDidLoad()
         actionPicker?.delegate = self
         actionPicker?.dataSource = self
-        
+        let pulsator = Pulsator()
+        testLaunch.layer.addSublayer(pulsator)
+        pulsator.radius = 240.0
+        pulsator.start()
         distancePicker?.delegate = self
         distancePicker?.dataSource = self
         
@@ -106,7 +111,7 @@ class LaunchViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
                 print(json["results"][randnum]["name"])
                 self.locationname = json["results"][randnum]["name"].stringValue
                 self.locationlatitude = json["results"][randnum]["geometry"]["location"]["lat"].stringValue
-                self.locationlongitude = json["results"][randnum]["name"]["location"]["lng"].stringValue
+                self.locationlongitude = json["results"][randnum]["geometry"]["location"]["lng"].stringValue
                 self.performSegue(withIdentifier: "mapSegue", sender: self)
             }
         }
@@ -116,6 +121,7 @@ class LaunchViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         if let destination = segue.destination as? MapViewController {
             destination.name = self.locationname
             destination.latitude = self.locationlatitude
+            print("self.locationlongitude " + self.locationlongitude)
             destination.longitude = self.locationlongitude
         }
     }

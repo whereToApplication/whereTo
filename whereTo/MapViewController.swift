@@ -17,13 +17,30 @@ class MapViewController: UIViewController {
     @IBAction func goTogetherBtn(_ sender: Any) {
     }
     @IBAction func goBtn(_ sender: Any) {
+        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
+            UIApplication.shared.openURL(URL(string:
+                "comgooglemaps://?center=\(latitude),\(longitude)&zoom=14&views=traffic")!)
+        } else {
+            print("Can't use comgooglemaps://");
+        }
+
     }
     
     @IBAction func reRollBtn(_ sender: Any) {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        placeName.text = name
+        print("latitude " + latitude)
+        print("longitude " + longitude)
+        mapView.centerCoordinate = CLLocationCoordinate2D(latitude: Double(latitude)!, longitude: Double(longitude)!)
+        let myAnnotation: MKPointAnnotation = MKPointAnnotation()
+        myAnnotation.coordinate = CLLocationCoordinate2DMake(Double(latitude)!, Double(longitude)!)
+        myAnnotation.title = name
+        mapView.addAnnotation(myAnnotation)
+        mapView.region.span.latitudeDelta = 0.2;
+        mapView.region.span.longitudeDelta = 0.2;
+        
         // Do any additional setup after loading the view.
     }
 
