@@ -11,6 +11,7 @@ import Alamofire
 import MapKit
 import SwiftyJSON
 import Pulsator
+import JJFloatingActionButton
 
 class LaunchViewController: UIViewController, UIPickerViewDataSource, UIPickerViewDelegate, CLLocationManagerDelegate{
     @IBOutlet weak var actionPicker: UIPickerView!
@@ -18,12 +19,20 @@ class LaunchViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     @IBOutlet weak var distancePicker: UIPickerView!
     
     let actions = ["places to go", "things to do", "stuff to eat"]
-    let distances = ["walk", "drive", "travel"]
-    
+    let travelmodes = ["walk", "drive", "travel"]
+    let realtravelmodes = ["walking", "driving", "transit"]
+    var realtravel: String = "walking"
+    let distances = [1500, 26093, 48280]
+    var distance: Int = 1000
+    let placesToGo = "amusement_park,aquarium,art_gallery,natural_feature,cafe,casino,library,hindu_temple,museum,park,stadium,zoo"
+    let thingsToDo = "bowling_alley,bookstore,gym,shopping_mall,spa,movie_theater,movie_rental"
+    let stuffToEat = "bakery,bar,cafe,food,restaurant"
+    var action: String = ""
     @IBOutlet weak var testLaunch: UIImageView!
     
-    var actionTxt: String = ""
-    var distanceTxt: String = ""
+    @IBOutlet var parentView: UIView!
+    var actionTxt: String = "places to go"
+    var distanceTxt: String = "walk"
     
     var locationname: String = ""
     var locationlatitude: String = ""
@@ -31,16 +40,82 @@ class LaunchViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     private var locationManager: CLLocationManager!
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
+    
+    let leftActionButton = JJFloatingActionButton()
+    let rightActionButton = JJFloatingActionButton()
+    let pulsator = Pulsator()
+
+    override func viewWillAppear(_ animated: Bool) {
+        pulsator.radius = 200.0
+        parentView.layer.insertSublayer(pulsator, below: testLaunch.layer)
+        pulsator.position = testLaunch.center
+        pulsator.numPulse = 3
+        pulsator.start()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        pulsator.position = testLaunch.layer.position
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         actionPicker?.delegate = self
         actionPicker?.dataSource = self
-        let pulsator = Pulsator()
-        testLaunch.layer.addSublayer(pulsator)
-        pulsator.radius = 240.0
-        pulsator.start()
+        
         distancePicker?.delegate = self
         distancePicker?.dataSource = self
+        
+        self.view.addSubview(leftActionButton)
+        self.view.addSubview(rightActionButton)
+        
+        testLaunch.frame = CGRect(x: parentView.center.x, y: testLaunch.frame.midY, width: testLaunch.frame.width, height: testLaunch.frame.height)
+        
+        leftActionButton.translatesAutoresizingMaskIntoConstraints = false
+        leftActionButton.widthAnchor.constraint(equalToConstant: 65).isActive = true
+        leftActionButton.heightAnchor.constraint(equalToConstant: 65).isActive = true
+        leftActionButton.configureDefaultItem { item in
+            item.titlePosition = .right
+        }
+        if #available(iOS 11.0, *) {
+            leftActionButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor, constant: 16).isActive = true
+            leftActionButton.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor, constant: -16).isActive = true
+        } else {
+            leftActionButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16).isActive = true
+            leftActionButton.bottomAnchor.constraint(equalTo: bottomLayoutGuide.topAnchor, constant: -16).isActive = true
+        }
+        leftActionButton.addItem(title: "Walk", image: UIImage(named: "walking")?.withRenderingMode(.alwaysTemplate)) { item in
+            self.leftActionButton.buttonImage = item.buttonImage
+        }
+        
+        leftActionButton.addItem(title: "Drive", image: UIImage(named: "car")?.withRenderingMode(.alwaysTemplate)) { item in
+            self.leftActionButton.buttonImage = item.buttonImage
+        }
+        
+        leftActionButton.addItem(title: "Transit", image: UIImage(named: "subway")?.withRenderingMode(.alwaysTemplate)) { item in
+            self.leftActionButton.buttonImage = item.buttonImage
+        }
+        
+        
+        rightActionButton.translatesAutoresizingMaskIntoConstraints = false
+        rightActionButton.widthAnchor.constraint(equalToConstant: 65).isActive = true
+        rightActionButton.heightAnchor.constraint(equalToConstant: 65).isActive = true
+        rightActionButton.configureDefaultItem { item in
+            item.titlePosition = .left
+        }
+        rightActionButton.display(inViewController: self)
+        rightActionButton.addItem(title: "Places to go", image: UIImage(named: "map")?.withRenderingMode(.alwaysTemplate)) { item in
+            self.rightActionButton.buttonImage = item.buttonImage
+        }
+        
+        rightActionButton.addItem(title: "Stuff to do", image: UIImage(named: "theme-park")?.withRenderingMode(.alwaysTemplate)) { item in
+            self.rightActionButton.buttonImage = item.buttonImage
+        }
+        
+        rightActionButton.addItem(title: "Things to eat", image: UIImage(named: "dining")?.withRenderingMode(.alwaysTemplate)) { item in
+            self.rightActionButton.buttonImage = item.buttonImage
+        }
         
         locationManager = CLLocationManager()
         locationManager.delegate = self
@@ -50,9 +125,34 @@ class LaunchViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
             locationManager.requestWhenInUseAuthorization()
             locationManager.startUpdatingLocation()
         }
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(self.testLaunchClicked))
+        testLaunch.isUserInteractionEnabled = true
+        testLaunch.addGestureRecognizer(singleTap)
+
+//        let floaty = Floaty()
+//        floaty.addItem("Hello, World!", icon: UIImage(named: "trekking")!)
+//        self.view.addSubview(floaty)
         // Do any additional setup after loading the view.
     }
     
+    @objc func testLaunchClicked() {
+        print("action " + action)
+        Alamofire.request("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(12.97),\(77.59)&radius=\(distance)&type=\(action)&key=AIzaSyBfiWNwy-JuUD59MQqEa_PkEiIlmVmVSu0", method: HTTPMethod.get, encoding: JSONEncoding.default, headers: nil).responseJSON {
+            response in
+            if let jsonValue = response.result.value {
+                let json = SwiftyJSON.JSON(jsonValue)
+                print(json["results"])
+                print(json["results"].count)
+                let randnum = Int(arc4random_uniform(UInt32(json["results"].count)))
+                print(json["results"][randnum]["name"])
+                self.locationname = json["results"][randnum]["name"].stringValue
+                self.locationlatitude = json["results"][randnum]["geometry"]["location"]["lat"].stringValue
+                self.locationlongitude = json["results"][randnum]["geometry"]["location"]["lng"].stringValue
+                self.performSegue(withIdentifier: "mapSegue", sender: self)
+            }
+        }
+    }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         latitude = locValue.latitude
@@ -68,7 +168,7 @@ class LaunchViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         if pickerView == actionPicker {
             return actions.count
         } else if pickerView == distancePicker {
-            return distances.count
+            return travelmodes.count
         } else {
             return 0
         }
@@ -78,7 +178,7 @@ class LaunchViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         if pickerView == actionPicker {
             return actions[row]
         } else if pickerView == distancePicker {
-            return distances[row]
+            return travelmodes[row]
         } else {
             return ""
         }
@@ -87,42 +187,28 @@ class LaunchViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         if pickerView == actionPicker {
             actionTxt = actions[row]
-        } else if pickerView == distancePicker {
-            distanceTxt = distances[row]
-        }
-    }
-    @IBAction func goBtn(_ sender: Any) {
-//        Alamofire.request("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(latitude),\(longitude)&radius=500&type=restaurant&key=AIzaSyBfiWNwy-JuUD59MQqEa_PkEiIlmVmVSu0", method: HTTPMethod.get, encoding: JSONEncoding.default, headers: nil).validate().responseString {
-//            response in
-//            print(response)
-//            let JSON = response as! NSDictionary
-//            var json = JSON(JSON)
-//            print (json.count)
-//        }
-        
-        Alamofire.request("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(latitude),\(longitude)&radius=500&type=restaurant&key=AIzaSyBfiWNwy-JuUD59MQqEa_PkEiIlmVmVSu0", method: HTTPMethod.get, encoding: JSONEncoding.default, headers: nil).responseJSON {
-            response in
-            if let jsonValue = response.result.value {
-                let json = SwiftyJSON.JSON(jsonValue)
-                print(json["results"])
-                var counter: Int = 0
-                print(json["results"].count)
-                let randnum = Int(arc4random_uniform(UInt32(json["results"].count)))
-                print(json["results"][randnum]["name"])
-                self.locationname = json["results"][randnum]["name"].stringValue
-                self.locationlatitude = json["results"][randnum]["geometry"]["location"]["lat"].stringValue
-                self.locationlongitude = json["results"][randnum]["geometry"]["location"]["lng"].stringValue
-                self.performSegue(withIdentifier: "mapSegue", sender: self)
+            if (actionTxt == "places to go") {
+                action = placesToGo
+            } else if (actionTxt == "things to do") {
+                action = thingsToDo
+            } else if (actionTxt == "stuff to eat") {
+                action = stuffToEat
             }
+        } else if pickerView == distancePicker {
+            distanceTxt = travelmodes[row]
+            distance = distances[row]
+            realtravel = realtravelmodes[row]
         }
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let destination = segue.destination as? MapViewController {
             destination.name = self.locationname
-            destination.latitude = self.locationlatitude
-            print("self.locationlongitude " + self.locationlongitude)
-            destination.longitude = self.locationlongitude
+            destination.dlatitude = self.locationlatitude
+            destination.dlongitude = self.locationlongitude
+            destination.slatitude = String(self.latitude)
+            destination.slongitude = String(self.longitude)
+            destination.travelMode = realtravel
         }
     }
     override func didReceiveMemoryWarning() {

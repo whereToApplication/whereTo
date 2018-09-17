@@ -17,7 +17,7 @@
 		550EAB3B214D98FD00C5AFF5 /* whereToUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550EAB3A214D98FD00C5AFF5 /* whereToUITests.swift */; };
 		550EAB49214D9B1700C5AFF5 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550EAB48214D9B1700C5AFF5 /* LaunchViewController.swift */; };
 		550EAB4B214DA88500C5AFF5 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550EAB4A214DA88500C5AFF5 /* MapViewController.swift */; };
-		556AE691214DFE9A00E23AE6 /* newMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 556AE690214DFE9A00E23AE6 /* newMapViewController.swift */; };
+		55FDA844214F70740081EC28 /* fabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FDA843214F70740081EC28 /* fabViewController.swift */; };
 		763835836062D3102E971A9F /* Pods_whereTo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3257294C46420CF5512FE8 /* Pods_whereTo.framework */; };
 		C46E2046B7E443969B9354E8 /* Pods_whereToUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5A4266954AF7514BE2CB267 /* Pods_whereToUITests.framework */; };
 /* End PBXBuildFile section */
@@ -57,7 +57,7 @@
 		550EAB3C214D98FD00C5AFF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		550EAB48214D9B1700C5AFF5 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		550EAB4A214DA88500C5AFF5 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
-		556AE690214DFE9A00E23AE6 /* newMapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = newMapViewController.swift; sourceTree = "<group>"; };
+		55FDA843214F70740081EC28 /* fabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fabViewController.swift; sourceTree = "<group>"; };
 		6D15C5AFEAFB70A4A7772919 /* Pods_whereToTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_whereToTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77A2FDF84A0B2ECC3F31A1BD /* Pods-whereToUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whereToUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-whereToUITests/Pods-whereToUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		7DF63C1D1F37F2AB6DC236EA /* Pods-whereToTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whereToTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-whereToTests/Pods-whereToTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -141,7 +141,7 @@
 				550EAB26214D98FD00C5AFF5 /* Info.plist */,
 				550EAB48214D9B1700C5AFF5 /* LaunchViewController.swift */,
 				550EAB4A214DA88500C5AFF5 /* MapViewController.swift */,
-				556AE690214DFE9A00E23AE6 /* newMapViewController.swift */,
+				55FDA843214F70740081EC28 /* fabViewController.swift */,
 			);
 			path = whereTo;
 			sourceTree = "<group>";
@@ -354,12 +354,20 @@
 			inputPaths = (
 				"${SRCROOT}/Pods/Target Support Files/Pods-whereTo/Pods-whereTo-frameworks.sh",
 				"${BUILT_PRODUCTS_DIR}/Alamofire/Alamofire.framework",
+				"${BUILT_PRODUCTS_DIR}/JJFloatingActionButton/JJFloatingActionButton.framework",
+				"${BUILT_PRODUCTS_DIR}/MDFInternationalization/MDFInternationalization.framework",
+				"${BUILT_PRODUCTS_DIR}/MDFTextAccessibility/MDFTextAccessibility.framework",
+				"${BUILT_PRODUCTS_DIR}/MaterialComponents/MaterialComponents.framework",
 				"${BUILT_PRODUCTS_DIR}/Pulsator/Pulsator.framework",
 				"${BUILT_PRODUCTS_DIR}/SwiftyJSON/SwiftyJSON.framework",
 			);
 			name = "[CP] Embed Pods Frameworks";
 			outputPaths = (
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Alamofire.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/JJFloatingActionButton.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFInternationalization.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MDFTextAccessibility.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/MaterialComponents.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pulsator.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SwiftyJSON.framework",
 			);
@@ -413,7 +421,7 @@
 			files = (
 				550EAB1D214D98FA00C5AFF5 /* ViewController.swift in Sources */,
 				550EAB49214D9B1700C5AFF5 /* LaunchViewController.swift in Sources */,
-				556AE691214DFE9A00E23AE6 /* newMapViewController.swift in Sources */,
+				55FDA844214F70740081EC28 /* fabViewController.swift in Sources */,
 				550EAB1B214D98FA00C5AFF5 /* AppDelegate.swift in Sources */,
 				550EAB4B214DA88500C5AFF5 /* MapViewController.swift in Sources */,
 			);
@@ -592,7 +600,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 823439UD45;
 				INFOPLIST_FILE = whereTo/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Krrish.whereTo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos11.4;
@@ -609,7 +620,10 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 823439UD45;
 				INFOPLIST_FILE = whereTo/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Krrish.whereTo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos11.4;
@@ -627,7 +641,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 823439UD45;
 				INFOPLIST_FILE = whereToTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Krrish.whereToTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -645,7 +663,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 823439UD45;
 				INFOPLIST_FILE = whereToTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Krrish.whereToTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -662,7 +684,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 823439UD45;
 				INFOPLIST_FILE = whereToUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Krrish.whereToUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
@@ -679,7 +705,11 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 823439UD45;
 				INFOPLIST_FILE = whereToUITests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.Krrish.whereToUITests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;

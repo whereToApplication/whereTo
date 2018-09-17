@@ -10,6 +10,8 @@ target 'whereTo' do
     pod 'SwiftyJSON'
     pod 'GoogleMaps'
     pod 'Pulsator'
+    pod 'JJFloatingActionButton'
+    pod 'MaterialComponents/Buttons'
   target 'whereToTests' do
     inherit! :search_paths
     # Pods for testing

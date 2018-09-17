@@ -5,12 +5,38 @@ PODS:
   - GoogleMaps/Base (2.7.0)
   - GoogleMaps/Maps (2.7.0):
     - GoogleMaps/Base
+  - JJFloatingActionButton (0.9.1)
+  - MaterialComponents/Buttons (54.10.0):
+    - MaterialComponents/Ink
+    - MaterialComponents/private/Math
+    - MaterialComponents/private/Shapes
+    - MaterialComponents/ShadowElevations
+    - MaterialComponents/ShadowLayer
+    - MaterialComponents/Typography
+    - MDFInternationalization
+    - MDFTextAccessibility
+  - MaterialComponents/Ink (54.10.0):
+    - MaterialComponents/private/Math
+  - MaterialComponents/private/Application (54.10.0)
+  - MaterialComponents/private/Math (54.10.0)
+  - MaterialComponents/private/Shapes (54.10.0):
+    - MaterialComponents/private/Math
+    - MaterialComponents/ShadowLayer
+  - MaterialComponents/ShadowElevations (54.10.0)
+  - MaterialComponents/ShadowLayer (54.10.0):
+    - MaterialComponents/ShadowElevations
+  - MaterialComponents/Typography (54.10.0):
+    - MaterialComponents/private/Application
+  - MDFInternationalization (1.0.4)
+  - MDFTextAccessibility (1.2.0)
   - Pulsator (0.5.1)
   - SwiftyJSON (4.1.0)
 
 DEPENDENCIES:
   - Alamofire (~> 4.7)
   - GoogleMaps
+  - JJFloatingActionButton
+  - MaterialComponents/Buttons
   - Pulsator
   - SwiftyJSON
 
@@ -18,15 +44,23 @@ SPEC REPOS:
   https://github.com/cocoapods/specs.git:
     - Alamofire
     - GoogleMaps
+    - JJFloatingActionButton
+    - MaterialComponents
+    - MDFInternationalization
+    - MDFTextAccessibility
     - Pulsator
     - SwiftyJSON
 
 SPEC CHECKSUMS:
   Alamofire: e4fa87002c137ba2d8d634d2c51fabcda0d5c223
   GoogleMaps: f79af95cb24d869457b1f961c93d3ce8b2f3b848
+  JJFloatingActionButton: ea596ce87923e5c9c55e8157ae2a91968c1512c3
+  MaterialComponents: 41a7961ccdcf5bc0c2ec376011388869512cb117
+  MDFInternationalization: e355b0cebecf53d60233bd267084e49366c82513
+  MDFTextAccessibility: 94098925e0853551c5a311ce7c1ecefbe297cdb6
   Pulsator: f465ca37212d826523fe8c79b07c1a4c1a941f5e
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: c7323f1851618e90e6130edc0b3a63350b8365d5
+PODFILE CHECKSUM: 2fa0968ac9b2eb7d88df87dc7d826766ec77a2a7
 
 COCOAPODS: 1.5.3
