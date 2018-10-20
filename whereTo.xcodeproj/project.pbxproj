@@ -19,6 +19,8 @@
 		550EAB4B214DA88500C5AFF5 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550EAB4A214DA88500C5AFF5 /* MapViewController.swift */; };
 		55FDA844214F70740081EC28 /* fabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FDA843214F70740081EC28 /* fabViewController.swift */; };
 		763835836062D3102E971A9F /* Pods_whereTo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3257294C46420CF5512FE8 /* Pods_whereTo.framework */; };
+		B47569A6217BE2AC00204F60 /* AlgorithmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47569A5217BE2AC00204F60 /* AlgorithmController.swift */; };
+		B4A807E0217BBD2500FA39F8 /* optionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B4A807DF217BBD2500FA39F8 /* optionsViewController.swift */; };
 		C46E2046B7E443969B9354E8 /* Pods_whereToUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C5A4266954AF7514BE2CB267 /* Pods_whereToUITests.framework */; };
 /* End PBXBuildFile section */
 
@@ -64,6 +66,8 @@
 		9393762915F2323F8E590A9A /* Pods-whereTo.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whereTo.debug.xcconfig"; path = "Pods/Target Support Files/Pods-whereTo/Pods-whereTo.debug.xcconfig"; sourceTree = "<group>"; };
 		941689A24C57B452E4DEB54D /* Pods-whereTo.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whereTo.release.xcconfig"; path = "Pods/Target Support Files/Pods-whereTo/Pods-whereTo.release.xcconfig"; sourceTree = "<group>"; };
 		A89C5D2B3539D18F552335FC /* Pods-whereToTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whereToTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-whereToTests/Pods-whereToTests.release.xcconfig"; sourceTree = "<group>"; };
+		B47569A5217BE2AC00204F60 /* AlgorithmController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlgorithmController.swift; sourceTree = "<group>"; };
+		B4A807DF217BBD2500FA39F8 /* optionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = optionsViewController.swift; sourceTree = "<group>"; };
 		C5A4266954AF7514BE2CB267 /* Pods_whereToUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_whereToUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -142,6 +146,8 @@
 				550EAB48214D9B1700C5AFF5 /* LaunchViewController.swift */,
 				550EAB4A214DA88500C5AFF5 /* MapViewController.swift */,
 				55FDA843214F70740081EC28 /* fabViewController.swift */,
+				B4A807DF217BBD2500FA39F8 /* optionsViewController.swift */,
+				B47569A5217BE2AC00204F60 /* AlgorithmController.swift */,
 			);
 			path = whereTo;
 			sourceTree = "<group>";
@@ -419,11 +425,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B47569A6217BE2AC00204F60 /* AlgorithmController.swift in Sources */,
 				550EAB1D214D98FA00C5AFF5 /* ViewController.swift in Sources */,
 				550EAB49214D9B1700C5AFF5 /* LaunchViewController.swift in Sources */,
 				55FDA844214F70740081EC28 /* fabViewController.swift in Sources */,
 				550EAB1B214D98FA00C5AFF5 /* AppDelegate.swift in Sources */,
 				550EAB4B214DA88500C5AFF5 /* MapViewController.swift in Sources */,
+				B4A807E0217BBD2500FA39F8 /* optionsViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -597,16 +605,18 @@
 			baseConfigurationReference = 9393762915F2323F8E590A9A /* Pods-whereTo.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 823439UD45;
+				DEVELOPMENT_TEAM = GDT7V52UT4;
 				INFOPLIST_FILE = whereTo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Krrish.whereTo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Nirmit.whereTo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos11.4;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -617,16 +627,18 @@
 			baseConfigurationReference = 941689A24C57B452E4DEB54D /* Pods-whereTo.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 823439UD45;
+				DEVELOPMENT_TEAM = GDT7V52UT4;
 				INFOPLIST_FILE = whereTo/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.Krrish.whereTo;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Nirmit.whereTo;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				SDKROOT = iphoneos11.4;
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				SDKROOT = iphoneos;
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
