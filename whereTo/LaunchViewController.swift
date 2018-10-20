@@ -138,7 +138,7 @@ class LaunchViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
     
     @objc func testLaunchClicked() {
         print("action " + action)
-        Alamofire.request("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(12.97),\(77.59)&radius=\(distance)&type=\(action)&key=AIzaSyBfiWNwy-JuUD59MQqEa_PkEiIlmVmVSu0", method: HTTPMethod.get, encoding: JSONEncoding.default, headers: nil).responseJSON {
+        Alamofire.request("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(latitude),\(longitude)&radius=\(distance)&type=\(action)&key=AIzaSyBfiWNwy-JuUD59MQqEa_PkEiIlmVmVSu0", method: HTTPMethod.get, encoding: JSONEncoding.default, headers: nil).responseJSON {
             response in
             if let jsonValue = response.result.value {
                 let json = SwiftyJSON.JSON(jsonValue)

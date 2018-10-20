@@ -66,7 +66,6 @@
         <!--Map View Controller-->
         <scene sceneID="bea-pT-sFw">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="uxG-0m-14f" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <viewController id="pM2-r4-k7T" customClass="MapViewController" customModule="whereTo" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="jSj-G8-0DV">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
@@ -178,6 +177,7 @@
                         <outlet property="reRollLabel" destination="A3i-c0-FXG" id="t2Y-aA-Iw0"/>
                     </connections>
                 </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="uxG-0m-14f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="712.79999999999995" y="132.68365817091455"/>
         </scene>
