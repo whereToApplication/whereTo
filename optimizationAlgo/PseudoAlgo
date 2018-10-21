@@ -1,0 +1,42 @@
+Input: startTime, endtime, transportation, map, pace, spot list
+Output: the optimal solution 
+Time = (endTime - startTime) * 0.9 // shrink the Time
+rank the spots by popularity in the list
+
+function visitTime(pace, x): 
+    if pace is chill: x /= z1
+    if past is moderate: x /= z2
+    if pace is fast: x /= z3
+    // z1, z2, z3 are constants to be found later
+
+function visitNum (totalTime, visiTime):
+    return totalTime / visitTime 
+
+function suggest(spotList, k, replaceThred, fullSpotList):
+    fill the spotList with the first k elements in the list
+    for each spot in the current spotList:
+        randomly generate a number between 0 and 1
+        if the number is smaller than the replaceThred: 
+            replace the current spot with something from (fullSpotList - spotList)
+        else 
+            keep the same
+    optimize the spotList based on the best order
+    return spotList
+
+function optimize(fullSpotList, k, spotList, totalTime):
+    sum the visiting time for every location and the traffic time in the spotList
+    if less than totalTime we find the best solution hooray! 
+    if more than totalTime: 
+        replace some of the elements in the spotList with some in the fullSpotList (from the most popular) -> try to keep the popularity the largest
+    
+function buildGraph(spots):
+    for each spot in spots:
+        for each spott in spots not spot:
+            build an edge between spot and spott
+
+
+
+
+
+
+

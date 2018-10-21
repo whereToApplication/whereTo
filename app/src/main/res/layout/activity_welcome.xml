@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:fab="http://schemas.android.com/tools"
+    android:orientation="vertical">
+    <com.skyfishjy.library.RippleBackground
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/content"
+        app:rb_color="#0099CC"
+        app:rb_radius="32dp"
+        app:rb_rippleAmount="4"
+        app:rb_duration="3000"
+        app:rb_scale="6">
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:layout_centerInParent="true"
+            android:id="@+id/centerImage"
+            android:src="@drawable/shoelogo"/>
+    </com.skyfishjy.library.RippleBackground>
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:layout_width="@dimen/fab_size_normal"
+        android:layout_height="wrap_content"
+        android:id="@+id/activityFAM"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_margin="16dp"
+        app:menu_showShadow="true"
+        app:menu_fab_label="Activity"
+        fab:menu_labels_textSize="20sp"
+        app:menu_openDirection="up"
+        app:menu_icon="@drawable/shoe"
+        app:menu_labels_position="left"
+        app:menu_backgroundColor="@android:color/transparent">
+        <com.github.clans.fab.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_label="Places to Go"
+            app:fab_size="normal"
+            android:id="@+id/ptgACT"
+            android:src="@drawable/shoe"/>
+        <com.github.clans.fab.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_label="Things to Do"
+            app:fab_size="normal"
+            android:id="@+id/ttdACT"
+            android:src="@drawable/shoe"/>
+        <com.github.clans.fab.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_label="Stuff to Eat"
+            app:fab_size="normal"
+            android:id="@+id/steACT"
+            android:src="@drawable/shoe"/>
+    </com.github.clans.fab.FloatingActionMenu>
+
+    <com.github.clans.fab.FloatingActionMenu
+        android:layout_width="@dimen/fab_size_normal"
+        android:layout_height="wrap_content"
+        android:id="@+id/rangeFAM"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_margin="16dp"
+        app:menu_showShadow="true"
+        fab:menu_fab_label="Range"
+        app:menu_openDirection="up"
+        app:menu_labels_position="left"
+        app:menu_icon="@drawable/shoe"
+        app:menu_backgroundColor="@android:color/transparent">
+        <com.github.clans.fab.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_label="Walk"
+            app:fab_size="normal"
+            android:id="@+id/walkFAM"
+            android:src="@drawable/shoe"/>
+        <com.github.clans.fab.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_label="Drive"
+            app:fab_size="normal"
+            android:id="@+id/driveFAM"
+            android:src="@drawable/shoe"/>
+        <com.github.clans.fab.FloatingActionButton
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:fab_label="Travel"
+            app:fab_size="normal"
+            android:id="@+id/travelFAM"
+            android:src="@drawable/shoe"/>
+    </com.github.clans.fab.FloatingActionMenu>
+
+
+</RelativeLayout>

@@ -1,6 +1,0 @@
-framework module Pods_whereTo {
-  umbrella header "Pods-whereTo-umbrella.h"
-
-  export *
-  module * { export * }
-}
