@@ -37,9 +37,9 @@ public class GooglePlacesListTask extends AsyncTask<String, Void, ArrayList<Plac
         currLong = params[1];
         rad = params[2];
         activitySelect = params[3];
-        if (activitySelect.equals("PLACESTOGO"))
+        if (activitySelect.equals("Sights"))
             placeType = placeTypePTG;
-        else if (activitySelect.equals("THINGSTODO"))
+        else if (activitySelect.equals("Roam"))
             placeType = placeTypeTTD;
         else
             placeType = placeTypeSTE;
@@ -52,7 +52,6 @@ public class GooglePlacesListTask extends AsyncTask<String, Void, ArrayList<Plac
         URL url;
         HttpURLConnection urlConnection = null;
         String resultString = "";
-        JSONObject jsonObject;
         ArrayList<Place> parseList = new ArrayList();
 
         try {
@@ -68,7 +67,7 @@ public class GooglePlacesListTask extends AsyncTask<String, Void, ArrayList<Plac
                 resultString += current;
                 data = reader.read();
             }
-            jsonObject = new JSONObject(resultString);
+            JSONObject jsonObject = new JSONObject(resultString);
             if (jsonObject.has("results")) {
                 JSONArray jsonArray = jsonObject.getJSONArray("results");
                 for (int i = 0; i < jsonArray.length(); i++) {
@@ -76,29 +75,17 @@ public class GooglePlacesListTask extends AsyncTask<String, Void, ArrayList<Plac
                     if (jsonArray.getJSONObject(i).has("name")) {
                         poi.setName(jsonArray.getJSONObject(i).optString("name"));
                         poi.setRating(jsonArray.getJSONObject(i).optString("rating", " "));
-                        if (jsonArray.getJSONObject(i).has("opening_hours")) {
-                            if (jsonArray.getJSONObject(i).getJSONObject("opening_hours").has("open_now")) {
-                                if (jsonArray.getJSONObject(i).getJSONObject("opening_hours").getString("open_now").equals("true")) {
-                                    poi.setOpenNow("YES");
-                                } else {
-                                    poi.setOpenNow("NO");
-                                }
-                            }
-                        } else {
-                            poi.setOpenNow("Not Known");
-                        }
                         if (jsonArray.getJSONObject(i).has("geometry"))
                         {
                             if (jsonArray.getJSONObject(i).getJSONObject("geometry").has("location"))
                             {
                                 if (jsonArray.getJSONObject(i).getJSONObject("geometry").getJSONObject("location").has("lat"))
                                 {
-                                    poi.setLatLng(Double.parseDouble(jsonArray.getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getString("lat")), Double.parseDouble(jsonArray.getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getString("lng")));
+                                    poi.setLatLng(Double.parseDouble(jsonArray.getJSONObject(i).getJSONObject("geometry").
+                                            getJSONObject("location").getString("lat")), Double.parseDouble(jsonArray.getJSONObject(i).
+                                            getJSONObject("geometry").getJSONObject("location").getString("lng")));
                                 }
                             }
-                        }
-                        if (jsonArray.getJSONObject(i).has("vicinity")) {
-                            poi.setVicinity(jsonArray.getJSONObject(i).optString("vicinity"));
                         }
                         if (jsonArray.getJSONObject(i).has("types")) {
                             JSONArray typesArray = jsonArray.getJSONObject(i).getJSONArray("types");

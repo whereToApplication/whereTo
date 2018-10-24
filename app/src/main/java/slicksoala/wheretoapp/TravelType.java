@@ -1,12 +1,11 @@
 package slicksoala.wheretoapp;
 
-public enum Range {
+public enum TravelType {
     WALK("Walk"),
-    DRIVE("Drive"),
-    TRAVEL("Public Transport");
+    DRIVE("Drive");
 
     private String val;
 
-    Range(String val) { this.val = val;}
+    TravelType(String val) { this.val = val;}
     public String toString() { return this.val;}
 }

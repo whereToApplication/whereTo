@@ -42,9 +42,9 @@ public class FoursquarePlacesListTask extends AsyncTask<String, Void, ArrayList<
         currLong = params[1];
         rad = params[2];
         activitySelect = params[3];
-        if (activitySelect.equals("PLACESTOGO"))
+        if (activitySelect.equals("Sights"))
             placeType = placeTypePTG;
-        else if (activitySelect.equals("THINGSTODO"))
+        else if (activitySelect.equals("Roam"))
             placeType = placeTypeTTD;
         else
             placeType = placeTypeSTE;
@@ -71,31 +71,34 @@ public class FoursquarePlacesListTask extends AsyncTask<String, Void, ArrayList<
                 data = reader.read();
             }
             jsonObject = new JSONObject(resultString);
-            if (jsonObject.has("groups")) {
-                JSONArray groupsArray = jsonObject.getJSONArray("groups");
-                if (groupsArray.getJSONObject(0).has("items")) {
-                    JSONArray jsonArray = jsonObject.getJSONArray("items");
-                    for (int i = 0; i < jsonArray.length(); i++) {
-                        Place poi = new Place();
-                        if (jsonArray.getJSONObject(i).has("venue")) {
-                            poi.setName(jsonArray.getJSONObject(i).getJSONObject("venue").optString("name"));
-                            if (jsonArray.getJSONObject(i).getJSONObject("venue").has("location")){
-                                Double lat = Double.parseDouble(jsonArray.getJSONObject(i).getJSONObject("venue").
-                                        getJSONObject("location").optString("lat"));
-                                Double lng = Double.parseDouble(jsonArray.getJSONObject(i).getJSONObject("venue").
-                                        getJSONObject("location").optString("lng"));
-                                poi.setLatLng(lat,lng);
-                                poi.setRating("3");
+            if (jsonObject.has("response")) {
+                if (jsonObject.getJSONObject("response").has("groups")) {
+                    JSONArray groupsArray = jsonObject.getJSONObject("response").getJSONArray("groups");
+                    if (groupsArray.getJSONObject(0).has("items")) {
+                        JSONArray jsonArray = groupsArray.getJSONObject(0).getJSONArray("items");
+                        for (int i = 0; i < jsonArray.length(); i++) {
+                            Place poi = new Place();
+                            if (jsonArray.getJSONObject(i).has("venue")) {
+                                poi.setName(jsonArray.getJSONObject(i).getJSONObject("venue").optString("name"));
+                                if (jsonArray.getJSONObject(i).getJSONObject("venue").has("location")){
+                                    Double lat = Double.parseDouble(jsonArray.getJSONObject(i).getJSONObject("venue").
+                                            getJSONObject("location").optString("lat"));
+                                    Double lng = Double.parseDouble(jsonArray.getJSONObject(i).getJSONObject("venue").
+                                            getJSONObject("location").optString("lng"));
+                                    poi.setLatLng(lat,lng);
+                                    poi.setRating("3");
+                                }
                             }
+                            if (jsonArray.getJSONObject(i).has("categories")) {
+                                poi.setCategory(jsonArray.getJSONObject(i).getJSONObject("categories").
+                                        optString("name"));
+                            }
+                            parseList.add(poi);
                         }
-                        if (jsonArray.getJSONObject(i).has("categories")) {
-                            poi.setCategory(jsonArray.getJSONObject(i).getJSONObject("categories").
-                                    optString("name"));
-                        }
-                        parseList.add(poi);
                     }
                 }
             }
+
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {

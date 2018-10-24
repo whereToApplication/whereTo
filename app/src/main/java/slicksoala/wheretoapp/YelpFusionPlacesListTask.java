@@ -35,12 +35,12 @@ public class YelpFusionPlacesListTask extends AsyncTask<String, Void, ArrayList<
     @Override
     protected ArrayList<Place> doInBackground(String... params) {
         currLat = params[0];
-        currLat = params[1];
+        currLong = params[1];
         rad = params[2];
         activitySelect = params[3];
-        if (activitySelect.equals("PLACESTOGO"))
+        if (activitySelect.equals("Sights"))
             placeType = placeTypePTG;
-        else if (activitySelect.equals("THINGSTODO"))
+        else if (activitySelect.equals("Roam"))
             placeType = placeTypeTTD;
         else
             placeType = placeTypeSTE;
@@ -56,7 +56,7 @@ public class YelpFusionPlacesListTask extends AsyncTask<String, Void, ArrayList<
         try {
             url = new URL(urlString);
             urlConnection = (HttpURLConnection) url.openConnection();
-            urlConnection.setRequestProperty("Bearer " + API_KEY,"Authorization");
+            urlConnection.setRequestProperty("Authorization","Bearer " + API_KEY);
 
             InputStream in = urlConnection.getInputStream();
             InputStreamReader reader = new InputStreamReader(in);
@@ -75,27 +75,18 @@ public class YelpFusionPlacesListTask extends AsyncTask<String, Void, ArrayList<
                     if (jsonArray.getJSONObject(i).has("name")) {
                         poi.setName(jsonArray.getJSONObject(i).optString("name"));
                         poi.setRating(jsonArray.getJSONObject(i).optString("rating"));
-                        poi.setDistance(jsonArray.getJSONObject(i).optString("distance"));
 
                         if (jsonArray.getJSONObject(i).has("coordinates"))
                         {
-                            poi.setLatLng(Double.parseDouble(jsonArray.getJSONObject(i).getJSONObject("coordinates").getJSONObject("location").getString("lat")), Double.parseDouble(jsonArray.getJSONObject(i).getJSONObject("geometry").getJSONObject("location").getString("lng")));
-
-                        }
-                        if (jsonArray.getJSONObject(i).has("vicinity")) {
-                            poi.setVicinity(jsonArray.getJSONObject(i).optString("vicinity"));
-                        }
-                        if (jsonArray.getJSONObject(i).has("types")) {
-                            JSONArray typesArray = jsonArray.getJSONObject(i).getJSONArray("types");
-                            for (int j = 0; j < typesArray.length(); j++) {
-                                poi.setCategory(typesArray.getString(j) + ", " + poi.getCategory());
-                            }
+                            poi.setLatLng(Double.parseDouble(jsonArray.getJSONObject(i).getJSONObject("coordinates").optString("latitude")),
+                                    Double.parseDouble(jsonArray.getJSONObject(i).getJSONObject("coordinates").optString("longitude")));
                         }
                     }
                     parseList.add(poi);
                 }
             }
         } catch (MalformedURLException e) {
+            System.out.print(e + "IOException");
             e.printStackTrace();
         } catch (IOException e) {
             e.printStackTrace();

@@ -1,17 +1,21 @@
 package slicksoala.wheretoapp;
 
 public enum Radius {
-    NEARBY("Nearby"),
-    CITYWIDE("City Wide");
+    NEARBY("Nearby", "1000"),
+    CITYWIDE("City Wide", "16093");
 
-    private String val;
+    private String type;
+    private String rad;
 
-    Radius(String val) {
-        this.val = val;
+    Radius(String type, String rad) {
+        this.type = type;
+        this.rad = rad;
     }
 
     public String toString() {
-        return this.val;
+        return this.type;
     }
+
+    public String getVal() {return this.rad;}
 }
 

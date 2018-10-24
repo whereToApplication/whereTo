@@ -23,15 +23,12 @@
 
         <EditText
             android:id="@+id/returnTime"
-            android:layout_width="100dp"
-            android:layout_height="39dp"
-            android:layout_marginStart="10dp"
-            android:layout_marginTop="72dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:ems="10"
-            android:hint="Enter Return Time"
-            android:inputType="textPersonName|time"
-            app:layout_constraintStart_toEndOf="@+id/backByText"
-            app:layout_constraintTop_toTopOf="parent" />
+            android:inputType="time"
+            android:paddingLeft="30dp"
+            app:layout_constraintTop_toBottomOf="@+id/backByText"/>
 
         <TextView
             android:id="@+id/radius"
@@ -112,19 +109,27 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/paceText" />
 
-        <Button
-            android:id="@+id/generate"
-            android:layout_width="259dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="64dp"
-            android:layout_marginTop="84dp"
-            android:layout_marginEnd="24dp"
-            android:text="Generate"
+        <com.skyfishjy.library.RippleBackground xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/content"
+            android:layout_width="match_parent"
+            android:layout_height="120dp"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/paceText" />
+            app:layout_constraintTop_toBottomOf="@+id/paceSpinner"
+            app:rb_color="@color/colorPrimaryDark"
+            app:rb_duration="3000"
+            app:rb_radius="12dp"
+            app:rb_rippleAmount="4"
+            app:rb_scale="5">
 
+            <ImageView
+                android:id="@+id/centerImage"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_centerInParent="true"
+                android:src="@drawable/shoelogo" />
+        </com.skyfishjy.library.RippleBackground>
 
 
     </android.support.constraint.ConstraintLayout>
