@@ -17,6 +17,8 @@
 		550EAB3B214D98FD00C5AFF5 /* whereToUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550EAB3A214D98FD00C5AFF5 /* whereToUITests.swift */; };
 		550EAB49214D9B1700C5AFF5 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550EAB48214D9B1700C5AFF5 /* LaunchViewController.swift */; };
 		550EAB4B214DA88500C5AFF5 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550EAB4A214DA88500C5AFF5 /* MapViewController.swift */; };
+		5530E56E217E9DC30046A3D6 /* heldKarpAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530E56D217E9DC30046A3D6 /* heldKarpAlgorithm.swift */; };
+		55574D47218BFF83000906E7 /* HeldKarpTSPTrialVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55574D46218BFF83000906E7 /* HeldKarpTSPTrialVersion.swift */; };
 		55FDA844214F70740081EC28 /* fabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FDA843214F70740081EC28 /* fabViewController.swift */; };
 		763835836062D3102E971A9F /* Pods_whereTo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3257294C46420CF5512FE8 /* Pods_whereTo.framework */; };
 		B47569A6217BE2AC00204F60 /* AlgorithmController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B47569A5217BE2AC00204F60 /* AlgorithmController.swift */; };
@@ -59,6 +61,8 @@
 		550EAB3C214D98FD00C5AFF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		550EAB48214D9B1700C5AFF5 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		550EAB4A214DA88500C5AFF5 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		5530E56D217E9DC30046A3D6 /* heldKarpAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = heldKarpAlgorithm.swift; sourceTree = "<group>"; };
+		55574D46218BFF83000906E7 /* HeldKarpTSPTrialVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeldKarpTSPTrialVersion.swift; path = ../HeldKarpTSPTrialVersion.swift; sourceTree = "<group>"; };
 		55FDA843214F70740081EC28 /* fabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fabViewController.swift; sourceTree = "<group>"; };
 		6D15C5AFEAFB70A4A7772919 /* Pods_whereToTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_whereToTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		77A2FDF84A0B2ECC3F31A1BD /* Pods-whereToUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-whereToUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-whereToUITests/Pods-whereToUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +141,7 @@
 		550EAB19214D98FA00C5AFF5 /* whereTo */ = {
 			isa = PBXGroup;
 			children = (
+				55574D46218BFF83000906E7 /* HeldKarpTSPTrialVersion.swift */,
 				550EAB1A214D98FA00C5AFF5 /* AppDelegate.swift */,
 				550EAB1C214D98FA00C5AFF5 /* ViewController.swift */,
 				550EAB1E214D98FA00C5AFF5 /* Main.storyboard */,
@@ -147,6 +152,7 @@
 				550EAB4A214DA88500C5AFF5 /* MapViewController.swift */,
 				55FDA843214F70740081EC28 /* fabViewController.swift */,
 				B4A807DF217BBD2500FA39F8 /* optionsViewController.swift */,
+				5530E56D217E9DC30046A3D6 /* heldKarpAlgorithm.swift */,
 				B47569A5217BE2AC00204F60 /* AlgorithmController.swift */,
 			);
 			path = whereTo;
@@ -427,8 +433,10 @@
 			files = (
 				B47569A6217BE2AC00204F60 /* AlgorithmController.swift in Sources */,
 				550EAB1D214D98FA00C5AFF5 /* ViewController.swift in Sources */,
+				55574D47218BFF83000906E7 /* HeldKarpTSPTrialVersion.swift in Sources */,
 				550EAB49214D9B1700C5AFF5 /* LaunchViewController.swift in Sources */,
 				55FDA844214F70740081EC28 /* fabViewController.swift in Sources */,
+				5530E56E217E9DC30046A3D6 /* heldKarpAlgorithm.swift in Sources */,
 				550EAB1B214D98FA00C5AFF5 /* AppDelegate.swift in Sources */,
 				550EAB4B214DA88500C5AFF5 /* MapViewController.swift in Sources */,
 				B4A807E0217BBD2500FA39F8 /* optionsViewController.swift in Sources */,

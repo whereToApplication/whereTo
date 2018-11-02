@@ -6,7 +6,7 @@ target 'whereTo' do
   use_frameworks!
 
   # Pods for whereTo
-	pod 'Alamofire', '~> 4.7'
+  pod 'Alamofire', '~> 4.7'
     pod 'SwiftyJSON'
     pod 'GoogleMaps'
     pod 'Pulsator'

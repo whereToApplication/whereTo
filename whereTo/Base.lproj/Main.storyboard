@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14313.18" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KhX-M6-XkS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Gij-Rf-b4Y">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14283.14"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14460.20"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -198,7 +198,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Radius: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5b5-y9-Oym">
-                                <rect key="frame" x="46" y="145.5" width="61" height="21"/>
+                                <rect key="frame" x="46" y="142.5" width="61" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="6gg-uk-yjW"/>
                                 </constraints>
@@ -206,8 +206,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="bKs-jR-HVg">
-                                <rect key="frame" x="132" y="223" width="203" height="37"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="bKs-jR-HVg">
+                                <rect key="frame" x="132" y="216" width="203" height="44"/>
                                 <segments>
                                     <segment title="Sightsee"/>
                                     <segment title="Food"/>
@@ -218,8 +218,8 @@
                                     <action selector="eventAction:" destination="KhX-M6-XkS" eventType="valueChanged" id="2hb-qw-cEy"/>
                                 </connections>
                             </segmentedControl>
-                            <segmentedControl opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="ACn-GI-jtx">
-                                <rect key="frame" x="147" y="142" width="188" height="29"/>
+                            <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="ACn-GI-jtx">
+                                <rect key="frame" x="147" y="143" width="188" height="22"/>
                                 <segments>
                                     <segment title="Nearby"/>
                                     <segment title="Whole City"/>
@@ -230,7 +230,7 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What to Do: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXi-Dk-PN0">
-                                <rect key="frame" x="11" y="223" width="96" height="43"/>
+                                <rect key="frame" x="11" y="217" width="96" height="49"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -260,8 +260,8 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Types of Travel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vk2-d5-Aeq">
-                                <rect key="frame" x="129" y="301" width="116" height="21"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Types of Travel" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vk2-d5-Aeq">
+                                <rect key="frame" x="129" y="301" width="117" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -278,14 +278,17 @@
                                     <action selector="paceAction:" destination="KhX-M6-XkS" eventType="valueChanged" id="7gQ-1R-7l5"/>
                                 </connections>
                             </segmentedControl>
-                            <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Hk2-ps-uT3">
-                                <rect key="frame" x="147" y="67" width="188" height="52"/>
+                            <datePicker contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Hk2-ps-uT3">
+                                <rect key="frame" x="147" y="67" width="188" height="53"/>
                                 <date key="date" timeIntervalSinceReferenceDate="561755799.50469196">
                                     <!--2018-10-20 19:16:39 +0000-->
                                 </date>
+                                <connections>
+                                    <action selector="timeAction:" destination="KhX-M6-XkS" eventType="valueChanged" id="boz-YQ-4vF"/>
+                                </connections>
                             </datePicker>
-                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8N-uN-19t">
-                                <rect key="frame" x="147" y="526" width="119" height="106"/>
+                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="h8N-uN-19t">
+                                <rect key="frame" x="129" y="596" width="119" height="51"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="32"/>
                                 <state key="normal" title="Done">
                                     <color key="titleColor" red="0.1177054365" green="0.54351522019999998" blue="0.12634957320000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
@@ -316,6 +319,7 @@
                             <constraint firstItem="hy5-re-h74" firstAttribute="top" secondItem="adF-OT-1BE" secondAttribute="top" constant="63" id="Zhr-3j-vQC"/>
                             <constraint firstItem="ACn-GI-jtx" firstAttribute="trailing" secondItem="bKs-jR-HVg" secondAttribute="trailing" id="bva-hZ-lj5"/>
                             <constraint firstItem="hy5-re-h74" firstAttribute="centerY" secondItem="Hk2-ps-uT3" secondAttribute="centerY" id="cgh-Tj-bcM"/>
+                            <constraint firstItem="Vk2-d5-Aeq" firstAttribute="leading" secondItem="h8N-uN-19t" secondAttribute="leading" id="dWg-fv-pnm"/>
                             <constraint firstItem="Z7N-8z-n3p" firstAttribute="top" secondItem="RXi-Dk-PN0" secondAttribute="bottom" constant="64" id="di8-IC-NI9"/>
                             <constraint firstItem="byh-PA-jnV" firstAttribute="bottom" secondItem="sYu-mo-zbr" secondAttribute="bottom" id="jdg-Ut-Zac"/>
                             <constraint firstItem="bKs-jR-HVg" firstAttribute="trailing" secondItem="Z7N-8z-n3p" secondAttribute="trailing" id="jfd-uW-IJu"/>
@@ -329,6 +333,7 @@
                             <constraint firstItem="hy5-re-h74" firstAttribute="leading" secondItem="adF-OT-1BE" secondAttribute="leading" constant="53" id="uh8-z1-ujs"/>
                             <constraint firstItem="5b5-y9-Oym" firstAttribute="centerY" secondItem="ACn-GI-jtx" secondAttribute="centerY" id="ulV-YQ-GOf"/>
                             <constraint firstItem="Vk2-d5-Aeq" firstAttribute="centerX" secondItem="fqq-4M-Ywe" secondAttribute="centerX" id="vVI-aD-vKF"/>
+                            <constraint firstItem="adF-OT-1BE" firstAttribute="trailing" secondItem="h8N-uN-19t" secondAttribute="trailing" constant="127" id="xYq-Od-cQp"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="adF-OT-1BE"/>
                     </view>

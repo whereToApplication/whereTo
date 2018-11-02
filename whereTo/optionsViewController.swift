@@ -8,34 +8,68 @@
 
 import Foundation
 import UIKit
-class optionsViewController: UIViewController {
+import MapKit
+import Alamofire
+import SwiftyJSON
+class optionsViewController: UIViewController, CLLocationManagerDelegate {
+    var timeText: String = ""
     var radiusText: String = ""
     var eventsText: String = ""
     var travelTypeText: String = ""
-    var placeText: String = ""
-    @IBOutlet weak var datePicker: UIDatePicker!
+    var paceText: String = ""
+    let distances = [1500, 26093, 48280]
+    var distance: Int = 1000
+    private var locationManager: CLLocationManager!
+    private var latitude: Double = 0.0
+    private var longitude: Double = 0.0
+    var k = 0
+    var delta = 0
+    let sigma = 0.4
+    var spotList: [JSON]!
+    var masterList: [JSON]!
+    var done: Bool = false
+    @IBAction func timeAction(_ sender: UIDatePicker) {
+        let date = sender
+        
+        let calendar = Calendar.current
+        let comp = calendar.dateComponents([.hour, .minute], from: date.date)
+        let hour = comp.hour
+        let minute = comp.minute
+        let currDate = Date()
+        let currCalendar = Calendar.current
+        let currHour = calendar.component(.hour, from: currDate)
+        let currMinutes = calendar.component(.minute, from: currDate)
+        
+        timeText = String((60*hour! + minute!) - (60*currHour + currMinutes))
+        print(timeText)
+    }
     @IBAction func eventAction(_ sender: UISegmentedControl) {
         eventsText = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? ""
     }
-    @IBOutlet weak var radiusPicker: UISegmentedControl!
     @IBAction func radiusAction(_ sender: UISegmentedControl) {
         radiusText = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? ""
     }
-    @IBOutlet weak var eventPicker: UISegmentedControl!
     
     @IBAction func travelAction(_ sender: UISegmentedControl) {
             travelTypeText = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? ""
+        if travelTypeText == "Walk" {
+            distance = distances[0]
+        } else if travelTypeText == "Drive" {
+            distance = distances[1]
+        } else if travelTypeText == "Transit" || travelTypeText == "Any" {
+            distance = distances[2]
+        }
     }
     @IBAction func paceAction(_ sender: UISegmentedControl) {
-        placeText = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? ""
+        paceText = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? ""
+        k = kCalculator()
     }
-    @IBOutlet weak var travelPicker: UISegmentedControl!
-    @IBOutlet weak var pacePicker: UISegmentedControl!
+
 
    
 
     @IBAction func submit(_ sender: UIButton) {
-        if radiusText.count > 0 && eventsText.count > 0 && travelTypeText.count > 0 && placeText.count > 0 {
+        if radiusText.count > 0 && eventsText.count > 0 && travelTypeText.count > 0 && paceText.count > 0 {
             performSegue(withIdentifier: "senddata", sender: self)
         } else {
             let alert = UIAlertController(title: "My Alert", message: "This is an alert.", preferredStyle: .alert)
@@ -51,23 +85,84 @@ class optionsViewController: UIViewController {
             destination.radius = self.radiusText
             destination.event = self.eventsText
             destination.travel = self.travelTypeText
-            destination.place = self.placeText
+            destination.place = self.paceText
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        locationManager = CLLocationManager()
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.requestWhenInUseAuthorization()
+            locationManager.startUpdatingLocation()
+        }
+        
+        
+        testLaunchClicked()
+        
+        delta = Int.random(in: 0...k)
+        
     }
     
-//    let radii = ["Nearby", "Whole City"]
-//    let events = ["Sightsee", "Food", "Both"]
-//    let travels = ["Walk, Drive, Transit", "Any"]
-//    let paces = ["Fast", "Normal", "Slow"]
-    //what i want
-    //once all of the segments are selected, enable the done button. Then pass in the radius, event, travel, and pace that were selected. Then go to the algorithm.
+    func buildSpotList() {
+        for i in 0...delta {
+            if Double.random(in: 0 ... 1) < sigma {
+                swap(&spotList[i], &masterList[Int.random(in: 0...masterList.count-k)])
+            }
+        }
+    }
     
-    
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
+        latitude = locValue.latitude
+        longitude = locValue.longitude
+        print("locations = \(latitude) \(longitude)")
+    }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         }
+    
+    
+    @objc func testLaunchClicked() {
+        
+        
+        let auth_header = [
+            "Authorization": "Bearer IRT-fzwU1f8luW7wcdWJ5wSzmTOWoJuYKAOMZJtlv-D6s-MVhzGwu7MLn77_A2NWUohglYO_WZhBgejDmHINDKSSP-jzSKFoa_DeL3TdYGrezK1TFeYaHLagsmvLW3Yx",
+            ]
+
+
+        Alamofire.request("https://api.yelp.com/v3/businesses/search?term=arts&latitude=40.7128&longitude=-74.0060&radius=20000", method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default, headers: auth_header).responseJSON {
+            response in
+            if let jsonValue = response.result.value {
+                let json = SwiftyJSON.JSON(jsonValue)
+                var options = json["businesses"].arrayValue
+                options.sort { $0["rating"].doubleValue > $1["rating"].doubleValue }
+                if self.k > options.count {
+                    self.spotList = options
+                    self.done = true
+                } else {
+                    for count in self.k ... options.count {
+                        self.spotList.append(options[count])
+                    }
+                    self.masterList = options
+                }
+            }
+        }
+    }
+    
+    func kCalculator() -> Int {
+        if paceText == "Chill" {
+            return Int(timeText)!/90
+        } else if paceText == "Moderate" {
+            return Int(timeText)!/45
+        } else if paceText == "Fast" {
+            return Int(timeText)!/15
+        }
+        
+        return 0
+    }
 }
