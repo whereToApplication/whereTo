@@ -1,0 +1,69 @@
+#!/usr/bin/env node
+var createError = require('http-errors');
+var express = require('express');
+var path = require('path');
+var cookieParser = require('cookie-parser');
+var logger = require('morgan');
+var fs = require('fs');
+var mongoose = require('mongoose');
+var handlebars = require('express-handlebars');
+//var cookieParser = require('cookie-parser');
+var indexRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+
+var app = express();
+
+var bodyParser = require("body-parser");
+// Checks for Necessary Mongoose elements
+if (!fs.existsSync('./env.sh')) {
+  throw new Error('env.sh file is missing');
+}
+if (!process.env.MONGODB_URI) {
+  throw new Error("MONGODB_URI has not been set. Try to source your env.sh file");
+}
+mongoose.connection.on('connected', function() {
+  console.log('Success: Connected to Mongo DB');
+});
+
+mongoose.connection.on('error', function() {
+  console.log('Error: Could not connect to Mongo DB. Check MONGODB_URI in env.sh');
+  process.exit(1);
+});
+
+mongoose.connect(process.env.MONGODB_URI);
+
+// view engine setup
+app.set('views', path.join(__dirname, 'views'));
+app.engine('hbs', handlebars({defaultLayout: 'main', extname: ".hbs"}));
+app.set('view engine', '.hbs');
+app.use(cookieParser());
+
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
+
+app.use(logger('dev'));
+//app.use(express.json());
+//app.use(express.urlencoded({ extended: false }));
+//app.use(cookieParser());
+app.use(express.static(path.join(__dirname, 'public')));
+app.use('/', indexRouter);
+app.use('/users', usersRouter);
+
+// catch 404 and forward to error handler
+//app.use(function(req, res, next) {
+//  next(createError(404));
+//});
+
+// error handler
+//app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+//  res.locals.message = err.message;
+//  res.locals.error = req.app.get('env') === 'development' ? err : {};
+//
+//  // render the error page
+//  res.status(err.status || 500);
+//  res.render('error');
+//});
+
+
+module.exports = app;
