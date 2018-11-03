@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="Gij-Rf-b4Y">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KhX-M6-XkS">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -198,7 +198,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Radius: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5b5-y9-Oym">
-                                <rect key="frame" x="46" y="142.5" width="61" height="21"/>
+                                <rect key="frame" x="46" y="141.5" width="61" height="21"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="21" id="6gg-uk-yjW"/>
                                 </constraints>
@@ -207,7 +207,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="bKs-jR-HVg">
-                                <rect key="frame" x="132" y="216" width="203" height="44"/>
+                                <rect key="frame" x="132" y="214" width="203" height="46"/>
                                 <segments>
                                     <segment title="Sightsee"/>
                                     <segment title="Food"/>
@@ -219,7 +219,7 @@
                                 </connections>
                             </segmentedControl>
                             <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" apportionsSegmentWidthsByContent="YES" segmentControlStyle="plain" translatesAutoresizingMaskIntoConstraints="NO" id="ACn-GI-jtx">
-                                <rect key="frame" x="147" y="143" width="188" height="22"/>
+                                <rect key="frame" x="147" y="143" width="188" height="20"/>
                                 <segments>
                                     <segment title="Nearby"/>
                                     <segment title="Whole City"/>
@@ -230,7 +230,7 @@
                                 </connections>
                             </segmentedControl>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="What to Do: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="RXi-Dk-PN0">
-                                <rect key="frame" x="11" y="217" width="96" height="49"/>
+                                <rect key="frame" x="11" y="215" width="96" height="51"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -338,7 +338,7 @@
                         <viewLayoutGuide key="safeArea" id="adF-OT-1BE"/>
                     </view>
                     <connections>
-                        <segue destination="Gij-Rf-b4Y" kind="show" identifier="senddata" id="9dr-Yu-ChO"/>
+                        <segue destination="Gij-Rf-b4Y" kind="show" identifier="algorithmIdentifier" id="9dr-Yu-ChO"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0CL-8t-NXO" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -349,7 +349,7 @@
         <scene sceneID="Feu-ME-Sky">
             <objects>
                 <viewController id="Gij-Rf-b4Y" customClass="AlgorithmController" customModule="whereTo" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="i91-77-H7c" customClass="Algorit">
+                    <view key="view" contentMode="scaleToFill" id="i91-77-H7c">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -358,7 +358,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jFY-hz-pg5" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3381.5999999999999" y="131.78410794602701"/>
+            <point key="canvasLocation" x="3380" y="120"/>
         </scene>
     </scenes>
     <resources>

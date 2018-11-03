@@ -153,7 +153,7 @@ class LaunchViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         latitude = locValue.latitude
         longitude = locValue.longitude
-        print("locations = \(latitude) \(longitude)")
+//        print("locations = \(latitude) \(longitude)")
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {

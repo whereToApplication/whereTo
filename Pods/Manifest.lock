@@ -29,6 +29,7 @@ PODS:
     - MaterialComponents/private/Application
   - MDFInternationalization (1.0.4)
   - MDFTextAccessibility (1.2.0)
+  - ModelMapper (8.0.0)
   - Pulsator (0.5.1)
   - SwiftyJSON (4.1.0)
 
@@ -37,6 +38,7 @@ DEPENDENCIES:
   - GoogleMaps
   - JJFloatingActionButton
   - MaterialComponents/Buttons
+  - ModelMapper
   - Pulsator
   - SwiftyJSON
 
@@ -48,6 +50,7 @@ SPEC REPOS:
     - MaterialComponents
     - MDFInternationalization
     - MDFTextAccessibility
+    - ModelMapper
     - Pulsator
     - SwiftyJSON
 
@@ -58,9 +61,10 @@ SPEC CHECKSUMS:
   MaterialComponents: 41a7961ccdcf5bc0c2ec376011388869512cb117
   MDFInternationalization: e355b0cebecf53d60233bd267084e49366c82513
   MDFTextAccessibility: 94098925e0853551c5a311ce7c1ecefbe297cdb6
+  ModelMapper: a258c5f8e1422e0e826c8265a3e89ae1b329c3a6
   Pulsator: f465ca37212d826523fe8c79b07c1a4c1a941f5e
   SwiftyJSON: c29297daf073d2aa016295d5809cdd68045c39b3
 
-PODFILE CHECKSUM: b14afe4332da34a9df2d5540fd9f2f647bae22cf
+PODFILE CHECKSUM: 620fe83c814e57e0dee00680822886b99506b18a
 
 COCOAPODS: 1.5.3
