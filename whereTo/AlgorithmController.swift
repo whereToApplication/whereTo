@@ -81,29 +81,6 @@ class AlgorithmController: UIViewController {
 
         GoogleMapsDistanceMatrixAPI();
         showLoadingScreen()
-        
-        var row1: [Double] = [0.0, 2.0, 3.0];
-        var row2: [Double] = [4.0, 0.0, 5.0];
-        var row3: [Double] = [3.0, 2.0, 0.0];
-        
-        var inputarr: [[Double]] = [];
-        inputarr.append(row1);
-        inputarr.append(row2);
-        inputarr.append(row3);
-        var tester: HeldKarpTSPTrialVersion = HeldKarpTSPTrialVersion.init();
-        
-//        var row1: [Double] = [0.0, 2.0, 3.0];
-//        var row2: [Double] = [4.0, 0.0, 5.0];
-//        var row3: [Double] = [3.0, 2.0, 0.0];
-//
-//        var inputarr: [[Double]] = [];
-//        inputarr.append(row1);
-//        inputarr.append(row2);
-//        inputarr.append(row3);
-//        var tester: HeldKarpTSPTrialVersion = HeldKarpTSPTrialVersion.init();
-//
-//        tester.optimalRoute(distance: inputarr);
-        // Do any additional setup after loading the view, typically from a nib.
     }
     func showLoadingScreen() {
         loadingView.bounds.size.width = view.bounds.width - 25;
