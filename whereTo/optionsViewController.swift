@@ -72,7 +72,7 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBAction func submit(_ sender: UIButton) {
         if radiusText.count > 0 && eventsText.count > 0 && travelTypeText.count > 0 && paceText.count > 0 {
-            performSegue(withIdentifier: "senddata", sender: self)
+            performSegue(withIdentifier: "algorithmIdentifier", sender: self)
         } else {
             let alert = UIAlertController(title: "My Alert", message: "This is an alert.", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Be sure to pick everything"), style: .default, handler: { _ in

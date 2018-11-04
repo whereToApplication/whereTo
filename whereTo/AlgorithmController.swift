@@ -10,14 +10,15 @@ import Foundation
 import UIKit
 import SwiftyJSON
 import Alamofire
+import MapKit
 
-class AlgorithmController: UIViewController {
+class AlgorithmController: UIViewController, CLLocationManagerDelegate {
+    @IBOutlet weak var mapView: MKMapView!
     var radius: String = ""
     var event: String = ""
     var travel: String = ""
     var place: String = ""
     var options1: [Place] = []
-    @IBOutlet weak var checkrad: UILabel!
     @IBOutlet var loadingView: UIView!
     @IBOutlet weak var labelToFade: UILabel!
     let DISTMATRIX_BASE: String = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric";
@@ -26,9 +27,13 @@ class AlgorithmController: UIViewController {
     let KEY_PAR: String = "&key=";
     let API_KEY: String = "AIzaSyAr-MIu6A-LmtXGsm94fDfIjICLguluajQ";
     
-    func GoogleMapsDistanceMatrixAPI() -> [Int]{
+    
+    var initialLocation : CLLocation??
+
+    
+    func GoogleMapsDistanceMatrixAPI() -> [Place]{
         //var arr = Array(repeating: Array(repeating: 0, count: 2), count: 3)
-        let options: [Place] = self.options1;
+        var options: [Place] = self.options1;
         var distMatrix = Array(repeating: Array(repeating: 0.0, count: options.count), count: options.count);
         var route: [Int] = [];
         var origdest: String = "";
@@ -64,24 +69,112 @@ class AlgorithmController: UIViewController {
                             var tester: HeldKarpTSPTrialVersion = HeldKarpTSPTrialVersion.init();
                             var optimalRoute = tester.optimalRoute(distance: distMatrix);
                             route = optimalRoute[1] as! [Int];
-                            self.buildRoute(route: route);
+                            options = self.buildRoute(route: route);
                 }
         });
-        return route;
+        return options;
     }
     
-    func buildRoute(route: [Int]) {
+    func buildRoute(route: [Int]) -> [Place] {
+        var optimalroutes: [Place] = [];
         for i in 0...route.count - 1 {
-            print(options1[route[i]].name);
+            optimalroutes.append(options1[route[i]]);
         }
+        
+        var locations = optimalroutes.map { CLLocationCoordinate2D.init(latitude: $0.coordinated.latitude, longitude: $0.coordinated.longitude) }
+        let polyline = MKPolyline(coordinates: &locations, count: locations.count)
+        mapView?.add(polyline);
+        
+        var urlString: String = "comgooglemaps://?daddr="
+        
+        for i in 1...locations.count-1 {
+            urlString.append("\(locations[i].latitude),\(locations[i].longitude)+to:");
+        }
+        
+//        DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
+//            if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
+//                //            UIApplication.shared.openURL(URL(string:
+//                //                "comgooglemaps://?center=\(latitude),\(longitude)&zoom=14&views=traffic")!)
+//
+//
+////                UIApplication.shared.openURL(URL(string:
+////                    "comgooglemaps://?saddr=\(locations[1].latitude),\(locations[)&daddr=\(dlatitude),\(dlongitude)&center=37.423725,-122.0877&directionsmode=\(travelMode)&zoom=17")!)
+////            } else {
+////                print("Can't use comgooglemaps://");
+////            }
+//        }
+//
+//        /*
+//
+//         if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
+//         //            UIApplication.shared.openURL(URL(string:
+//         //                "comgooglemaps://?center=\(latitude),\(longitude)&zoom=14&views=traffic")!)
+//         UIApplication.shared.openURL(URL(string:
+//         "comgooglemaps://?saddr=\(slatitude),\(slongitude)&daddr=\(dlatitude),\(dlongitude)&center=37.423725,-122.0877&directionsmode=\(travelMode)&zoom=17")!)
+//         } else {
+//         print("Can't use comgooglemaps://");
+//         }
+//
+//         */
+        urlString.removeSubrange(urlString.index(urlString.endIndex, offsetBy: -4)...urlString.index(urlString.endIndex, offsetBy: -1));
+        
+        
+        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
+                     //            UIApplication.shared.openURL(URL(string:
+                     //                "comgooglemaps://?center=\(latitude),\(longitude)&zoom=14&views=traffic")!)
+                     UIApplication.shared.openURL(URL(string:
+                     "comgooglemaps://daddr=\(urlString)&center=37.423725,-122.0877&directionsmode=car&zoom=17")!)
+                     } else {
+                     print("Can't use comgooglemaps://");
+                     }
+        return optimalroutes;
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        GoogleMapsDistanceMatrixAPI();
+        mapView?.delegate = self;
+        let optimalRoutes = GoogleMapsDistanceMatrixAPI();
         showLoadingScreen()
+        
+        //set up markers on map
+        for i in 0...options1.count - 1 {
+            mapView.centerCoordinate = CLLocationCoordinate2D(latitude: options1[i].coordinated.latitude, longitude: options1[i].coordinated.longitude);
+            let myAnnotation: MKPointAnnotation = MKPointAnnotation()
+            myAnnotation.coordinate = CLLocationCoordinate2DMake(options1[i].coordinated.latitude, options1[i].coordinated.longitude)
+            myAnnotation.title = options1[i].name
+            mapView.addAnnotation(myAnnotation)
+            
+        }
+        
+        
+        var zoomRect: MKMapRect = MKMapRectNull;
+        
+        for annotation in mapView.annotations {
+            let annotationPoint: MKMapPoint = MKMapPointForCoordinate(annotation.coordinate);
+            let pointRect: MKMapRect = MKMapRectMake(annotationPoint.x, annotationPoint.y, 0, 0);
+            if (MKMapRectIsNull(zoomRect)) {
+                zoomRect = pointRect;
+            } else {
+                zoomRect = MKMapRectUnion(zoomRect, pointRect);
+            }
+        }
+        [mapView?.setVisibleMapRect(zoomRect, animated: true)];
+        
+        
+       
+//        initialLocation = CLLocation(latitude: options1[0].coordinated.latitude, longitude: options1[0].coordinated.longitude)
+//        centerMapOnLocation(location: initialLocation as! CLLocation)
+        
     }
+    
+    
+    let regionRadius: CLLocationDistance = 1000
+    func centerMapOnLocation(location: CLLocation) {
+        let coordinateRegion = MKCoordinateRegionMakeWithDistance(location.coordinate,
+                                                                  regionRadius, regionRadius)
+        mapView.setRegion(coordinateRegion, animated: true)
+    }
+    
     func showLoadingScreen() {
         loadingView.bounds.size.width = view.bounds.width - 25;
         loadingView.bounds.size.height = view.bounds.height - 40;
@@ -139,3 +232,12 @@ class AlgorithmController: UIViewController {
     
 }
 
+extension AlgorithmController: MKMapViewDelegate {
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+            let renderer = MKPolylineRenderer(overlay: overlay)
+            renderer.strokeColor = UIColor.orange
+            renderer.lineWidth = 3
+            return renderer
+    }
+
+}
