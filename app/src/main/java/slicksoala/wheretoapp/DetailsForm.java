@@ -26,7 +26,6 @@ public class DetailsForm extends AppCompatActivity {
     private Spinner travelSpinner;
     private Spinner paceSpinner;
     private Button generateButton;
-    private WhereToPlaces sing;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,7 +35,6 @@ public class DetailsForm extends AppCompatActivity {
         activitySpinner = findViewById(R.id.activitySpinner);
         travelSpinner = findViewById(R.id.travelSpinner);
         paceSpinner = findViewById(R.id.paceSpinner);
-        this.sing = WhereToPlaces.getInstance();
         //generateButton = (Button) findViewById(R.id.generate);
         RippleBackground rippleBackground = (RippleBackground) findViewById(R.id.content);
         rippleBackground.startRippleAnimation();
@@ -91,8 +89,13 @@ public class DetailsForm extends AppCompatActivity {
         String currLong = Double.toString(location.getLongitude());*/
         String currLat = "33.78508547";
         String currLong = "-84.3879824";
+        Place currPlace = new Place();
+        currPlace.setName("Your Location");
+        currPlace.setLatLng(Double.parseDouble(currLat), Double.parseDouble(currLong));
 
-        int k = sing.getK();
+        int k = 5;
+        ArrayList<Place> masterList;
+        ArrayList<Place> kList = new ArrayList<>();
 
         String ret = returnTime.getText().toString();
 
@@ -110,18 +113,19 @@ public class DetailsForm extends AppCompatActivity {
 
         if (activity == ActivityDo.EAT) {
             YelpFusionPlacesListTask yftask = new YelpFusionPlacesListTask();
-            sing.setMasterList(yftask.execute(currLat, currLong, rad, act).get());
+            masterList = yftask.execute(currLat, currLong, rad, act).get();
         } else {
             FoursquarePlacesListTask fstask = new FoursquarePlacesListTask();
-            sing.setMasterList(fstask.execute(currLat, currLong, rad, act).get());
+            masterList = fstask.execute(currLat, currLong, rad, act).get();
         }
 
+        kList.add(currPlace);
         for (int i = 0; i < k; i++) {
-            sing.addtoKList(sing.getfromMasterList(i));
+            kList.add(masterList.get(i));
         }
 
         GDistanceMatrixTask dmtask = new GDistanceMatrixTask();
-        double[][] distMatrix = dmtask.execute(sing.getkList()).get();
+        double[][] distMatrix = dmtask.execute(kList).get();
 
         HeldKarpTSP hk = new HeldKarpTSP();
         System.out.print(Arrays.deepToString(distMatrix));
@@ -130,17 +134,15 @@ public class DetailsForm extends AppCompatActivity {
 
         LinkedList<Integer> path = (LinkedList<Integer>) hk.optimalRoute(distMatrix)[1];
         ArrayList<Place> placesRoute = new ArrayList<>();
-        ArrayList<Place> kList = sing.getkList();
         int i = 0;
         while (i < path.size()) {
             placesRoute.add(kList.get(path.get(i)));
             i++;
         }
-        String route = "Your Location";
+        String route = "";
         for (Place p : placesRoute) {
             route += "-> " + p.getName();
         }
-        route += " -> Your Location";
         for (int d = 1; d < 20; d++) {
             Toast.makeText(DetailsForm.this, route, Toast.LENGTH_LONG).show();
         }
