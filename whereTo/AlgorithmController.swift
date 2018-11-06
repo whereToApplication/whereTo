@@ -176,8 +176,8 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
     }
     
     func showLoadingScreen() {
-        loadingView.bounds.size.width = view.bounds.width - 25;
-        loadingView.bounds.size.height = view.bounds.height - 40;
+        loadingView.bounds.size.width = view.bounds.width;
+        loadingView.bounds.size.height = view.bounds.height;
         loadingView.center = view.center;
         loadingView.alpha = 0;
 //        labelToFade.alpha = 1;
