@@ -3,14 +3,13 @@ package slicksoala.wheretoapp;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Spinner;
-import android.widget.Toast;
 
 import com.skyfishjy.library.RippleBackground;
 
@@ -25,8 +24,6 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.concurrent.ExecutionException;
 
@@ -48,7 +45,6 @@ public class DetailsForm extends AppCompatActivity {
         travelSpinner = findViewById(R.id.travelSpinner);
         paceSpinner = findViewById(R.id.paceSpinner);
         rippleBackground = (RippleBackground) findViewById(R.id.content);
-        rippleBackground.startRippleAnimation();
         ImageView go = findViewById(R.id.centerImage);
         go.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -438,13 +434,15 @@ public class DetailsForm extends AppCompatActivity {
                 placesRoute.add(kList.get(path.get(i)));
                 i++;
             }
-            String route = "";
+            /*String route = "";
             for (Place p : placesRoute) {
                 route += "-> " + p.getName();
             }
-            System.out.println("ROUTE: " + route);
-            Intent intentBack = new Intent(getApplicationContext(), DetailsForm.class);
-            startActivity(intentBack);
+            System.out.println("ROUTE: " + route);*/
+
+            Intent mapsIntent = new Intent(getApplicationContext(), MapsActivity.class);
+            mapsIntent.putExtra("route", placesRoute);
+            startActivity(mapsIntent);
             return null;
         }
     }
