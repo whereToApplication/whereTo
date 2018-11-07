@@ -1,7 +1,15 @@
 package slicksoala.wheretoapp;
 
 
+import android.app.Activity;
+import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
+import android.os.Looper;
+import android.widget.Toast;
+
+import com.skyfishjy.library.RippleBackground;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -31,9 +39,11 @@ public class YelpFusionPlacesListTask extends AsyncTask<String, Void, ArrayList<
     final String placeTypePTG = "arts";
     final String placeTypeTTD = "arts";
     final String placeTypeSTE = "food";
+    Context context;
 
     @Override
     protected ArrayList<Place> doInBackground(String... params) {
+
         currLat = params[0];
         currLong = params[1];
         rad = params[2];
