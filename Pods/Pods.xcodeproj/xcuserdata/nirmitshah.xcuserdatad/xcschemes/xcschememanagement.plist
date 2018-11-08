@@ -12,7 +12,7 @@
 		<key>Alamofire.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>0</integer>
+			<integer>1</integer>
 		</dict>
 		<key>JJFloatingActionButton.xcscheme</key>
 		<dict>
@@ -22,7 +22,7 @@
 		<key>JJFloatingActionButton.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>3</integer>
+			<integer>2</integer>
 		</dict>
 		<key>MDFInternationalization.xcscheme</key>
 		<dict>
@@ -32,7 +32,7 @@
 		<key>MDFInternationalization.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>5</integer>
+			<integer>4</integer>
 		</dict>
 		<key>MDFTextAccessibility.xcscheme</key>
 		<dict>
@@ -42,7 +42,7 @@
 		<key>MDFTextAccessibility.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>6</integer>
+			<integer>5</integer>
 		</dict>
 		<key>MaterialComponents.xcscheme</key>
 		<dict>
@@ -52,12 +52,12 @@
 		<key>MaterialComponents.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>4</integer>
+			<integer>3</integer>
 		</dict>
 		<key>ModelMapper.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>2</integer>
+			<integer>6</integer>
 		</dict>
 		<key>Pods-whereTo.xcscheme</key>
 		<dict>

@@ -18,6 +18,7 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
     var event: String = ""
     var travel: String = ""
     var place: String = ""
+    @IBOutlet weak var goLabel: UIImageView!
     var options1: [Place] = []
     @IBOutlet var loadingView: UIView!
     @IBOutlet weak var labelToFade: UILabel!
@@ -26,27 +27,27 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
     let DEST_PAR: String = "&destinations=";
     let KEY_PAR: String = "&key=";
     let API_KEY: String = "AIzaSyAr-MIu6A-LmtXGsm94fDfIjICLguluajQ";
-    
-    
+    var route: [Int] = [];
+
+    var gotRoutes: Bool = false;
     var initialLocation : CLLocation??
 
     
     func GoogleMapsDistanceMatrixAPI() -> [Place]{
         //var arr = Array(repeating: Array(repeating: 0, count: 2), count: 3)
-        var options: [Place] = self.options1;
-        var distMatrix = Array(repeating: Array(repeating: 0.0, count: options.count), count: options.count);
-        var route: [Int] = [];
+        var options: [Place] = [];
+        var distMatrix = Array(repeating: Array(repeating: 0.0, count: self.options1.count), count: self.options1.count);
         var origdest: String = "";
         
-        if options.count != 0 {
-            origdest.append("\(options[0].coordinated.latitude)");
+        if self.options1.count != 0 {
+            origdest.append("\(self.options1[0].coordinated.latitude)");
             origdest.append(",");
-            origdest.append("\(options[0].coordinated.longitude)");
-            for i in 1 ... options.count - 1 {
+            origdest.append("\(self.options1[0].coordinated.longitude)");
+            for i in 1 ... self.options1.count - 1 {
                 origdest.append("|");
-                origdest.append("\(options[i].coordinated.latitude)");
+                origdest.append("\(self.options1[i].coordinated.latitude)");
                 origdest.append(",");
-                origdest.append("\(options[i].coordinated.longitude)");
+                origdest.append("\(self.options1[i].coordinated.longitude)");
             }
         }
         let urlString: String = DISTMATRIX_BASE + ORIG_PAR + origdest + DEST_PAR + origdest + KEY_PAR + API_KEY;
@@ -60,73 +61,59 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
                         if let jsonValue = response.result.value {
                             let json = SwiftyJSON.JSON(jsonValue)
                             print(json["rows"])
-                            for i in 0...options.count - 1 {
-                                for j in 0...options.count - 1 {
+                            for i in 0...self.options1.count - 1 {
+                                for j in 0...self.options1.count - 1 {
                                     distMatrix[i][j] = json["rows"][i]["elements"][j]["duration"]["value"].doubleValue;
                                 }
                             }
                             
                             var tester: HeldKarpTSPTrialVersion = HeldKarpTSPTrialVersion.init();
                             var optimalRoute = tester.optimalRoute(distance: distMatrix);
-                            route = optimalRoute[1] as! [Int];
-                            options = self.buildRoute(route: route);
+                            self.route = optimalRoute[1] as! [Int];
+                            options = self.buildRoute(route: self.route);
+                            self.gotRoutes = true;
                 }
         });
         return options;
     }
     
+    @objc func goBtn() {
+        
+        if gotRoutes {
+            var urlString: String = "comgooglemaps://?daddr="
+            var optimalroutes: [Place] = [];
+            for i in 0...self.route.count - 1 {
+                optimalroutes.append(options1[self.route[i]]);
+            }
+            var locations = optimalroutes.map { CLLocationCoordinate2D.init(latitude: $0.coordinated.latitude, longitude: $0.coordinated.longitude) }
+            for i in 1...locations.count-1 {
+                urlString.append("\(locations[i].latitude),\(locations[i].longitude)+to:");
+            }
+            
+            urlString.removeSubrange(urlString.index(urlString.endIndex, offsetBy: -4)...urlString.index(urlString.endIndex, offsetBy: -1));
+            
+            
+            if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
+                UIApplication.shared.openURL(URL(string:
+                    "comgooglemaps://daddr=\(urlString)&center=37.423725,-122.0877&directionsmode=car&zoom=17")!)
+            } else {
+                print("Can't use comgooglemaps://");
+            }
+        }
+        
+        
+    }
+    
     func buildRoute(route: [Int]) -> [Place] {
         var optimalroutes: [Place] = [];
-        for i in 0...route.count - 1 {
-            optimalroutes.append(options1[route[i]]);
+        for i in 0...self.route.count - 1 {
+            optimalroutes.append(options1[self.route[i]]);
         }
         
         var locations = optimalroutes.map { CLLocationCoordinate2D.init(latitude: $0.coordinated.latitude, longitude: $0.coordinated.longitude) }
         let polyline = MKPolyline(coordinates: &locations, count: locations.count)
         mapView?.add(polyline);
-        
-        var urlString: String = "comgooglemaps://?daddr="
-        
-        for i in 1...locations.count-1 {
-            urlString.append("\(locations[i].latitude),\(locations[i].longitude)+to:");
-        }
-        
-//        DispatchQueue.main.asyncAfter(deadline: .now() + 4.5) {
-//            if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
-//                //            UIApplication.shared.openURL(URL(string:
-//                //                "comgooglemaps://?center=\(latitude),\(longitude)&zoom=14&views=traffic")!)
-//
-//
-////                UIApplication.shared.openURL(URL(string:
-////                    "comgooglemaps://?saddr=\(locations[1].latitude),\(locations[)&daddr=\(dlatitude),\(dlongitude)&center=37.423725,-122.0877&directionsmode=\(travelMode)&zoom=17")!)
-////            } else {
-////                print("Can't use comgooglemaps://");
-////            }
-//        }
-//
-//        /*
-//
-//         if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
-//         //            UIApplication.shared.openURL(URL(string:
-//         //                "comgooglemaps://?center=\(latitude),\(longitude)&zoom=14&views=traffic")!)
-//         UIApplication.shared.openURL(URL(string:
-//         "comgooglemaps://?saddr=\(slatitude),\(slongitude)&daddr=\(dlatitude),\(dlongitude)&center=37.423725,-122.0877&directionsmode=\(travelMode)&zoom=17")!)
-//         } else {
-//         print("Can't use comgooglemaps://");
-//         }
-//
-//         */
-        urlString.removeSubrange(urlString.index(urlString.endIndex, offsetBy: -4)...urlString.index(urlString.endIndex, offsetBy: -1));
-        
-        
-        if (UIApplication.shared.canOpenURL(URL(string:"comgooglemaps://")!)) {
-                     //            UIApplication.shared.openURL(URL(string:
-                     //                "comgooglemaps://?center=\(latitude),\(longitude)&zoom=14&views=traffic")!)
-                     UIApplication.shared.openURL(URL(string:
-                     "comgooglemaps://daddr=\(urlString)&center=37.423725,-122.0877&directionsmode=car&zoom=17")!)
-                     } else {
-                     print("Can't use comgooglemaps://");
-                     }
+
         return optimalroutes;
     }
     
@@ -161,9 +148,10 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
         [mapView?.setVisibleMapRect(zoomRect, animated: true)];
         
         
-       
-//        initialLocation = CLLocation(latitude: options1[0].coordinated.latitude, longitude: options1[0].coordinated.longitude)
-//        centerMapOnLocation(location: initialLocation as! CLLocation)
+        
+        let singleTap = UITapGestureRecognizer(target: self, action: #selector(self.goBtn))
+        goLabel.isUserInteractionEnabled = true
+        goLabel.addGestureRecognizer(singleTap)
         
     }
     
@@ -185,28 +173,6 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
         UIView.animate(withDuration: 0.7, delay: 0.3, options: [], animations: {
             self.loadingView.alpha = 1
         }) {(success) in
-//            var i = 0;
-//            while(i < 3) {
-//                UIView.animate(withDuration: 0.6, delay: 0.7, animations: {
-//                        self.labelToFade.alpha = 0.0
-//                }, completion: {(success) in
-//                    UIView.animate(withDuration: 0.6, animations: {
-//                            self.labelToFade.alpha = 1.0
-//                    })
-//                })
-//                i = i + 1;
-//            }
-//            UIView.animate(withDuration: 1.0,
-//                           delay: 0,
-//                           options: [.autoreverse, .repeat],
-//                           animations: {
-//                            self.labelToFade.alpha = 1 - self.labelToFade.alpha
-//            },
-//                           completion: nil
-//
-//            )
-//            var i = 0;
-//            while(i < 3) {
                 UIView.animate(withDuration: 1.0, delay: 1.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
                     self.labelToFade.alpha = 1.0
                 }, completion: nil)
@@ -217,11 +183,8 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
                     UIView.animate(withDuration: 1.0
                         , animations: {
                             self.loadingView.alpha = 0.0
-                            
                     })
                 })
-//                i = i + 1;
-//            }
         }
         
     }
