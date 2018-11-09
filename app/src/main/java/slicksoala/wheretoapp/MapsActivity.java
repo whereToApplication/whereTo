@@ -65,6 +65,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         }
         avlat /= route.size();
         avlng /= route.size();
+        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLngs[0]));
         /*mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(avlat, avlng)));
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(avlat, avlng))      // Sets the center of the map to Mountain View
@@ -73,6 +74,5 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .tilt(30)                   // Sets the tilt of the camera to 30 degrees
                 .build();                   // Creates a CameraPosition from the builder
         mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));*/
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(avlat, avlng)));
     }
 }
