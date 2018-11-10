@@ -20,6 +20,7 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var goLabel: UIImageView!
     var options1: [Place] = []
     @IBOutlet var loadingView: UIView!
+    @IBOutlet weak var backbutton: UIButton!
     @IBOutlet weak var labelToFade: UILabel!
     let DISTMATRIX_BASE: String = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric";
     let ORIG_PAR: String = "&origins=";
@@ -153,6 +154,8 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(self.goBtn))
         goLabel.isUserInteractionEnabled = true
         goLabel.addGestureRecognizer(singleTap)
+        
+        
         
     }
     

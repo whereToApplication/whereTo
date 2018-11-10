@@ -348,6 +348,17 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LpA-dv-u2q">
+                                <rect key="frame" x="16" y="29" width="61" height="36"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="20"/>
+                                <state key="normal" title="&lt; Back">
+                                    <color key="titleColor" red="0.1177054365" green="0.54351522019999998" blue="0.12634957320000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                </state>
+                                <connections>
+                                    <segue destination="KhX-M6-XkS" kind="show" id="fCd-nu-gNi"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
@@ -361,6 +372,7 @@
                         <viewLayoutGuide key="safeArea" id="JS2-8E-QdT"/>
                     </view>
                     <connections>
+                        <outlet property="backbutton" destination="LpA-dv-u2q" id="DWy-bQ-YrL"/>
                         <outlet property="goLabel" destination="QBH-U5-UbR" id="Kig-GJ-Ypb"/>
                         <outlet property="labelToFade" destination="1md-zf-LnG" id="7z3-Cw-g0c"/>
                         <outlet property="loadingView" destination="n7b-TH-0IH" id="BkV-U7-1GJ"/>
