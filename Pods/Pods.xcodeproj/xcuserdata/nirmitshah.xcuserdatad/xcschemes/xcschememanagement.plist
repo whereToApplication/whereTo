@@ -54,6 +54,11 @@
 			<key>orderHint</key>
 			<integer>3</integer>
 		</dict>
+		<key>ModelMapper.xcscheme_^#shared#^_</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
+		</dict>
 		<key>Pods-whereTo.xcscheme</key>
 		<dict>
 			<key>orderHint</key>
@@ -62,7 +67,7 @@
 		<key>Pods-whereTo.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>6</integer>
+			<integer>7</integer>
 		</dict>
 		<key>Pods-whereToTests.xcscheme</key>
 		<dict>
@@ -72,7 +77,7 @@
 		<key>Pods-whereToTests.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>7</integer>
+			<integer>8</integer>
 		</dict>
 		<key>Pods-whereToUITests.xcscheme</key>
 		<dict>
@@ -82,7 +87,7 @@
 		<key>Pods-whereToUITests.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>9</integer>
 		</dict>
 		<key>Pulsator.xcscheme</key>
 		<dict>
@@ -92,7 +97,7 @@
 		<key>Pulsator.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>9</integer>
+			<integer>10</integer>
 		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
@@ -102,7 +107,7 @@
 		<key>SwiftyJSON.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>10</integer>
+			<integer>11</integer>
 		</dict>
 	</dict>
 </dict>

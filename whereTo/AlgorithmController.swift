@@ -165,8 +165,8 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
     }
     
     func showLoadingScreen() {
-        loadingView.bounds.size.width = view.bounds.width - 25;
-        loadingView.bounds.size.height = view.bounds.height - 40;
+        loadingView.bounds.size.width = view.bounds.width;
+        loadingView.bounds.size.height = view.bounds.height;
         loadingView.center = view.center;
         loadingView.alpha = 0;
 //        labelToFade.alpha = 1;
@@ -174,28 +174,6 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
         UIView.animate(withDuration: 0.7, delay: 0.3, options: [], animations: {
             self.loadingView.alpha = 1
         }) {(success) in
-//            var i = 0;
-//            while(i < 3) {
-//                UIView.animate(withDuration: 0.6, delay: 0.7, animations: {
-//                        self.labelToFade.alpha = 0.0
-//                }, completion: {(success) in
-//                    UIView.animate(withDuration: 0.6, animations: {
-//                            self.labelToFade.alpha = 1.0
-//                    })
-//                })
-//                i = i + 1;
-//            }
-//            UIView.animate(withDuration: 1.0,
-//                           delay: 0,
-//                           options: [.autoreverse, .repeat],
-//                           animations: {
-//                            self.labelToFade.alpha = 1 - self.labelToFade.alpha
-//            },
-//                           completion: nil
-//
-//            )
-//            var i = 0;
-//            while(i < 3) {
                 UIView.animate(withDuration: 1.0, delay: 1.0, options: UIViewAnimationOptions.curveEaseOut, animations: {
                     self.labelToFade.alpha = 1.0
                 }, completion: nil)
@@ -206,11 +184,8 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
                     UIView.animate(withDuration: 1.0
                         , animations: {
                             self.loadingView.alpha = 0.0
-                            
                     })
                 })
-//                i = i + 1;
-//            }
         }
         
     }
