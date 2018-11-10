@@ -16,8 +16,7 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var mapView: MKMapView!
     var radius: String = ""
     var event: String = ""
-    var travel: String = ""
-    var place: String = ""
+    var pace: String = ""
     @IBOutlet weak var goLabel: UIImageView!
     var options1: [Place] = []
     @IBOutlet var loadingView: UIView!
@@ -43,11 +42,13 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
             origdest.append("\(self.options1[0].coordinated.latitude)");
             origdest.append(",");
             origdest.append("\(self.options1[0].coordinated.longitude)");
-            for i in 1 ... self.options1.count - 1 {
-                origdest.append("|");
-                origdest.append("\(self.options1[i].coordinated.latitude)");
-                origdest.append(",");
-                origdest.append("\(self.options1[i].coordinated.longitude)");
+            if self.options1.count > 1 {
+                for i in 1 ... self.options1.count - 1 {
+                    origdest.append("|");
+                    origdest.append("\(self.options1[i].coordinated.latitude)");
+                    origdest.append(",");
+                    origdest.append("\(self.options1[i].coordinated.longitude)");
+                }
             }
         }
         let urlString: String = DISTMATRIX_BASE + ORIG_PAR + origdest + DEST_PAR + origdest + KEY_PAR + API_KEY;
@@ -61,8 +62,8 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
                         if let jsonValue = response.result.value {
                             let json = SwiftyJSON.JSON(jsonValue)
                             print(json["rows"])
-                            for i in 0...self.options1.count - 1 {
-                                for j in 0...self.options1.count - 1 {
+                            for i in 0..<json["rows"].count {
+                                for j in 0..<json["rows"].count {
                                     distMatrix[i][j] = json["rows"][i]["elements"][j]["duration"]["value"].doubleValue;
                                 }
                             }
@@ -121,7 +122,7 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         mapView?.delegate = self;
         let optimalRoutes = GoogleMapsDistanceMatrixAPI();
-        showLoadingScreen()
+                showLoadingScreen()
         
         //set up markers on map
         for i in 0...options1.count - 1 {
@@ -222,10 +223,12 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
 
 extension AlgorithmController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
-            let renderer = MKPolylineRenderer(overlay: overlay)
+            let renderer = AnimatedGradientPathRenderer(overlay: overlay)
             renderer.strokeColor = UIColor.orange
             renderer.lineWidth = 3
             return renderer
     }
 
 }
+
+

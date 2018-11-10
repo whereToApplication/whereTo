@@ -15,7 +15,6 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
     var timeText: String = ""
     var radiusText: String = ""
     var eventsText: String = ""
-    var travelTypeText: String = ""
     var paceText: String = ""
     let distances = [1500, 26093, 48280]
     var distance: Int = 1000
@@ -42,26 +41,32 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
         let currHour = calendar.component(.hour, from: currDate)
         let currMinutes = calendar.component(.minute, from: currDate)
         
-        timeText = String((60*hour! + minute!) - (60*currHour + currMinutes))
+        let nextNum = (60*hour! + minute!);
+        let currNum = (60*currHour + currMinutes)
+        
+        if nextNum < currNum {
+            timeText = String(nextNum + (24*60 - currNum));
+        } else {
+            timeText = String((60*hour! + minute!) - (60*currHour + currMinutes))
+        }
         print(timeText)
     }
     @IBAction func eventAction(_ sender: UISegmentedControl) {
         eventsText = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? ""
-    }
-    @IBAction func radiusAction(_ sender: UISegmentedControl) {
-        radiusText = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? ""
-    }
-    
-    @IBAction func travelAction(_ sender: UISegmentedControl) {
-            travelTypeText = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? ""
-        if travelTypeText == "Walk" {
-            distance = distances[0]
-        } else if travelTypeText == "Drive" {
-            distance = distances[1]
-        } else if travelTypeText == "Transit" || travelTypeText == "Any" {
-            distance = distances[2]
+        if eventsText == "sightsee" {
+            eventsText = "tourist"
         }
     }
+    @IBAction func radiusAction(_ sender: UISegmentedControl) {
+        var coverage = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? ""
+        
+        if coverage == "Nearby" {
+            radiusText = "4000"
+        } else if coverage == "Whole City" {
+            radiusText = "20000"
+        }
+    }
+    
     @IBAction func paceAction(_ sender: UISegmentedControl) {
         paceText = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? ""
         k = kCalculator()
@@ -71,10 +76,22 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
    
 
     @IBAction func submit(_ sender: UIButton) {
-        if radiusText.count > 0 && eventsText.count > 0 && travelTypeText.count > 0 && paceText.count > 0 {
-            performSegue(withIdentifier: "algorithmIdentifier", sender: self)
+        if radiusText.count > 0 && eventsText.count > 0 && paceText.count > 0 {
+//            performSegue(withIdentifier: "algorithmIdentifier", sender: self)
+            
+            if k <= 0 {
+                let alert = UIAlertController(title: "Error", message: "That's too little time, if you want to go \(paceText)", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Be sure to pick everything"), style: .default, handler: { _ in
+                    NSLog("The \"OK\" alert occured.")
+                }))
+                self.present(alert, animated: true, completion: nil)
+            } else {
+                testLaunchClicked();
+            }
+            
+
         } else {
-            let alert = UIAlertController(title: "My Alert", message: "This is an alert.", preferredStyle: .alert)
+            let alert = UIAlertController(title: "Error", message: "Be sure to pick everything", preferredStyle: .alert)
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Be sure to pick everything"), style: .default, handler: { _ in
                 NSLog("The \"OK\" alert occured.")
             }))
@@ -87,8 +104,7 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
         if let destination = segue.destination as? AlgorithmController {
             destination.radius = self.radiusText
             destination.event = self.eventsText
-            destination.travel = self.travelTypeText
-            destination.place = self.paceText
+            destination.pace = self.paceText
             destination.options1 = self.spotList
         }
     }
@@ -123,7 +139,7 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
         latitude = locValue.latitude
         longitude = locValue.longitude
         if !updated {
-            testLaunchClicked();
+//            testLaunchClicked();
             updated = true;
         }
 
@@ -143,7 +159,7 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
             ]
 
         
-        Alamofire.request("https://api.yelp.com/v3/businesses/search?term=arts&latitude=\(self.latitude)&longitude=\(self.longitude)&radius=20000", method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default, headers: auth_header).responseJSON {
+        Alamofire.request("https://api.yelp.com/v3/businesses/search?term=\(eventsText)&latitude=\(self.latitude)&longitude=\(self.longitude)&radius=\(radiusText)", method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default, headers: auth_header).responseJSON {
             response in
             if let jsonValue = response.result.value {
                 let json = SwiftyJSON.JSON(jsonValue)
@@ -165,9 +181,10 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
                     self.spotList = newPlaces;
                     self.done = true
                 } else {
-                    for count in 0 ... self.k {
+                    for count in 0 ... self.k  {
                         self.spotList.append(newPlaces[count]);
                     }
+                    
                     self.masterList = newPlaces
                     
                 }
@@ -179,12 +196,12 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
     
     
     func kCalculator() -> Int {
-        if paceText == "Chill" {
-            return Int(timeText)!/90
-        } else if paceText == "Moderate" {
-            return Int(timeText)!/45
+        if paceText == "Slow" {
+            return min(abs(Int(timeText)!)/90, 9)
+        } else if paceText == "Normal" {
+            return min(abs(Int(timeText)!)/45, 9)
         } else if paceText == "Fast" {
-            return Int(timeText)!/15
+            return min(abs(Int(timeText)!)/15, 9)
         }
         
         return 0
