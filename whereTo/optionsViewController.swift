@@ -29,6 +29,7 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
     var done: Bool = false
     var options: [JSON] = []
     var updated: Bool = false;
+    var modeText: String = ""
     @IBAction func timeAction(_ sender: UIDatePicker) {
         let date = sender
         
@@ -57,23 +58,29 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
             eventsText = "tourist"
         }
     }
-    @IBAction func radiusAction(_ sender: UISegmentedControl) {
-        var coverage = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? ""
-        
-        if coverage == "Nearby" {
-            radiusText = "4000"
-        } else if coverage == "Whole City" {
-            radiusText = "20000"
-        }
-    }
-    
+
     @IBAction func paceAction(_ sender: UISegmentedControl) {
         paceText = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? ""
         k = kCalculator()
     }
 
 
-   
+    @IBAction func modeAction(_ sender: UISegmentedControl) {
+        var coverage = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? ""
+        
+        if coverage == "Walk" {
+            var maxDistance = Int(1.4 * Double(timeText)!/2 * 60)
+            radiusText = "\(maxDistance)"
+        } else {
+            var maxDistance = Int(13.9 * Double(timeText)!/2 * 60)
+            if maxDistance > 40000 {
+                radiusText = "40000"
+            } else {
+                radiusText = "\(maxDistance)"
+            }
+        }
+    }
+    
 
     @IBAction func submit(_ sender: UIButton) {
         if radiusText.count > 0 && eventsText.count > 0 && paceText.count > 0 {
@@ -157,9 +164,12 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
         let auth_header = [
             "Authorization": "Bearer IRT-fzwU1f8luW7wcdWJ5wSzmTOWoJuYKAOMZJtlv-D6s-MVhzGwu7MLn77_A2NWUohglYO_WZhBgejDmHINDKSSP-jzSKFoa_DeL3TdYGrezK1TFeYaHLagsmvLW3Yx",
             ]
-
         
-        Alamofire.request("https://api.yelp.com/v3/businesses/search?term=\(eventsText)&latitude=\(self.latitude)&longitude=\(self.longitude)&radius=\(radiusText)", method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default, headers: auth_header).responseJSON {
+        var urlText = "https://api.yelp.com/v3/businesses/search?term=\(eventsText)&latitude=\(self.latitude)&longitude=\(self.longitude)&radius=\(radiusText)"
+        
+        let encodedUrl = urlText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
+        Alamofire.request(encodedUrl!, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default, headers: auth_header).responseJSON {
             response in
             if let jsonValue = response.result.value {
                 let json = SwiftyJSON.JSON(jsonValue)

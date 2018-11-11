@@ -26,7 +26,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HeldKarpTSPTrialVersion.swift"
-            timestampString = "563580041.282497"
+            timestampString = "563587163.128531"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "102"
@@ -42,7 +42,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/AlgorithmController.swift"
-            timestampString = "563580041.283972"
+            timestampString = "563587163.138077"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "69"
@@ -58,11 +58,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/optionsViewController.swift"
-            timestampString = "563580041.284894"
+            timestampString = "563587163.13871"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "180"
-            endingLineNumber = "180"
+            startingLineNumber = "190"
+            endingLineNumber = "190"
             landmarkName = "testLaunchClicked()"
             landmarkType = "7">
          </BreakpointContent>
@@ -70,46 +70,46 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
+            shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/optionsViewController.swift"
-            timestampString = "563580041.285282"
+            timestampString = "563587163.139172"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "162"
-            endingLineNumber = "162"
+            startingLineNumber = "172"
+            endingLineNumber = "172"
             landmarkName = "testLaunchClicked()"
             landmarkType = "7">
             <Locations>
                <Location
-                  shouldBeEnabled = "No"
+                  shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "whereTo.optionsViewController.testLaunchClicked() -&gt; ()"
                   moduleName = "whereTo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/krrishdholakia/Dropbox/whereTo/whereTo/optionsViewController.swift"
-                  timestampString = "563082325.199887"
+                  timestampString = "563587165.973972"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "149"
-                  endingLineNumber = "149"
-                  offsetFromSymbolStart = "212">
+                  startingLineNumber = "172"
+                  endingLineNumber = "172"
+                  offsetFromSymbolStart = "908">
                </Location>
                <Location
-                  shouldBeEnabled = "No"
+                  shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "closure #1 (Alamofire.DataResponse&lt;Any&gt;) -&gt; () in whereTo.optionsViewController.testLaunchClicked() -&gt; ()"
                   moduleName = "whereTo"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/krrishdholakia/Dropbox/whereTo/whereTo/optionsViewController.swift"
-                  timestampString = "563082325.2055629"
+                  timestampString = "563587165.976913"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "151"
-                  endingLineNumber = "151"
+                  startingLineNumber = "174"
+                  endingLineNumber = "174"
                   offsetFromSymbolStart = "68">
                </Location>
             </Locations>
@@ -122,7 +122,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/AlgorithmController.swift"
-            timestampString = "563580041.2855279"
+            timestampString = "563587163.139544"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "137"
@@ -138,7 +138,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/AlgorithmController.swift"
-            timestampString = "563580041.286036"
+            timestampString = "563587163.139909"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "138"
@@ -154,7 +154,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/AlgorithmController.swift"
-            timestampString = "563580041.28666"
+            timestampString = "563587163.1401989"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "140"
@@ -170,13 +170,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/AlgorithmController.swift"
-            timestampString = "563580041.287218"
+            timestampString = "563587163.141199"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "230"
-            endingLineNumber = "230"
-            landmarkName = "mapView(_:rendererFor:)"
-            landmarkType = "7">
+            startingLineNumber = "210"
+            endingLineNumber = "210">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -186,7 +184,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/AlgorithmController.swift"
-            timestampString = "563580041.287752"
+            timestampString = "563587163.141587"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "78"
@@ -202,11 +200,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/optionsViewController.swift"
-            timestampString = "563580041.288198"
+            timestampString = "563587163.142012"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "192"
-            endingLineNumber = "192"
+            startingLineNumber = "202"
+            endingLineNumber = "202"
             landmarkName = "testLaunchClicked()"
             landmarkType = "7">
          </BreakpointContent>
@@ -218,11 +216,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/optionsViewController.swift"
-            timestampString = "563580041.288445"
+            timestampString = "563587163.142506"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
             landmarkName = "submit(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -234,7 +232,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/AlgorithmController.swift"
-            timestampString = "563580041.2887239"
+            timestampString = "563587163.142942"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "118"
@@ -250,7 +248,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/AlgorithmController.swift"
-            timestampString = "563580041.28939"
+            timestampString = "563587163.143993"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "128"
@@ -266,7 +264,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/AlgorithmController.swift"
-            timestampString = "563580041.289917"
+            timestampString = "563587163.144289"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "149"
@@ -282,7 +280,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/AlgorithmController.swift"
-            timestampString = "563580041.290382"
+            timestampString = "563587163.1445301"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "75"
@@ -298,7 +296,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/AlgorithmController.swift"
-            timestampString = "563580041.290822"
+            timestampString = "563587163.144778"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "64"
@@ -314,7 +312,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/AlgorithmController.swift"
-            timestampString = "563580041.291261"
+            timestampString = "563587163.146282"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "59"
@@ -362,11 +360,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/optionsViewController.swift"
-            timestampString = "563580041.2917041"
+            timestampString = "563587163.1466171"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "200"
-            endingLineNumber = "200"
+            startingLineNumber = "210"
+            endingLineNumber = "210"
             landmarkName = "kCalculator()"
             landmarkType = "7">
          </BreakpointContent>
@@ -378,11 +376,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/optionsViewController.swift"
-            timestampString = "563580041.29196"
+            timestampString = "563587163.146888"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "202"
-            endingLineNumber = "202"
+            startingLineNumber = "212"
+            endingLineNumber = "212"
             landmarkName = "kCalculator()"
             landmarkType = "7">
          </BreakpointContent>
@@ -394,11 +392,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/optionsViewController.swift"
-            timestampString = "563580041.292212"
+            timestampString = "563587163.147171"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "204"
-            endingLineNumber = "204"
+            startingLineNumber = "214"
+            endingLineNumber = "214"
             landmarkName = "kCalculator()"
             landmarkType = "7">
          </BreakpointContent>
@@ -410,11 +408,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/optionsViewController.swift"
-            timestampString = "563580041.292451"
+            timestampString = "563587163.147441"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "53"
-            endingLineNumber = "53"
+            startingLineNumber = "54"
+            endingLineNumber = "54"
             landmarkName = "timeAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -426,11 +424,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/optionsViewController.swift"
-            timestampString = "563580041.29272"
+            timestampString = "563587163.147776"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "205"
-            endingLineNumber = "205"
+            startingLineNumber = "215"
+            endingLineNumber = "215"
             landmarkName = "kCalculator()"
             landmarkType = "7">
          </BreakpointContent>
@@ -442,7 +440,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "HeldKarpTSPTrialVersion.swift"
-            timestampString = "563580041.29296"
+            timestampString = "563587163.148041"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "36"
@@ -458,12 +456,76 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "whereTo/AlgorithmController.swift"
-            timestampString = "563580041.293012"
+            timestampString = "563587163.14828"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "72"
             endingLineNumber = "72"
             landmarkName = "GoogleMapsDistanceMatrixAPI()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "whereTo/optionsViewController.swift"
+            timestampString = "563587163.149529"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "182"
+            endingLineNumber = "182"
+            landmarkName = "testLaunchClicked()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "whereTo/optionsViewController.swift"
+            timestampString = "563587163.149931"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "170"
+            endingLineNumber = "170"
+            landmarkName = "testLaunchClicked()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "whereTo/optionsViewController.swift"
+            timestampString = "563587163.150244"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
+            landmarkName = "modeAction(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "whereTo/optionsViewController.swift"
+            timestampString = "563587163.150528"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "modeAction(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
