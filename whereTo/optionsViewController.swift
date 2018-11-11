@@ -21,7 +21,7 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
     private var locationManager: CLLocationManager!
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
-    var k = 4
+    var k = 9
     var delta = 0
     let sigma = 0.4
     var spotList: [Place] = []
@@ -61,7 +61,7 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
 
     @IBAction func paceAction(_ sender: UISegmentedControl) {
         paceText = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? ""
-        k = kCalculator()
+//        k = kCalculator()
     }
 
 
@@ -113,6 +113,7 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
             destination.event = self.eventsText
             destination.pace = self.paceText
             destination.options1 = self.spotList
+            destination.time = self.timeText
         }
     }
     override func viewDidLoad() {
@@ -205,15 +206,15 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
-    func kCalculator() -> Int {
-        if paceText == "Slow" {
-            return min(abs(Int(timeText)!)/90, 9)
-        } else if paceText == "Normal" {
-            return min(abs(Int(timeText)!)/45, 9)
-        } else if paceText == "Fast" {
-            return min(abs(Int(timeText)!)/15, 9)
-        }
-        
-        return 0
-    }
+//    func kCalculator() -> Int {
+//        if paceText == "Slow" {
+//            return min(abs(Int(timeText)!)/90, 9)
+//        } else if paceText == "Normal" {
+//            return min(abs(Int(timeText)!)/45, 9)
+//        } else if paceText == "Fast" {
+//            return min(abs(Int(timeText)!)/15, 9)
+//        }
+//
+//        return 0
+//    }
 }
