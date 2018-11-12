@@ -120,6 +120,10 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
         if let destination = segue.destination as? UserPreferenceViewController {
             destination.categories = Array(self.tempcategories)
             destination.places = self.spotList;
+            destination.radiusText = self.radiusText
+            destination.eventsText = self.eventsText
+            destination.paceText = self.paceText
+            destination.timeText = self.timeText
         }
     }
     override func viewDidLoad() {

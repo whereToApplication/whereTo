@@ -12,6 +12,10 @@ class UserPreferenceViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
     var categories: [String] = [];
     var places: [Place] = [];
+    var radiusText: String = "";
+    var eventsText: String = "";
+    var paceText: String = "";
+    var timeText: String = "";
     var voteUpCategories: Set<String> = Set<String>.init();
     var voteDownCategories: Set<String> = Set<String>.init();
     
@@ -25,7 +29,6 @@ class UserPreferenceViewController: UIViewController {
     
     
     @IBAction func onDoneBtnClicked(_ sender: Any) {
-//        performSegue(withIdentifier: "tableToAlgoIdentifier", sender: self)
         var PopularityDic = [String: Double]();
         var ratingsum = 0.0;
         
@@ -89,15 +92,21 @@ class UserPreferenceViewController: UIViewController {
         
         //replace rating in place.rating w/ popularity dict value
         places = places.sorted {PopularityDic[$0.name]! > PopularityDic[$1.name]!}
-       
-        
+        let element = places.remove(at: places.count - 1)
+        places.insert(element, at: 0)
+        performSegue(withIdentifier: "tableToAlgoIdentifier", sender: self)
+
     }
     
-//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-//        if let destination = segue.destination as? AlgorithmController {
-//
-//        }
-//    }
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let destination = segue.destination as? AlgorithmController {
+            destination.radius = self.radiusText
+            destination.event = self.eventsText
+            destination.pace = self.paceText
+            destination.options1 = self.places
+            destination.time = self.timeText
+        }
+    }
     
     /*
     // MARK: - Navigation
