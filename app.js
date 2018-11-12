@@ -14,13 +14,7 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 var bodyParser = require("body-parser");
-// Checks for Necessary Mongoose elements
-if (!fs.existsSync('./env.sh')) {
-  throw new Error('env.sh file is missing');
-}
-if (!process.env.MONGODB_URI) {
-  throw new Error("MONGODB_URI has not been set. Try to source your env.sh file");
-}
+// Checks for Necessary Mongoose element
 mongoose.connection.on('connected', function() {
   console.log('Success: Connected to Mongo DB');
 });
