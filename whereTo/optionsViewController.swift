@@ -30,6 +30,8 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
     var options: [JSON] = []
     var updated: Bool = false;
     var modeText: String = ""
+    var tempcategories: [String] = []
+
     @IBAction func timeAction(_ sender: UIDatePicker) {
         let date = sender
         
@@ -115,6 +117,9 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
             destination.options1 = self.spotList
             destination.time = self.timeText
         }
+        if let destination = segue.destination as? UserPreferenceViewController {
+            destination.categories = self.tempcategories
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -182,6 +187,9 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
                 newPlaces.append(userPlace);
                 for count in 0 ... self.options.count - 1 {
                     let tempcoord: coordinates = coordinates(latitude: self.options[count]["coordinates"]["latitude"].doubleValue, longitude: self.options[count]["coordinates"]["longitude"].doubleValue);
+                    for (tempcategory, tempJSON) in self.options[count]["categories"] {
+                        self.tempcategories.append(tempJSON["title"].string ?? "")
+                    }
                     let tempPlace: Place = Place(name: self.options[count]["name"].stringValue, coordinates: tempcoord, rating: self.options[count]["rating"].intValue, review_count: self.options[count]["review_count"].intValue);
                     
                     newPlaces.append(tempPlace);
@@ -200,7 +208,7 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
                     
                 }
                 
-                self.performSegue(withIdentifier: "algorithmIdentifier", sender: self);
+                self.performSegue(withIdentifier: "preferenceIdentifier", sender: self);
             }
         }
     }

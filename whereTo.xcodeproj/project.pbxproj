@@ -17,9 +17,11 @@
 		550EAB3B214D98FD00C5AFF5 /* whereToUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550EAB3A214D98FD00C5AFF5 /* whereToUITests.swift */; };
 		550EAB49214D9B1700C5AFF5 /* LaunchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550EAB48214D9B1700C5AFF5 /* LaunchViewController.swift */; };
 		550EAB4B214DA88500C5AFF5 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 550EAB4A214DA88500C5AFF5 /* MapViewController.swift */; };
+		552DF2802199046A00CB291F /* PreferenceCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 552DF27F2199046A00CB291F /* PreferenceCell.swift */; };
 		5530E56E217E9DC30046A3D6 /* heldKarpAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530E56D217E9DC30046A3D6 /* heldKarpAlgorithm.swift */; };
 		55574D47218BFF83000906E7 /* HeldKarpTSPTrialVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55574D46218BFF83000906E7 /* HeldKarpTSPTrialVersion.swift */; };
 		557B42A2218D2A65009A0AEE /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B42A1218D2A65009A0AEE /* Place.swift */; };
+		55A835B82198F49B000E1178 /* UserPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A835B72198F49B000E1178 /* UserPreferenceViewController.swift */; };
 		55CADF262192555300E49B90 /* AnimatedGradientPathRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CADF252192555300E49B90 /* AnimatedGradientPathRenderer.swift */; };
 		55FDA844214F70740081EC28 /* fabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FDA843214F70740081EC28 /* fabViewController.swift */; };
 		763835836062D3102E971A9F /* Pods_whereTo.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D3257294C46420CF5512FE8 /* Pods_whereTo.framework */; };
@@ -63,9 +65,11 @@
 		550EAB3C214D98FD00C5AFF5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		550EAB48214D9B1700C5AFF5 /* LaunchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LaunchViewController.swift; sourceTree = "<group>"; };
 		550EAB4A214DA88500C5AFF5 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
+		552DF27F2199046A00CB291F /* PreferenceCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreferenceCell.swift; sourceTree = "<group>"; };
 		5530E56D217E9DC30046A3D6 /* heldKarpAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = heldKarpAlgorithm.swift; sourceTree = "<group>"; };
 		55574D46218BFF83000906E7 /* HeldKarpTSPTrialVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeldKarpTSPTrialVersion.swift; path = ../HeldKarpTSPTrialVersion.swift; sourceTree = "<group>"; };
 		557B42A1218D2A65009A0AEE /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		55A835B72198F49B000E1178 /* UserPreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferenceViewController.swift; sourceTree = "<group>"; };
 		55CADF252192555300E49B90 /* AnimatedGradientPathRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedGradientPathRenderer.swift; sourceTree = "<group>"; };
 		55FDA843214F70740081EC28 /* fabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fabViewController.swift; sourceTree = "<group>"; };
 		6D15C5AFEAFB70A4A7772919 /* Pods_whereToTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_whereToTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -149,6 +153,7 @@
 				550EAB1A214D98FA00C5AFF5 /* AppDelegate.swift */,
 				550EAB1C214D98FA00C5AFF5 /* ViewController.swift */,
 				550EAB1E214D98FA00C5AFF5 /* Main.storyboard */,
+				552DF27F2199046A00CB291F /* PreferenceCell.swift */,
 				550EAB21214D98FD00C5AFF5 /* Assets.xcassets */,
 				550EAB23214D98FD00C5AFF5 /* LaunchScreen.storyboard */,
 				550EAB26214D98FD00C5AFF5 /* Info.plist */,
@@ -160,6 +165,7 @@
 				B47569A5217BE2AC00204F60 /* AlgorithmController.swift */,
 				557B42A1218D2A65009A0AEE /* Place.swift */,
 				55CADF252192555300E49B90 /* AnimatedGradientPathRenderer.swift */,
+				55A835B72198F49B000E1178 /* UserPreferenceViewController.swift */,
 			);
 			path = whereTo;
 			sourceTree = "<group>";
@@ -449,6 +455,8 @@
 				550EAB4B214DA88500C5AFF5 /* MapViewController.swift in Sources */,
 				55CADF262192555300E49B90 /* AnimatedGradientPathRenderer.swift in Sources */,
 				B4A807E0217BBD2500FA39F8 /* optionsViewController.swift in Sources */,
+				55A835B82198F49B000E1178 /* UserPreferenceViewController.swift in Sources */,
+				552DF2802199046A00CB291F /* PreferenceCell.swift in Sources */,
 				557B42A2218D2A65009A0AEE /* Place.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

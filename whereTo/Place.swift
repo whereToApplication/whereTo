@@ -12,7 +12,6 @@ struct Place {
     var coordinated: coordinates = coordinates(latitude: 0.0, longitude: 0.0);
     var rating: Int = 0;
     var review_count: Int = 0;
-    
     init(name: String, coordinates: coordinates, rating: Int, review_count: Int) {
         self.name = name;
         self.coordinated.latitude = coordinates.latitude;
@@ -31,5 +30,13 @@ struct coordinates {
     init(latitude: Double, longitude: Double) {
         self.latitude = latitude;
         self.longitude = longitude;
+    }
+}
+
+struct categories {
+    var title: String = "";
+    
+    init(title: String) {
+        self.title = title;
     }
 }
