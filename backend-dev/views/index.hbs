@@ -1,5 +1,48 @@
-<form action="/feedback" method="post">
-      User: <input type="text" name="user" value="">
-      Feedback: <input type="text" name="feedback" value="">
+<div class="container center_div">
+  {{title}}
+  <h1>Register for WhereTo Beta!</h1>
+  <form action="/register" method="post">
+    <div class="form-group">
+      <label for="firstname">First Name</label>
+      <input type="text" class="form-control" name="fname" id="firstname" aria-describedby="emailHelp" placeholder="Enter First name">
+    </div>
+    <div class="form-group">
+      <label for="lastname">Last Name</label>
+      <input type="text" class="form-control" name="lname" id="lastname" aria-describedby="emailHelp" placeholder="Enter Last name">
+    </div>
+    <div class="form-group">
+      <label for="email">Email</label>
+      <input type="email" class="form-control" name="email" id="email" placeholder="Enter Email">
+    </div>
+    <div class="form-group">
+      <label for="phoneos">Phone OS</label>
+      <div class="input-group mb-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="phoneos">Options</label>
+        </div>
+        <select class="custom-select" id="phoneos" required name="ospicker">
+          <option selected>Choose...</option>
+          <option value="IOS">IOS</option>
+          <option value="Android">Android</option>
+          <option value="Other">Other</option>
+        </select>
+      </div>
+    </div>
+   <button type="submit" class="btn btn-primary">Submit</button>
+  </form>
+</div>
+</div>
+
+
+
+<!-- <div class="user">
+  <form action="/feedback" method="post">
+      <label for="fname">First name:</label><input type="text" name="firstname"
+value=""><br>
+      <label for="lname">Last name:</label><input type="text" name="lastname"
+value=""><br>
+      <label for="email">Email: </label><input type="text" name="email"
+value=""><br>
       <input type="submit" name="" value="Submit">
-    </form>
+  </form>
+</div> -->
