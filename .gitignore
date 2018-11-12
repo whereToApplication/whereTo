@@ -1,2 +1,2 @@
-/backend-dev/node_modules/*
-/backedn-dev/env.sh
+node_modules/*
+env.sh
