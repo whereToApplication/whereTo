@@ -11,17 +11,94 @@ class UserPreferenceViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
     var categories: [String] = [];
+    var places: [Place] = [];
+    var voteUpCategories: Set<String> = Set<String>.init();
+    var voteDownCategories: Set<String> = Set<String>.init();
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
         tableView.delegate = self;
-        tableView.dataSource = self; 
+        tableView.dataSource = self;
         // Do any additional setup after loading the view.
     }
     
     
-
+    @IBAction func onDoneBtnClicked(_ sender: Any) {
+//        performSegue(withIdentifier: "tableToAlgoIdentifier", sender: self)
+        var PopularityDic = [String: Double]();
+        var ratingsum = 0.0;
+        
+        var placesVotedDownCategories : [Int] = Array(repeating: 0, count: places.count);
+        var placesVotedUpCategories: [Int] = Array(repeating: 0, count: places.count);
+        var count = 0;
+        
+        for place in places {
+            PopularityDic[place.name] = Double(place.rating);
+            ratingsum += Double(place.rating);
+        }
+        var factor = 1.0/ratingsum;
+        for place in places {
+            PopularityDic[place.name] = PopularityDic[place.name]! * factor;
+            
+            //create freq. counter for the weighting of the places
+            for category in place.categories {
+                if voteUpCategories.contains(category) {
+                    placesVotedUpCategories[count] = placesVotedUpCategories[count] + 1;
+                } else if voteDownCategories.contains(category) {
+                    placesVotedDownCategories[count] += 1;
+                }
+            }
+            
+            count += 1;
+        }
+        
+        //check if downvotes
+        count = 0;
+        ratingsum = 0.0;
+        for place in places {
+            if placesVotedDownCategories[count] > 0 {
+                PopularityDic[place.name] = PopularityDic[place.name]! * exp(Double(-1 * placesVotedDownCategories[count]));
+            }
+            ratingsum += PopularityDic[place.name] ?? 1.0;
+            count += 1;
+        }
+        
+        //normalize
+        factor = 1.0/ratingsum;
+        for place in places {
+            PopularityDic[place.name] = PopularityDic[place.name]! * factor;
+        }
+        
+        //check if upvotes
+        count = 0;
+        ratingsum = 0.0;
+        for place in places {
+            if placesVotedUpCategories[count] > 0 {
+                PopularityDic[place.name] = PopularityDic[place.name]! * exp(Double(-1 * placesVotedUpCategories[count]));
+            }
+            ratingsum += PopularityDic[place.name] ?? 1.0;
+            count += 1;
+        }
+        
+        //normalize
+        factor = 1.0/ratingsum;
+        for place in places {
+            PopularityDic[place.name] = PopularityDic[place.name]! * factor;
+        }
+        
+        //replace rating in place.rating w/ popularity dict value
+        places = places.sorted {PopularityDic[$0.name]! > PopularityDic[$1.name]!}
+       
+        
+    }
+    
+//    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+//        if let destination = segue.destination as? AlgorithmController {
+//
+//        }
+//    }
+    
     /*
     // MARK: - Navigation
 
@@ -46,8 +123,43 @@ extension UserPreferenceViewController: UITableViewDataSource, UITableViewDelega
         
         cell.setCategory(category: category)
         
+        let thumbsUpTap = CustomTapGestureRecognizer(target: self, action: #selector(self.onThumbsUp))
+        thumbsUpTap.category = category;
+        cell.thumbsUp.isUserInteractionEnabled = true
+        cell.thumbsUp.addGestureRecognizer(thumbsUpTap);
+        
+        let thumbsDownTap = CustomTapGestureRecognizer(target: self, action: #selector(self.onThumbsDown))
+        thumbsDownTap.category = category;
+        cell.thumbsDown.isUserInteractionEnabled = true
+        cell.thumbsDown.addGestureRecognizer(thumbsDownTap)
+        
         return cell;
     }
     
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        onThumbsUp(sender: <#T##CustomTapGestureRecognizer#>)
+//    }
     
+    @objc func onThumbsUp(sender: CustomTapGestureRecognizer) {
+        if let category = sender.category {
+            voteUpCategories.insert(category);
+            if voteDownCategories.contains(category) {
+                voteDownCategories.remove(category);
+            }
+        }
+    }
+    
+    @objc func onThumbsDown(sender: CustomTapGestureRecognizer) {
+        if let category = sender.category {
+            voteDownCategories.insert(category);
+            if voteUpCategories.contains(category) {
+                voteUpCategories.remove(category);
+            }
+        }
+    }
+    
+}
+
+class CustomTapGestureRecognizer: UITapGestureRecognizer {
+    var category: String?
 }

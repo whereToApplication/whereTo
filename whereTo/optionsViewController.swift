@@ -119,6 +119,7 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
         }
         if let destination = segue.destination as? UserPreferenceViewController {
             destination.categories = Array(self.tempcategories)
+            destination.places = self.spotList;
         }
     }
     override func viewDidLoad() {
@@ -183,14 +184,14 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
                 self.options.sort { $0["rating"].doubleValue > $1["rating"].doubleValue }
                 var newPlaces: [Place] = []
                 let userLocation: coordinates = coordinates(latitude: self.latitude, longitude: self.longitude)
-                let userPlace: Place = Place(name: "Your location", coordinates: userLocation, rating: 0, review_count: 0)
+                let userPlace: Place = Place(name: "Your location", coordinates: userLocation, rating: 0, review_count: 0, categories: [])
                 newPlaces.append(userPlace);
                 for count in 0 ... self.options.count - 1 {
                     let tempcoord: coordinates = coordinates(latitude: self.options[count]["coordinates"]["latitude"].doubleValue, longitude: self.options[count]["coordinates"]["longitude"].doubleValue);
                     for (tempcategory, tempJSON) in self.options[count]["categories"] {
                         self.tempcategories.insert(tempJSON["title"].string ?? "")
                     }
-                    let tempPlace: Place = Place(name: self.options[count]["name"].stringValue, coordinates: tempcoord, rating: self.options[count]["rating"].intValue, review_count: self.options[count]["review_count"].intValue);
+                    let tempPlace: Place = Place(name: self.options[count]["name"].stringValue, coordinates: tempcoord, rating: self.options[count]["rating"].intValue, review_count: self.options[count]["review_count"].intValue, categories: Array(self.tempcategories));
                     
                     newPlaces.append(tempPlace);
                     
