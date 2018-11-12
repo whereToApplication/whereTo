@@ -30,7 +30,7 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
     var options: [JSON] = []
     var updated: Bool = false;
     var modeText: String = ""
-    var tempcategories: [String] = []
+    var tempcategories: Set<String> = Set<String>.init();
 
     @IBAction func timeAction(_ sender: UIDatePicker) {
         let date = sender
@@ -118,7 +118,7 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
             destination.time = self.timeText
         }
         if let destination = segue.destination as? UserPreferenceViewController {
-            destination.categories = self.tempcategories
+            destination.categories = Array(self.tempcategories)
         }
     }
     override func viewDidLoad() {
@@ -188,7 +188,7 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
                 for count in 0 ... self.options.count - 1 {
                     let tempcoord: coordinates = coordinates(latitude: self.options[count]["coordinates"]["latitude"].doubleValue, longitude: self.options[count]["coordinates"]["longitude"].doubleValue);
                     for (tempcategory, tempJSON) in self.options[count]["categories"] {
-                        self.tempcategories.append(tempJSON["title"].string ?? "")
+                        self.tempcategories.insert(tempJSON["title"].string ?? "")
                     }
                     let tempPlace: Place = Place(name: self.options[count]["name"].stringValue, coordinates: tempcoord, rating: self.options[count]["rating"].intValue, review_count: self.options[count]["review_count"].intValue);
                     
