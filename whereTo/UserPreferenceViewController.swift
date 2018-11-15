@@ -49,7 +49,7 @@ class UserPreferenceViewController: UIViewController {
                 if voteUpCategories.contains(category) {
                     placesVotedUpCategories[count] = placesVotedUpCategories[count] + 1;
                 } else if voteDownCategories.contains(category) {
-                    placesVotedDownCategories[count] += 1;
+                    placesVotedDownCategories[count] = placesVotedDownCategories[count] + 1;
                 }
             }
             
@@ -94,6 +94,16 @@ class UserPreferenceViewController: UIViewController {
         places = places.sorted {PopularityDic[$0.name]! > PopularityDic[$1.name]!}
         let element = places.remove(at: places.count - 1)
         places.insert(element, at: 0)
+        
+//        if self.k > newPlaces.count {
+//            self.spotList = places;
+//        } else {
+//            for count in 0 ... self.k  {
+//                self.spotList.append(newPlaces[count]);
+//            }
+//
+//        }
+        
         performSegue(withIdentifier: "tableToAlgoIdentifier", sender: self)
 
     }
@@ -143,6 +153,10 @@ extension UserPreferenceViewController: UITableViewDataSource, UITableViewDelega
         cell.thumbsDown.addGestureRecognizer(thumbsDownTap)
         
         return cell;
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 200.0;
     }
     
 //    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {

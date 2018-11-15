@@ -104,6 +104,7 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
             alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Be sure to pick everything"), style: .default, handler: { _ in
                 NSLog("The \"OK\" alert occured.")
             }))
+            
             self.present(alert, animated: true, completion: nil)
         }
         
@@ -201,17 +202,19 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
                     
                 }
                 
-                if self.k > newPlaces.count {
-                    self.spotList = newPlaces;
-                    self.done = true
-                } else {
-                    for count in 0 ... self.k  {
-                        self.spotList.append(newPlaces[count]);
-                    }
-                    
-                    self.masterList = newPlaces
-                    
-                }
+                self.spotList = newPlaces;
+                
+//                if self.k > newPlaces.count {
+//                    self.spotList = newPlaces;
+//                    self.done = true
+//                } else {
+//                    for count in 0 ... self.k  {
+//                        self.spotList.append(newPlaces[count]);
+//                    }
+//
+//                    self.masterList = newPlaces
+//
+//                }
                 
                 self.performSegue(withIdentifier: "preferenceIdentifier", sender: self);
             }
