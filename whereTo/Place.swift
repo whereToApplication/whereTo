@@ -12,13 +12,14 @@ struct Place {
     var coordinated: coordinates = coordinates(latitude: 0.0, longitude: 0.0);
     var rating: Int = 0;
     var review_count: Int = 0;
-    
-    init(name: String, coordinates: coordinates, rating: Int, review_count: Int) {
+    var categories: [String] = [];
+    init(name: String, coordinates: coordinates, rating: Int, review_count: Int, categories: [String]) {
         self.name = name;
         self.coordinated.latitude = coordinates.latitude;
         self.coordinated.longitude = coordinates.longitude;
         self.rating = rating;
         self.review_count = review_count;
+        self.categories = categories;
     }
     
 }
@@ -33,3 +34,4 @@ struct coordinates {
         self.longitude = longitude;
     }
 }
+

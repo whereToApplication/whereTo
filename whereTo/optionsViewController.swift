@@ -21,7 +21,7 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
     private var locationManager: CLLocationManager!
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
-    var k = 4
+    var k = 9
     var delta = 0
     let sigma = 0.4
     var spotList: [Place] = []
@@ -29,6 +29,9 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
     var done: Bool = false
     var options: [JSON] = []
     var updated: Bool = false;
+    var modeText: String = ""
+    var tempcategories: Set<String> = Set<String>.init();
+
     @IBAction func timeAction(_ sender: UIDatePicker) {
         let date = sender
         
@@ -57,23 +60,29 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
             eventsText = "tourist"
         }
     }
-    @IBAction func radiusAction(_ sender: UISegmentedControl) {
+
+    @IBAction func paceAction(_ sender: UISegmentedControl) {
+        paceText = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? ""
+//        k = kCalculator()
+    }
+
+
+    @IBAction func modeAction(_ sender: UISegmentedControl) {
         var coverage = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? ""
         
-        if coverage == "Nearby" {
-            radiusText = "4000"
-        } else if coverage == "Whole City" {
-            radiusText = "20000"
+        if coverage == "Walk" {
+            var maxDistance = Int(1.4 * Double(timeText)!/2 * 60)
+            radiusText = "\(maxDistance)"
+        } else {
+            var maxDistance = Int(13.9 * Double(timeText)!/2 * 60)
+            if maxDistance > 40000 {
+                radiusText = "40000"
+            } else {
+                radiusText = "\(maxDistance)"
+            }
         }
     }
     
-    @IBAction func paceAction(_ sender: UISegmentedControl) {
-        paceText = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? ""
-        k = kCalculator()
-    }
-
-
-   
 
     @IBAction func submit(_ sender: UIButton) {
         if radiusText.count > 0 && eventsText.count > 0 && paceText.count > 0 {
@@ -106,6 +115,15 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
             destination.event = self.eventsText
             destination.pace = self.paceText
             destination.options1 = self.spotList
+            destination.time = self.timeText
+        }
+        if let destination = segue.destination as? UserPreferenceViewController {
+            destination.categories = Array(self.tempcategories)
+            destination.places = self.spotList;
+            destination.radiusText = self.radiusText
+            destination.eventsText = self.eventsText
+            destination.paceText = self.paceText
+            destination.timeText = self.timeText
         }
     }
     override func viewDidLoad() {
@@ -157,9 +175,12 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
         let auth_header = [
             "Authorization": "Bearer IRT-fzwU1f8luW7wcdWJ5wSzmTOWoJuYKAOMZJtlv-D6s-MVhzGwu7MLn77_A2NWUohglYO_WZhBgejDmHINDKSSP-jzSKFoa_DeL3TdYGrezK1TFeYaHLagsmvLW3Yx",
             ]
-
         
-        Alamofire.request("https://api.yelp.com/v3/businesses/search?term=\(eventsText)&latitude=\(self.latitude)&longitude=\(self.longitude)&radius=\(radiusText)", method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default, headers: auth_header).responseJSON {
+        var urlText = "https://api.yelp.com/v3/businesses/search?term=\(eventsText)&latitude=\(self.latitude)&longitude=\(self.longitude)&radius=\(radiusText)"
+        
+        let encodedUrl = urlText.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)
+        
+        Alamofire.request(encodedUrl!, method: HTTPMethod.get, parameters: nil, encoding: JSONEncoding.default, headers: auth_header).responseJSON {
             response in
             if let jsonValue = response.result.value {
                 let json = SwiftyJSON.JSON(jsonValue)
@@ -167,11 +188,14 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
                 self.options.sort { $0["rating"].doubleValue > $1["rating"].doubleValue }
                 var newPlaces: [Place] = []
                 let userLocation: coordinates = coordinates(latitude: self.latitude, longitude: self.longitude)
-                let userPlace: Place = Place(name: "Your location", coordinates: userLocation, rating: 0, review_count: 0)
+                let userPlace: Place = Place(name: "Your location", coordinates: userLocation, rating: 0, review_count: 0, categories: [])
                 newPlaces.append(userPlace);
                 for count in 0 ... self.options.count - 1 {
                     let tempcoord: coordinates = coordinates(latitude: self.options[count]["coordinates"]["latitude"].doubleValue, longitude: self.options[count]["coordinates"]["longitude"].doubleValue);
-                    let tempPlace: Place = Place(name: self.options[count]["name"].stringValue, coordinates: tempcoord, rating: self.options[count]["rating"].intValue, review_count: self.options[count]["review_count"].intValue);
+                    for (tempcategory, tempJSON) in self.options[count]["categories"] {
+                        self.tempcategories.insert(tempJSON["title"].string ?? "")
+                    }
+                    let tempPlace: Place = Place(name: self.options[count]["name"].stringValue, coordinates: tempcoord, rating: self.options[count]["rating"].intValue, review_count: self.options[count]["review_count"].intValue, categories: Array(self.tempcategories));
                     
                     newPlaces.append(tempPlace);
                     
@@ -189,21 +213,21 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
                     
                 }
                 
-                self.performSegue(withIdentifier: "algorithmIdentifier", sender: self);
+                self.performSegue(withIdentifier: "preferenceIdentifier", sender: self);
             }
         }
     }
     
     
-    func kCalculator() -> Int {
-        if paceText == "Slow" {
-            return min(abs(Int(timeText)!)/90, 9)
-        } else if paceText == "Normal" {
-            return min(abs(Int(timeText)!)/45, 9)
-        } else if paceText == "Fast" {
-            return min(abs(Int(timeText)!)/15, 9)
-        }
-        
-        return 0
-    }
+//    func kCalculator() -> Int {
+//        if paceText == "Slow" {
+//            return min(abs(Int(timeText)!)/90, 9)
+//        } else if paceText == "Normal" {
+//            return min(abs(Int(timeText)!)/45, 9)
+//        } else if paceText == "Fast" {
+//            return min(abs(Int(timeText)!)/15, 9)
+//        }
+//
+//        return 0
+//    }
 }

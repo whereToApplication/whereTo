@@ -17,6 +17,7 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
     var radius: String = ""
     var event: String = ""
     var pace: String = ""
+    var time: String = ""
     @IBOutlet weak var goLabel: UIImageView!
     var options1: [Place] = []
     @IBOutlet var loadingView: UIView!
@@ -70,9 +71,27 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
                             }
                             
                             var tester: HeldKarpTSPTrialVersion = HeldKarpTSPTrialVersion.init();
-                            var optimalRoute = tester.optimalRoute(distance: distMatrix);
-                            self.route = optimalRoute[1] as! [Int];
-                            options = self.buildRoute(route: self.route);
+                            var userTime = Int(self.time)!;
+                            var count: Int = 1;
+                            while userTime > 0 && count <= 10 {
+                                userTime = Int(self.time)!;
+                                var rowSliceMatrix = Array(distMatrix[0...count]);
+                                var tempWholeSliceMatrix : [[Double]] = [];
+                                for row in rowSliceMatrix {
+                                    tempWholeSliceMatrix.append(Array(row[0...count]))
+                                }
+                                var optimalRoute = tester.optimalRoute(distance: tempWholeSliceMatrix);
+                                var prevVertex = 0;
+                                var totalTime = 0.0;
+                                for currVertex in 1 ..< optimalRoute.count {
+                                    totalTime += distMatrix[prevVertex][currVertex];
+                                    prevVertex += 1;
+                                }
+                                userTime -= Int(totalTime);
+                                self.route = optimalRoute[1] as! [Int];
+                                options = self.buildRoute(route: self.route);
+                                count += 1;
+                            }
                             self.gotRoutes = true;
                 }
         });
@@ -108,33 +127,18 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
     
     func buildRoute(route: [Int]) -> [Place] {
         var optimalroutes: [Place] = [];
-        for i in 0...self.route.count - 1 {
+        for i in 0 ..< route.count {
             optimalroutes.append(options1[self.route[i]]);
         }
         
-        var locations = optimalroutes.map { CLLocationCoordinate2D.init(latitude: $0.coordinated.latitude, longitude: $0.coordinated.longitude) }
-        let polyline = MKPolyline(coordinates: &locations, count: locations.count)
-        mapView?.add(polyline);
-
-        return optimalroutes;
-    }
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        mapView?.delegate = self;
-        let optimalRoutes = GoogleMapsDistanceMatrixAPI();
-                showLoadingScreen()
-        
-        //set up markers on map
-        for i in 0...options1.count - 1 {
-            mapView.centerCoordinate = CLLocationCoordinate2D(latitude: options1[i].coordinated.latitude, longitude: options1[i].coordinated.longitude);
+        for i in 0 ..< route.count {
+            mapView.centerCoordinate = CLLocationCoordinate2D(latitude: optimalroutes[i].coordinated.latitude, longitude: optimalroutes[i].coordinated.longitude);
             let myAnnotation: MKPointAnnotation = MKPointAnnotation()
-            myAnnotation.coordinate = CLLocationCoordinate2DMake(options1[i].coordinated.latitude, options1[i].coordinated.longitude)
-            myAnnotation.title = options1[i].name
+            myAnnotation.coordinate = CLLocationCoordinate2DMake(optimalroutes[i].coordinated.latitude, optimalroutes[i].coordinated.longitude)
+            myAnnotation.title = optimalroutes[i].name
             mapView.addAnnotation(myAnnotation)
             
         }
-        
         
         var zoomRect: MKMapRect = MKMapRectNull;
         
@@ -150,6 +154,18 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
         [mapView?.setVisibleMapRect(zoomRect, animated: true)];
         
         
+        var locations = optimalroutes.map { CLLocationCoordinate2D.init(latitude: $0.coordinated.latitude, longitude: $0.coordinated.longitude) }
+        let polyline = MKPolyline(coordinates: &locations, count: locations.count)
+        mapView?.add(polyline);
+
+        return optimalroutes;
+    }
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        mapView?.delegate = self;
+        let optimalRoutes = GoogleMapsDistanceMatrixAPI();
+        showLoadingScreen()
         
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(self.goBtn))
         goLabel.isUserInteractionEnabled = true
