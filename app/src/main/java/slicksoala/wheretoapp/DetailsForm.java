@@ -40,7 +40,6 @@ public class DetailsForm extends AppCompatActivity {
     private Spinner activitySpinner;
     private Spinner travelSpinner;
     private Spinner paceSpinner;
-    private RippleBackground rippleBackground;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +50,6 @@ public class DetailsForm extends AppCompatActivity {
         activitySpinner = findViewById(R.id.activitySpinner);
         travelSpinner = findViewById(R.id.travelSpinner);
         paceSpinner = findViewById(R.id.paceSpinner);
-        rippleBackground = (RippleBackground) findViewById(R.id.content);
         ImageView go = findViewById(R.id.centerImage);
         go.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,6 +81,11 @@ public class DetailsForm extends AppCompatActivity {
         paceSpinner.setAdapter(paceAdapter);
     }
 
+    public void goToFeedback(View view) {
+        Intent fintent = new Intent(DetailsForm.this, FeedbackForm.class);
+        startActivity(fintent);
+    }
+
     public void goTo() throws ExecutionException, InterruptedException {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             Toast.makeText(DetailsForm.this, "First enable LOCATION ACCESS in settings.", Toast.LENGTH_LONG).show();
@@ -93,11 +96,6 @@ public class DetailsForm extends AppCompatActivity {
         Log.d("LOCATION: ",location.toString());
         String currLat = Double.toString(location.getLatitude());
         String currLong = Double.toString(location.getLongitude());
-        /*String currLat = "33.78508547";
-        String currLong = "-84.3879824";*/
-        Place currPlace = new Place();
-        currPlace.setName("Your Location");
-        currPlace.setLatLng(Double.parseDouble(currLat), Double.parseDouble(currLong));
 
         int k = 5;
         ArrayList<Place> masterList;

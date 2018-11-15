@@ -1,23 +1,30 @@
 package slicksoala.wheretoapp;
 
+import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
+import android.view.Gravity;
+import android.view.View;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
+import com.google.android.gms.maps.CameraUpdate;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.LatLngBounds;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
 
 import java.util.ArrayList;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
-
-    private GoogleMap mMap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +33,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+        assert mapFragment != null;
         mapFragment.getMapAsync(this);
     }
 
@@ -41,38 +49,64 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
      */
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        mMap = googleMap;
-        mMap.getUiSettings().setZoomControlsEnabled(true);
+        googleMap.getUiSettings().setZoomControlsEnabled(true);
 
         ArrayList<Place> route = (ArrayList<Place>) getIntent().getSerializableExtra("route");
 
         LatLng[] latLngs = new LatLng[route.size()];
 
-        latLngs[0] = new LatLng(route.get(0).getLatitude(), route.get(0).getLongitude());
-        mMap.addMarker(new MarkerOptions().position(latLngs[0]).title(route.get(0).getName()));
+        LatLngBounds.Builder builder = new LatLngBounds.Builder();
 
-        double avlat = 0, avlng = 0;
+        latLngs[0] = new LatLng(route.get(0).getLatitude(), route.get(0).getLongitude());
+        googleMap.addMarker(new MarkerOptions().position(latLngs[0]).title(route.get(0).getName()));
+
         for (int i = 1; i < route.size(); i++) {
             double lat = route.get(i).getLatitude();
-            avlat += lat;
             double lng = route.get(i).getLongitude();
-            avlng += lng;
             String title = route.get(i).getName();
             latLngs[i] = new LatLng(lat, lng);
-            mMap.addMarker(new MarkerOptions().position(latLngs[i]).title(title));
+            googleMap.addMarker(new MarkerOptions().position(latLngs[i]).title(title));
             PolylineOptions edge = new PolylineOptions().add(latLngs[i], latLngs[i - 1]).width(5).color(Color.BLUE);
-            mMap.addPolyline(edge);
+            builder.include(latLngs[i]);
+            googleMap.addPolyline(edge);
         }
-        avlat /= route.size();
-        avlng /= route.size();
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(latLngs[0]));
-        /*mMap.moveCamera(CameraUpdateFactory.newLatLng(new LatLng(avlat, avlng)));
-        CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(new LatLng(avlat, avlng))      // Sets the center of the map to Mountain View
-                .zoom(16)                   // Sets the zoom
-                .bearing(90)                // Sets the orientation of the camera to east
-                .tilt(30)                   // Sets the tilt of the camera to 30 degrees
-                .build();                   // Creates a CameraPosition from the builder
-        mMap.animateCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));*/
+
+        LatLngBounds bounds = builder.build();
+        int padding = 200;
+        CameraUpdate cu = CameraUpdateFactory.newLatLngBounds(bounds, padding);
+        googleMap.animateCamera(cu);
+
+        googleMap.setInfoWindowAdapter(new GoogleMap.InfoWindowAdapter() {
+
+            @Override
+            public View getInfoWindow(Marker arg0) {
+                return null;
+            }
+
+            @Override
+            public View getInfoContents(Marker marker) {
+
+                Context mContext = getApplicationContext();
+
+                LinearLayout info = new LinearLayout(mContext);
+                info.setOrientation(LinearLayout.VERTICAL);
+
+                TextView title = new TextView(mContext);
+                title.setTextColor(Color.BLACK);
+                title.setGravity(Gravity.CENTER);
+                title.setTypeface(null, Typeface.BOLD);
+                title.setText(marker.getTitle());
+
+                TextView snippet = new TextView(mContext);
+                snippet.setTextColor(Color.GRAY);
+                snippet.setText(marker.getSnippet());
+                snippet.setGravity(Gravity.CENTER);
+
+                info.addView(title);
+                info.addView(snippet);
+
+                return info;
+            }
+        });
     }
 }

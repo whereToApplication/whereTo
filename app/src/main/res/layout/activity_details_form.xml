@@ -15,7 +15,7 @@
             android:layout_width="100dp"
             android:layout_height="38dp"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="72dp"
+            android:layout_marginTop="28dp"
             android:text="Back By? :"
             android:textSize="20dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -25,17 +25,19 @@
             android:id="@+id/returnTime"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:ems="10"
             android:inputType="time"
             android:paddingLeft="30dp"
-            app:layout_constraintTop_toBottomOf="@+id/backByText"/>
+            app:layout_constraintBottom_toTopOf="@+id/radius"
+            tools:layout_editor_absoluteX="39dp" />
 
         <TextView
             android:id="@+id/radius"
             android:layout_width="214dp"
             android:layout_height="36dp"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="152dp"
+            android:layout_marginTop="132dp"
             android:text="Radius"
             android:textSize="24dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -63,8 +65,8 @@
             android:id="@+id/whatToDo"
             android:layout_width="214dp"
             android:layout_height="40dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="252dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="212dp"
             android:text="What To Do?"
             android:textSize="24dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,8 +76,8 @@
             android:id="@+id/travelType"
             android:layout_width="214dp"
             android:layout_height="40dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="360dp"
+            android:layout_marginStart="36dp"
+            android:layout_marginTop="288dp"
             android:text="Types of Travel"
             android:textSize="24dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -89,12 +91,13 @@
             android:layout_marginTop="4dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/travelType" />
+
         <TextView
             android:id="@+id/paceText"
             android:layout_width="214dp"
             android:layout_height="40dp"
             android:layout_marginStart="40dp"
-            android:layout_marginTop="460dp"
+            android:layout_marginTop="340dp"
             android:text="Pace"
             android:textSize="24dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -112,11 +115,13 @@
         <com.skyfishjy.library.RippleBackground xmlns:android="http://schemas.android.com/apk/res/android"
             xmlns:app="http://schemas.android.com/apk/res-auto"
             android:id="@+id/content"
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_width="366dp"
+            android:layout_height="106dp"
+            android:layout_marginEnd="16dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/paceSpinner"
+            app:layout_constraintVertical_bias="0.0"
             app:rb_color="@color/colorPrimaryDark"
             app:rb_duration="3000"
             app:rb_radius="12dp"
@@ -130,6 +135,16 @@
                 android:layout_centerInParent="true"
                 android:src="@drawable/gobutton" />
         </com.skyfishjy.library.RippleBackground>
+
+        <Button
+            android:id="@+id/feedbackBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="124dp"
+            android:onClick="goToFeedback"
+            android:text="Feedback"
+            app:layout_constraintStart_toEndOf="@+id/backByText"
+            tools:layout_editor_absoluteY="18dp" />
 
 
     </android.support.constraint.ConstraintLayout>
