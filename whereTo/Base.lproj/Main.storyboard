@@ -280,8 +280,8 @@
                             </segmentedControl>
                             <datePicker contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" datePickerMode="time" minuteInterval="1" translatesAutoresizingMaskIntoConstraints="NO" id="Hk2-ps-uT3">
                                 <rect key="frame" x="115" y="67" width="245" height="53"/>
-                                <date key="date" timeIntervalSinceReferenceDate="561755799.50469196">
-                                    <!--2018-10-20 19:16:39 +0000-->
+                                <date key="date" timeIntervalSinceReferenceDate="561582999.50469196">
+                                    <!--2018-10-18 19:16:39 +0000-->
                                 </date>
                                 <connections>
                                     <action selector="timeAction:" destination="KhX-M6-XkS" eventType="valueChanged" id="boz-YQ-4vF"/>
@@ -359,6 +359,7 @@
                     <nil key="simulatedTopBarMetrics"/>
                     <nil key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="dates" destination="Hk2-ps-uT3" id="nsl-IB-Snh"/>
                         <segue destination="Gij-Rf-b4Y" kind="show" identifier="algorithmIdentifier" id="9dr-Yu-ChO"/>
                         <segue destination="sY0-hE-yBb" kind="show" identifier="preferenceIdentifier" id="yfh-6z-20e"/>
                     </connections>
