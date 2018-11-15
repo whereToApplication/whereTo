@@ -21,7 +21,6 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
     @IBOutlet weak var goLabel: UIImageView!
     var options1: [Place] = []
     @IBOutlet var loadingView: UIView!
-    @IBOutlet weak var backbutton: UIButton!
     @IBOutlet weak var labelToFade: UILabel!
     let DISTMATRIX_BASE: String = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric";
     let ORIG_PAR: String = "&origins=";
@@ -33,6 +32,9 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
     var gotRoutes: Bool = false;
     var initialLocation : CLLocation??
 
+    @IBAction func onBackBtnClick(_ sender: Any) {
+        self.navigationController?.popToRootViewController(animated: true)
+    }
     
     func GoogleMapsDistanceMatrixAPI() -> [Place]{
         //var arr = Array(repeating: Array(repeating: 0, count: 2), count: 3)
@@ -87,13 +89,13 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
                                     totalTime += distMatrix[prevVertex][currVertex];
                                     prevVertex += 1;
                                 }
-                                userTime -= Int(totalTime);
+                                userTime -= Int(totalTime)/60; //totalTime is in seconds
                                 self.route = optimalRoute[1] as! [Int];
                                 options = self.buildRoute(route: self.route);
                                 count += 1;
                             }
                             self.gotRoutes = true;
-                }
+                    }
         });
         return options;
     }
@@ -223,6 +225,40 @@ extension AlgorithmController: MKMapViewDelegate {
             return renderer
     }
 
+}
+
+extension AlgorithmController: UIAlertViewDelegate {
+    @IBAction func onFeedbackBtnClick(_ sender: Any) {
+        let alert = UIAlertController(title: "Feedback", message: "Let us know how we can improve whereTo?", preferredStyle: .alert)
+        alert.addTextField { textField in
+            let heightConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
+            textField.addConstraint(heightConstraint)
+        }
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Submit", comment: "Be sure to pick everything"), style: .default, handler: { _ in
+            let feedbackText = alert.textFields?[0].text ?? ""
+            let urlString = "http://where2trip.herokuapp.com/feedback"
+            let encodedUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed);
+            let body : Parameters = [
+                "feedback": feedbackText
+            ]
+            Alamofire.request(encodedUrl!, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil).responseString {
+                response in
+                print(response)
+                let alert = UIAlertController(title: "Submitted!", message: "Your feedback has been submitted", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Be sure to pick everything"), style: .default, handler: { _ in
+                    NSLog("The \"OK\" alert occured.")
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }))
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Cancel", comment: "Be sure to pick everything"), style: .default, handler: { _ in
+            NSLog("The \"OK\" alert occured.")
+        }))
+        self.present(alert, animated: true, completion: nil)
+        
+        
+    }
+        
 }
 
 

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="KhX-M6-XkS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14460.31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="5AJ-8P-iRN">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -24,7 +24,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dEC-2h-br0" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-961" y="133"/>
+            <point key="canvasLocation" x="-3202" y="-1002"/>
         </scene>
         <!--Dérive-->
         <scene sceneID="tne-QT-ifu">
@@ -60,7 +60,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-67.5" y="132.04225352112675"/>
+            <point key="canvasLocation" x="-2308" y="-1003"/>
         </scene>
         <!--Root View Controller-->
         <scene sceneID="b5x-Ix-4HT">
@@ -223,7 +223,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="uxG-0m-14f" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="860" y="132"/>
+            <point key="canvasLocation" x="-1380" y="-1003"/>
         </scene>
         <!--Options View Controller-->
         <scene sceneID="Zqi-dM-N2h">
@@ -355,6 +355,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="adF-OT-1BE"/>
                     </view>
+                    <navigationItem key="navigationItem" id="sQx-5y-goj"/>
+                    <nil key="simulatedTopBarMetrics"/>
+                    <nil key="simulatedBottomBarMetrics"/>
                     <connections>
                         <segue destination="Gij-Rf-b4Y" kind="show" identifier="algorithmIdentifier" id="9dr-Yu-ChO"/>
                         <segue destination="sY0-hE-yBb" kind="show" identifier="preferenceIdentifier" id="yfh-6z-20e"/>
@@ -398,7 +401,15 @@
                                     <color key="titleColor" red="0.1177054365" green="0.54351522019999998" blue="0.12634957320000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                 </state>
                                 <connections>
-                                    <segue destination="KhX-M6-XkS" kind="show" id="fCd-nu-gNi"/>
+                                    <action selector="onBackBtnClick:" destination="Gij-Rf-b4Y" eventType="touchUpInside" id="wpd-uF-siE"/>
+                                </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xsp-bm-4fW">
+                                <rect key="frame" x="291" y="29" width="68" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Feedback"/>
+                                <connections>
+                                    <action selector="onFeedbackBtnClick:" destination="Gij-Rf-b4Y" eventType="touchUpInside" id="o3f-cN-o5A"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -414,7 +425,6 @@
                         <viewLayoutGuide key="safeArea" id="JS2-8E-QdT"/>
                     </view>
                     <connections>
-                        <outlet property="backbutton" destination="LpA-dv-u2q" id="DWy-bQ-YrL"/>
                         <outlet property="goLabel" destination="QBH-U5-UbR" id="Kig-GJ-Ypb"/>
                         <outlet property="labelToFade" destination="1md-zf-LnG" id="7z3-Cw-g0c"/>
                         <outlet property="loadingView" destination="n7b-TH-0IH" id="BkV-U7-1GJ"/>
@@ -528,6 +538,22 @@
             </objects>
             <point key="canvasLocation" x="2272.8000000000002" y="864.91754122938539"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="4I9-eH-h6V">
+            <objects>
+                <navigationController navigationBarHidden="YES" id="5AJ-8P-iRN" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="0Zm-db-OuY">
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="KhX-M6-XkS" kind="relationship" relationship="rootViewController" id="KBW-rS-vc7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EIx-Cp-eLI" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1372" y="120"/>
+        </scene>
     </scenes>
     <resources>
         <image name="gobutton-1" width="1052" height="1052"/>
@@ -536,6 +562,6 @@
         <image name="together" width="1052" height="1052"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YVZ-rN-UPv"/>
+        <segue reference="9dr-Yu-ChO"/>
     </inferredMetricsTieBreakers>
 </document>
