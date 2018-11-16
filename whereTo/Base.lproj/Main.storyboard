@@ -433,35 +433,32 @@
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="👍🏼" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wmc-dM-b3S">
-                                                    <rect key="frame" x="248" y="12" width="23" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="👎🏼" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MTf-4K-Yf1">
-                                                    <rect key="frame" x="305" y="12" width="23" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QRb-7v-XiR">
+                                                    <rect key="frame" x="210" y="7" width="30" height="30"/>
+                                                    <state key="normal" title="Like"/>
+                                                </button>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="65y-rq-CG4">
+                                                    <rect key="frame" x="283" y="7" width="45" height="30"/>
+                                                    <state key="normal" title="Dislike"/>
+                                                </button>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstItem="Q33-jz-KKo" firstAttribute="baseline" secondItem="wmc-dM-b3S" secondAttribute="baseline" id="1sg-sa-FB0"/>
-                                                <constraint firstItem="Q33-jz-KKo" firstAttribute="firstBaseline" secondItem="wmc-dM-b3S" secondAttribute="firstBaseline" id="5jR-79-1a5"/>
-                                                <constraint firstItem="MTf-4K-Yf1" firstAttribute="leading" secondItem="wmc-dM-b3S" secondAttribute="trailing" constant="34" id="LHw-ia-hAz"/>
+                                                <constraint firstItem="Q33-jz-KKo" firstAttribute="centerY" secondItem="QRb-7v-XiR" secondAttribute="centerY" id="1fS-iz-SwT"/>
                                                 <constraint firstItem="Q33-jz-KKo" firstAttribute="centerY" secondItem="zfQ-8w-8Ns" secondAttribute="centerY" id="NBz-8l-ewL"/>
-                                                <constraint firstItem="wmc-dM-b3S" firstAttribute="firstBaseline" secondItem="MTf-4K-Yf1" secondAttribute="firstBaseline" id="WEE-67-aQX"/>
+                                                <constraint firstItem="QRb-7v-XiR" firstAttribute="top" secondItem="zfQ-8w-8Ns" secondAttribute="topMargin" constant="-4" id="P0C-p0-Qw8"/>
+                                                <constraint firstItem="65y-rq-CG4" firstAttribute="baseline" secondItem="QRb-7v-XiR" secondAttribute="firstBaseline" id="Q9q-mK-pb7"/>
                                                 <constraint firstItem="Q33-jz-KKo" firstAttribute="leading" secondItem="zfQ-8w-8Ns" secondAttribute="leadingMargin" id="XVT-V1-4Gs"/>
                                                 <constraint firstItem="Q33-jz-KKo" firstAttribute="bottom" secondItem="zfQ-8w-8Ns" secondAttribute="bottomMargin" id="XxA-s3-jov"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="MTf-4K-Yf1" secondAttribute="trailing" constant="-1" id="nfj-Tk-OSv"/>
-                                                <constraint firstItem="wmc-dM-b3S" firstAttribute="baseline" secondItem="MTf-4K-Yf1" secondAttribute="baseline" id="pwZ-H9-HW7"/>
+                                                <constraint firstItem="QRb-7v-XiR" firstAttribute="baseline" secondItem="65y-rq-CG4" secondAttribute="firstBaseline" id="l5a-Nz-z0R"/>
+                                                <constraint firstItem="QRb-7v-XiR" firstAttribute="top" secondItem="65y-rq-CG4" secondAttribute="top" id="riz-O6-0b8"/>
+                                                <constraint firstItem="65y-rq-CG4" firstAttribute="leading" secondItem="QRb-7v-XiR" secondAttribute="trailing" constant="43" id="ry6-Za-Sj8"/>
+                                                <constraint firstItem="QRb-7v-XiR" firstAttribute="leading" secondItem="Q33-jz-KKo" secondAttribute="trailing" constant="76" id="vGU-Fp-wBd"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="placeCategory" destination="Q33-jz-KKo" id="tvy-Wd-zhC"/>
-                                            <outlet property="thumbsDown" destination="MTf-4K-Yf1" id="YEH-md-uID"/>
-                                            <outlet property="thumbsUp" destination="wmc-dM-b3S" id="rmW-DT-BMb"/>
+                                            <outlet property="thumbsDown" destination="65y-rq-CG4" id="wSz-iK-D5v"/>
+                                            <outlet property="thumbsUp" destination="QRb-7v-XiR" id="4OX-i2-jbv"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -517,6 +514,6 @@
         <image name="together" width="1052" height="1052"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="9dr-Yu-ChO"/>
+        <segue reference="YVZ-rN-UPv"/>
     </inferredMetricsTieBreakers>
 </document>

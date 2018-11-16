@@ -16,6 +16,8 @@ class UserPreferenceViewController: UIViewController {
     var eventsText: String = "";
     var paceText: String = "";
     var timeText: String = "";
+    var k = 9;
+    var spotList: [Place] = [];
     var voteUpCategories: Set<String> = Set<String>.init();
     var voteDownCategories: Set<String> = Set<String>.init();
     
@@ -67,18 +69,18 @@ class UserPreferenceViewController: UIViewController {
             count += 1;
         }
         
-        //normalize
-        factor = 1.0/ratingsum;
-        for place in places {
-            PopularityDic[place.name] = PopularityDic[place.name]! * factor;
-        }
-        
+//        //normalize
+//        factor = 1.0/ratingsum;
+//        for place in places {
+//            PopularityDic[place.name] = PopularityDic[place.name]! * factor;
+//        }
+//
         //check if upvotes
         count = 0;
         ratingsum = 0.0;
         for place in places {
             if placesVotedUpCategories[count] > 0 {
-                PopularityDic[place.name] = PopularityDic[place.name]! * exp(Double(-1 * placesVotedUpCategories[count]));
+                PopularityDic[place.name] = PopularityDic[place.name]! * exp(Double(1 * placesVotedUpCategories[count]));
             }
             ratingsum += PopularityDic[place.name] ?? 1.0;
             count += 1;
@@ -95,14 +97,14 @@ class UserPreferenceViewController: UIViewController {
         let element = places.remove(at: places.count - 1)
         places.insert(element, at: 0)
         
-//        if self.k > newPlaces.count {
-//            self.spotList = places;
-//        } else {
-//            for count in 0 ... self.k  {
-//                self.spotList.append(newPlaces[count]);
-//            }
-//
-//        }
+        if self.k > places.count {
+            self.spotList = places;
+        } else {
+            for count in 0 ... self.k  {
+                self.spotList.append(places[count]);
+            }
+
+        }
         
         performSegue(withIdentifier: "tableToAlgoIdentifier", sender: self)
 
@@ -113,7 +115,7 @@ class UserPreferenceViewController: UIViewController {
             destination.radius = self.radiusText
             destination.event = self.eventsText
             destination.pace = self.paceText
-            destination.options1 = self.places
+            destination.options1 = self.spotList
             destination.time = self.timeText
         }
     }

@@ -75,6 +75,8 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
                             var tester: HeldKarpTSPTrialVersion = HeldKarpTSPTrialVersion.init();
                             var userTime = Int(self.time)!;
                             var count: Int = 1;
+                            var minBadTime = Double.greatestFiniteMagnitude;
+                            var bestWorstRoute: [Int] = [];
                             while userTime > 0 && count <= 10 {
                                 userTime = Int(self.time)!;
                                 var rowSliceMatrix = Array(distMatrix[0...count]);
@@ -90,10 +92,20 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
                                     prevVertex += 1;
                                 }
                                 userTime -= Int(totalTime)/60; //totalTime is in seconds
+                                if (userTime <= 0 && count < 10) {
+                                    if totalTime < minBadTime {
+                                        minBadTime = totalTime;
+                                        bestWorstRoute = optimalRoute as! [Int];
+                                    }
+                                    optimalRoute.removeLast();
+                                } else if (userTime <= 0 && count == 10) {
+                                    optimalRoute = bestWorstRoute as [AnyObject];
+                                }
                                 self.route = optimalRoute[1] as! [Int];
-                                options = self.buildRoute(route: self.route);
+                                
                                 count += 1;
                             }
+                            options = self.buildRoute(route: self.route);
                             self.gotRoutes = true;
                     }
         });

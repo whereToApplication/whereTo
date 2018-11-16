@@ -12,9 +12,10 @@ class PreferenceCell: UITableViewCell {
 
     @IBOutlet weak var placeCategory: UILabel!
     
-    @IBOutlet weak var thumbsUp: UILabel!
     
-    @IBOutlet weak var thumbsDown: UILabel!
+    @IBOutlet weak var thumbsUp: UIButton!
+    
+    @IBOutlet weak var thumbsDown: UIButton!
     
     func setCategory(category: String) {
         placeCategory.text = category; 
