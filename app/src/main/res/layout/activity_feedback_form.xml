@@ -7,7 +7,7 @@
     tools:context=".FeedbackForm">
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/feedbackText"
         android:layout_width="304dp"
         android:layout_height="346dp"
         android:layout_alignParentTop="true"
@@ -22,7 +22,7 @@
         android:id="@+id/submitBtn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/editText2"
+        android:layout_alignStart="@+id/feedbackText"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="68dp"
         android:text="submit" />

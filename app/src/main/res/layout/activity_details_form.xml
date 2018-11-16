@@ -1,151 +1,138 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".DetailsForm">
 
-    <android.support.constraint.ConstraintLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <TextView
+        android:id="@+id/backByText"
+        android:layout_width="100dp"
+        android:layout_height="38dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="28dp"
+        android:text="Back By? :"
+        android:textSize="20dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/backByText"
-            android:layout_width="100dp"
-            android:layout_height="38dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="28dp"
-            android:text="Back By? :"
-            android:textSize="20dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <EditText
+        android:id="@+id/returnTime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/backByText"
+        android:layout_marginStart="-2dp"
+        android:layout_marginBottom="20dp"
+        android:ems="10"
+        android:inputType="time"
+        android:paddingLeft="30dp"
+        app:layout_constraintBottom_toTopOf="@+id/radius"
+        tools:layout_editor_absoluteX="39dp" />
 
-        <EditText
-            android:id="@+id/returnTime"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="20dp"
-            android:ems="10"
-            android:inputType="time"
-            android:paddingLeft="30dp"
-            app:layout_constraintBottom_toTopOf="@+id/radius"
-            tools:layout_editor_absoluteX="39dp" />
+    <TextView
+        android:id="@+id/radius"
+        android:layout_width="214dp"
+        android:layout_height="36dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="132dp"
+        android:text="Radius"
+        android:textSize="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/radius"
-            android:layout_width="214dp"
-            android:layout_height="36dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="132dp"
-            android:text="Radius"
-            android:textSize="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <Spinner
+        android:id="@+id/radiusSpinner"
+        android:layout_width="215dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radius" />
 
-        <Spinner
-            android:id="@+id/radiusSpinner"
-            android:layout_width="215dp"
-            android:layout_height="33dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="4dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/radius" />
+    <Spinner
+        android:id="@+id/activitySpinner"
+        android:layout_width="215dp"
+        android:layout_height="33dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/whatToDo" />
 
-        <Spinner
-            android:id="@+id/activitySpinner"
-            android:layout_width="215dp"
-            android:layout_height="33dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="4dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/whatToDo" />
+    <TextView
+        android:id="@+id/whatToDo"
+        android:layout_width="214dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="212dp"
+        android:text="What To Do?"
+        android:textSize="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/whatToDo"
-            android:layout_width="214dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="212dp"
-            android:text="What To Do?"
-            android:textSize="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <TextView
+        android:id="@+id/travelType"
+        android:layout_width="214dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="288dp"
+        android:text="Types of Travel"
+        android:textSize="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/travelType"
-            android:layout_width="214dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="36dp"
-            android:layout_marginTop="288dp"
-            android:text="Types of Travel"
-            android:textSize="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <Spinner
+        android:id="@+id/travelSpinner"
+        android:layout_width="215dp"
+        android:layout_height="41dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/travelType" />
 
-        <Spinner
-            android:id="@+id/travelSpinner"
-            android:layout_width="215dp"
-            android:layout_height="41dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="4dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/travelType" />
+    <TextView
+        android:id="@+id/paceText"
+        android:layout_width="214dp"
+        android:layout_height="40dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="340dp"
+        android:text="Pace"
+        android:textSize="24dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/paceText"
-            android:layout_width="214dp"
-            android:layout_height="40dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="340dp"
-            android:text="Pace"
-            android:textSize="24dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+    <Spinner
+        android:id="@+id/paceSpinner"
+        android:layout_width="215dp"
+        android:layout_height="41dp"
+        android:layout_below="@+id/paceText"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/paceText" />
 
-        <Spinner
-            android:id="@+id/paceSpinner"
-            android:layout_width="215dp"
-            android:layout_height="41dp"
-            android:layout_marginStart="40dp"
-            android:layout_marginTop="4dp"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/paceText" />
+    <ImageView
+        android:id="@+id/centerImage"
+        android:layout_width="wrap_content"
+        android:layout_height="157dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="354dp"
+        android:layout_marginEnd="120dp"
+        android:layout_marginBottom="0dp"
+        android:src="@drawable/gobutton" />
 
-        <com.skyfishjy.library.RippleBackground xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            android:id="@+id/content"
-            android:layout_width="366dp"
-            android:layout_height="106dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/paceSpinner"
-            app:layout_constraintVertical_bias="0.0"
-            app:rb_color="@color/colorPrimaryDark"
-            app:rb_duration="3000"
-            app:rb_radius="12dp"
-            app:rb_rippleAmount="4"
-            app:rb_scale="5">
-
-            <ImageView
-                android:id="@+id/centerImage"
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:layout_centerInParent="true"
-                android:src="@drawable/gobutton" />
-        </com.skyfishjy.library.RippleBackground>
-
-        <Button
-            android:id="@+id/feedbackBtn"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="124dp"
-            android:onClick="goToFeedback"
-            android:text="Feedback"
-            app:layout_constraintStart_toEndOf="@+id/backByText"
-            tools:layout_editor_absoluteY="18dp" />
-
-
-    </android.support.constraint.ConstraintLayout>
-</ScrollView>
+    <Button
+        android:id="@+id/feedbackBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/backByText"
+        android:layout_marginStart="126dp"
+        android:layout_marginBottom="-3dp"
+        android:layout_toEndOf="@+id/backByText"
+        android:onClick="goToFeedback"
+        android:text="Feedback"
+        app:layout_constraintStart_toEndOf="@+id/backByText"
+        tools:layout_editor_absoluteY="18dp" />
+</RelativeLayout>
