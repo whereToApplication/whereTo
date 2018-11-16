@@ -113,13 +113,13 @@
 
     <ImageView
         android:id="@+id/centerImage"
-        android:layout_width="wrap_content"
-        android:layout_height="157dp"
+        android:layout_width="98dp"
+        android:layout_height="102dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="354dp"
-        android:layout_marginEnd="120dp"
+        android:layout_marginTop="409dp"
+        android:layout_marginEnd="131dp"
         android:layout_marginBottom="0dp"
         android:src="@drawable/gobutton" />
 
