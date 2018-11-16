@@ -10,12 +10,12 @@ router.get('/', function(req, res, next) {
   res.render('index');
 });
 
-router.post('/feedback', function(req, res, next) {
+router.post('/api/feedback', function(req, res, next) {
   console.log(req.body)
-  if(!req.body.feedback) {
+  if(!req.body.feedback || req.body.feedback.length < 5) {
     console.log('Hello!')
     return res.status(401).send({
-      error: 'Missing feedback'
+      error: 'Missing feedback or feedback was less than 5 characters'
     })
   }
   let feedback_text = req.body.feedback;
@@ -27,12 +27,13 @@ router.post('/feedback', function(req, res, next) {
   console.log('testings')
   feedback.save(function(err, response) {
     if (err) {
-      return res.status(402).json({
+      return res.status(502).json({
         error: 'Could not save feedback'
       })
     }
     return res.status(200).json({
-      success: 'Feedback was a success! ' + response
+      success: 'Feedback was a success! ',
+      response
     })
   })
 });
