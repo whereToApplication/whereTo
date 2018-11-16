@@ -14,6 +14,11 @@ var usersRouter = require('./routes/users');
 var app = express();
 
 var bodyParser = require("body-parser");
+
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+app.use(bodyParser.json());
 // Checks for Necessary Mongoose element
 mongoose.connection.on('connected', function() {
   console.log('Success: Connected to Mongo DB');
@@ -24,7 +29,7 @@ mongoose.connection.on('error', function() {
   process.exit(1);
 });
 
-mongoose.connect(process.env.MONGODB_URI);
+mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true });
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -32,8 +37,7 @@ app.engine('hbs', handlebars({defaultLayout: 'main', extname: ".hbs"}));
 app.set('view engine', '.hbs');
 app.use(cookieParser());
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({extended: true}));
+
 
 app.use(logger('dev'));
 //app.use(express.json());

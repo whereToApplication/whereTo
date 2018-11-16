@@ -11,20 +11,30 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/feedback', function(req, res, next) {
-  console.log('get into feedback');
-  console.log(req.body);
+  console.log(req.body)
+  if(!req.body.feedback) {
+    console.log('Hello!')
+    return res.status(401).send({
+      error: 'Missing feedback'
+    })
+  }
   let feedback_text = req.body.feedback;
-  console.log('after feeback_text');
   let user = 'You';
   let feedback = new feedbackModel({
     user,
     feedback: feedback_text
   });
-  feedback.save(function(err, res) {
-    if (err) return console.error(err);
-    console.log(res);
+  console.log('testings')
+  feedback.save(function(err, response) {
+    if (err) {
+      return res.status(402).json({
+        error: 'Could not save feedback'
+      })
+    }
+    return res.status(200).json({
+      success: 'Feedback was a success! ' + response
+    })
   })
-  res.render('index', {title: 'After submit'});
 });
 
 router.post('/register', function(req, res, next) {
