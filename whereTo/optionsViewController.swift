@@ -32,6 +32,7 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
     var modeText: String = ""
     var tempcategories: Set<String> = Set<String>.init();
 
+    @IBOutlet weak var dates: UIDatePicker!
     @IBAction func timeAction(_ sender: UIDatePicker) {
         let date = sender
         
@@ -129,7 +130,9 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        var theDateAnHourFromNow = NSDate().addingTimeInterval(3600)
+        dates.setDate(theDateAnHourFromNow as Date, animated: true)
+        timeText = "60"
         locationManager = CLLocationManager()
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
