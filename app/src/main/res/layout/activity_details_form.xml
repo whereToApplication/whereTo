@@ -7,132 +7,254 @@
     tools:context=".DetailsForm">
 
     <TextView
-        android:id="@+id/backByText"
-        android:layout_width="100dp"
-        android:layout_height="38dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="28dp"
-        android:text="Back By? :"
-        android:textSize="20dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <EditText
-        android:id="@+id/returnTime"
+        android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/backByText"
-        android:layout_marginStart="-2dp"
-        android:layout_marginBottom="20dp"
-        android:ems="10"
-        android:inputType="time"
-        android:paddingLeft="30dp"
-        app:layout_constraintBottom_toTopOf="@+id/radius"
-        tools:layout_editor_absoluteX="39dp" />
+        android:layout_below="@+id/textView"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="33dp"
+        android:fontFamily="@font/carrois_gothic_sc"
+        android:text="RANGE"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/radius"
-        android:layout_width="214dp"
-        android:layout_height="36dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="132dp"
-        android:text="Radius"
-        android:textSize="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <Spinner
-        android:id="@+id/radiusSpinner"
-        android:layout_width="215dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radius" />
-
-    <Spinner
-        android:id="@+id/activitySpinner"
-        android:layout_width="215dp"
-        android:layout_height="33dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/whatToDo" />
+        android:id="@+id/textView4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="30dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/carrois_gothic_sc"
+        android:text="ACTIVITY"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/whatToDo"
-        android:layout_width="214dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="212dp"
-        android:text="What To Do?"
-        android:textSize="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/textView5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView4"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="31dp"
+        android:layout_marginTop="50dp"
+        android:fontFamily="@font/carrois_gothic_sc"
+        android:text="TRANSIT"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp" />
 
     <TextView
-        android:id="@+id/travelType"
-        android:layout_width="214dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="36dp"
-        android:layout_marginTop="288dp"
-        android:text="Types of Travel"
-        android:textSize="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="45dp"
+        android:layout_marginTop="354dp"
+        android:fontFamily="@font/carrois_gothic_sc"
+        android:text="PACE"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp" />
 
-    <Spinner
-        android:id="@+id/travelSpinner"
-        android:layout_width="215dp"
-        android:layout_height="41dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/travelType" />
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="239dp"
+        android:layout_height="108dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="14dp"
+        android:layout_toEndOf="@+id/textView"
+        android:timePickerMode="spinner" />
 
     <TextView
-        android:id="@+id/paceText"
-        android:layout_width="214dp"
-        android:layout_height="40dp"
-        android:layout_marginStart="40dp"
+        android:id="@+id/textView"
+        android:layout_width="73dp"
+        android:layout_height="58dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="33dp"
+        android:fontFamily="@font/carrois_gothic_sc"
+        android:text="TIME OF RETURN"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp" />
+
+    <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/radiusGroup"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="33dp"
+        android:layout_marginTop="115dp"
+        android:layout_marginEnd="13dp"
+        android:layout_toEndOf="@+id/textView2"
+        android:orientation="horizontal"
+        segmentedgroup:sc_border_width="2dp"
+        segmentedgroup:sc_corner_radius="10dp"
+        segmentedgroup:sc_tint_color="@color/colorPrimaryDark">
+
+        <RadioButton
+            android:id="@+id/citywideBtn"
+            style="@style/RadioButton"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:text="City wide" />
+
+        <RadioButton
+            android:id="@+id/nearbyBtn"
+            style="@style/RadioButton"
+            android:layout_width="120dp"
+            android:layout_height="50dp"
+            android:text="Nearby" />
+    </info.hoang8f.android.segmented.SegmentedGroup>
+
+    <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/activityGroup"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="25dp"
+        android:layout_marginTop="190dp"
+        android:layout_marginEnd="13dp"
+        android:layout_toEndOf="@+id/textView4"
+        android:orientation="horizontal"
+        segmentedgroup:sc_border_width="2dp"
+        segmentedgroup:sc_corner_radius="10dp"
+        segmentedgroup:sc_tint_color="@color/colorPrimaryDark">
+
+        <RadioButton
+            android:id="@+id/sightsBtn"
+            style="@style/RadioButton"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:text="Sights" />
+
+        <RadioButton
+            android:id="@+id/foodBtn"
+            style="@style/RadioButton"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:text="Food" />
+
+        <RadioButton
+            android:id="@+id/roamBtn"
+            style="@style/RadioButton"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:text="Roam" />
+    </info.hoang8f.android.segmented.SegmentedGroup>
+
+    <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/travelGroup"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="29dp"
+        android:layout_marginTop="266dp"
+        android:layout_marginEnd="13dp"
+        android:layout_toEndOf="@+id/textView5"
+        android:orientation="horizontal"
+        segmentedgroup:sc_border_width="2dp"
+        segmentedgroup:sc_corner_radius="10dp"
+        segmentedgroup:sc_tint_color="@color/colorPrimaryDark">
+
+        <RadioButton
+            android:id="@+id/walkBtn"
+            style="@style/RadioButton"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:text="Walk" />
+
+        <RadioButton
+            android:id="@+id/driveBtn"
+            style="@style/RadioButton"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:text="Drive" />
+
+        <RadioButton
+            android:id="@+id/publicBtn"
+            style="@style/RadioButton"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:text="Public" />
+
+        <RadioButton
+            android:id="@+id/mixBtn"
+            style="@style/RadioButton"
+            android:layout_width="60dp"
+            android:layout_height="50dp"
+            android:text="Mix" />
+    </info.hoang8f.android.segmented.SegmentedGroup>
+
+    <info.hoang8f.android.segmented.SegmentedGroup xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/paceGroup"
+        android:layout_width="240dp"
+        android:layout_height="50dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="42dp"
         android:layout_marginTop="340dp"
-        android:text="Pace"
-        android:textSize="24dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginEnd="13dp"
+        android:layout_toEndOf="@+id/textView6"
+        android:orientation="horizontal"
+        segmentedgroup:sc_border_width="2dp"
+        segmentedgroup:sc_corner_radius="10dp"
+        segmentedgroup:sc_tint_color="@color/colorPrimaryDark">
 
-    <Spinner
-        android:id="@+id/paceSpinner"
-        android:layout_width="215dp"
-        android:layout_height="41dp"
-        android:layout_below="@+id/paceText"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="8dp"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/paceText" />
+        <RadioButton
+            android:id="@+id/chillBtn"
+            style="@style/RadioButton"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:text="Chill" />
+
+        <RadioButton
+            android:id="@+id/moderateBtn"
+            style="@style/RadioButton"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:text="Moderate" />
+
+        <RadioButton
+            android:id="@+id/fastBtn"
+            style="@style/RadioButton"
+            android:layout_width="80dp"
+            android:layout_height="50dp"
+            android:text="Fast" />
+    </info.hoang8f.android.segmented.SegmentedGroup>
 
     <ImageView
-        android:id="@+id/centerImage"
-        android:layout_width="98dp"
-        android:layout_height="102dp"
+        android:id="@+id/contBtn"
+        android:layout_width="92dp"
+        android:layout_height="89dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="409dp"
-        android:layout_marginEnd="131dp"
-        android:layout_marginBottom="0dp"
+        android:layout_marginTop="412dp"
+        android:layout_marginEnd="137dp"
+        android:layout_marginBottom="10dp"
         android:src="@drawable/gobutton" />
 
     <Button
-        android:id="@+id/feedbackBtn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignBottom="@+id/backByText"
-        android:layout_marginStart="126dp"
-        android:layout_marginBottom="-3dp"
-        android:layout_toEndOf="@+id/backByText"
-        android:onClick="goToFeedback"
+        android:id="@+id/button"
+        android:layout_width="78dp"
+        android:layout_height="25dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginBottom="38dp"
+        android:layout_toStartOf="@+id/contBtn"
+        android:background="@color/colorPrimaryDark"
+        android:fontFamily="@font/convergence"
         android:text="Feedback"
-        app:layout_constraintStart_toEndOf="@+id/backByText"
-        tools:layout_editor_absoluteY="18dp" />
+        android:textColor="@android:color/background_light" />
 </RelativeLayout>

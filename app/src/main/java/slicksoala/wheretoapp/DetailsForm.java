@@ -7,18 +7,14 @@ import android.location.Location;
 import android.location.LocationManager;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.Parcelable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.Spinner;
+import android.widget.RadioGroup;
+import android.widget.TimePicker;
 import android.widget.Toast;
-
-import com.skyfishjy.library.RippleBackground;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -30,60 +26,115 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.concurrent.ExecutionException;
 
-public class DetailsForm extends AppCompatActivity {
-    private EditText returnTime;
-    private Spinner radiusSpinner;
-    private Spinner activitySpinner;
-    private Spinner travelSpinner;
-    private Spinner paceSpinner;
+import info.hoang8f.android.segmented.SegmentedGroup;
+
+public class DetailsForm extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
+    TimePicker timePicker;
+    private Radius radius;
+    private ActivityDo activity;
+    private TravelType travelType;
+    private Pace pace;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_details_form);
-        returnTime = (EditText) findViewById(R.id.returnTime);
-        radiusSpinner = findViewById(R.id.radiusSpinner);
-        activitySpinner = findViewById(R.id.activitySpinner);
-        travelSpinner = findViewById(R.id.travelSpinner);
-        paceSpinner = findViewById(R.id.paceSpinner);
-        ImageView go = findViewById(R.id.centerImage);
-        go.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                try {
-                    goTo();
-                } catch (ExecutionException e) {
-                    e.printStackTrace();
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
+
+        SegmentedGroup radiusGroup = findViewById(R.id.radiusGroup);
+        radiusGroup.setOnCheckedChangeListener(this);
+        SegmentedGroup activityGroup = findViewById(R.id.activityGroup);
+        activityGroup.setOnCheckedChangeListener(this);
+        SegmentedGroup travelGroup = findViewById(R.id.travelGroup);
+        travelGroup.setOnCheckedChangeListener(this);
+        SegmentedGroup paceGroup = findViewById(R.id.paceGroup);
+        paceGroup.setOnCheckedChangeListener(this);
+        timePicker = findViewById(R.id.timePicker);
+
+        ImageView go = findViewById(R.id.contBtn);
+        go.setOnClickListener(view -> {
+            try {
+                goTo();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (InterruptedException e) {
+                e.printStackTrace();
             }
         });
+    }
 
-        ArrayAdapter<String> radiusAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, Radius.values());
-        radiusAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        radiusSpinner.setAdapter(radiusAdapter);
+    @Override
+    public void onCheckedChanged(RadioGroup group, int checkedId) {
+        switch (checkedId) {
+            //range
+            case R.id.nearbyBtn:
+                radius = Radius.NEARBY;
+                break;
+            case R.id.citywideBtn:
+                radius = Radius.CITYWIDE;
+                break;
 
-        ArrayAdapter<String> activityAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, ActivityDo.values());
-        activityAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        activitySpinner.setAdapter(activityAdapter);
+            //activity
+            case R.id.sightsBtn:
+                activity = ActivityDo.SIGHTSEE;
+                break;
+            case R.id.foodBtn:
+                activity = ActivityDo.EAT;
+                break;
+            case R.id.roamBtn:
+                activity = ActivityDo.WANDER;
+                break;
 
-        ArrayAdapter<String> travelAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, TravelType.values());
-        travelAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        travelSpinner.setAdapter(travelAdapter);
+            //transit
+            case R.id.walkBtn:
+                travelType = TravelType.WALK;
+                break;
+            case R.id.driveBtn:
+                travelType = TravelType.DRIVE;
+                break;
+            case R.id.publicBtn:
+                travelType = TravelType.WALK;
+                break;
+            case R.id.mixBtn:
+                travelType = TravelType.DRIVE;
+                break;
 
-        ArrayAdapter<String> paceAdapter = new ArrayAdapter(this,android.R.layout.simple_spinner_item, Pace.values());
-        paceAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        paceSpinner.setAdapter(paceAdapter);
+            //pace
+            case R.id.chillBtn:
+                pace = Pace.CHILL;
+                break;
+            case R.id.moderateBtn:
+                pace = Pace.MODERATE;
+                break;
+            case R.id.fastBtn:
+                pace = Pace.FAST;
+                break;
+        }
     }
 
     public void goToFeedback(View view) {
         Intent fintent = new Intent(DetailsForm.this, FeedbackForm.class);
         startActivity(fintent);
+    }
+
+    public int getAvailableTime() {
+        int currHour = LocalDateTime.now().getHour();
+        int currMin = LocalDateTime.now().getMinute();
+        int retHour = timePicker.getHour();
+        int retMin = timePicker.getMinute();
+        int availableTime;
+
+        if ((currHour > retHour) || ((currHour == retHour) && (currMin > retMin))) {
+            availableTime = (24 - currHour) * 60 + (60 - currMin);
+            availableTime += retHour * 60 + retMin;
+        } else {
+            availableTime = (retHour - currHour) * 60 + (retMin - currMin);
+        }
+        return availableTime;
     }
 
     public void goTo() throws ExecutionException, InterruptedException {
@@ -97,33 +148,31 @@ public class DetailsForm extends AppCompatActivity {
         String currLat = Double.toString(location.getLatitude());
         String currLong = Double.toString(location.getLongitude());
 
-        int k = 5;
-        ArrayList<Place> masterList;
-        ArrayList<Place> kList = new ArrayList<>();
+        if (radius == null || activity == null || travelType == null || pace == null) {
+            Toast.makeText(this, "Make all the selections!", Toast.LENGTH_LONG).show();
+            return;
+        }
+        int availableTime = getAvailableTime();
+        if (availableTime == 0) {
+            Toast.makeText(this, "Choose a time different from now!", Toast.LENGTH_LONG).show();
+            return;
+        }
 
-        String ret = returnTime.getText().toString();
+        int maxRad = travelType.getAvgSpeed() * availableTime/2;
+        Toast.makeText(this, "Max radius: " + maxRad, Toast.LENGTH_LONG).show();
 
-        Radius radius = (Radius) radiusSpinner.getSelectedItem();
-        String rad = radius.getVal();
-
-        ActivityDo activity = (ActivityDo) activitySpinner.getSelectedItem();
         String act = activity.toString();
-
-        TravelType travelType = (TravelType) travelSpinner.getSelectedItem();
-        String tra = travelType.toString();
-
-        Pace pace = (Pace) paceSpinner.getSelectedItem();
-        String pac = radius.getVal();
+        if (maxRad > 40000)
+            maxRad = 40000;
 
         if (activity == ActivityDo.EAT) {
             FoodSelectTask ftask = new FoodSelectTask();
-            ftask.execute(currLat, currLong, rad, act);
+            ftask.execute(currLat, currLong, Integer.toString(maxRad), act);
         } else {
             SightSelectTask stask = new SightSelectTask();
-            stask.execute(currLat, currLong, rad, act);
+            stask.execute(currLat, currLong, Integer.toString(maxRad), act);
         }
     }
-
 
     class FoodSelectTask extends AsyncTask<String, Void, Void> {
         //https://api.yelp.com/v3/businesses/search?term=food&latitude=33.78508547&longitude=-84.3879824&radius=1000
@@ -147,7 +196,7 @@ public class DetailsForm extends AppCompatActivity {
             Intent intentSplash = new Intent(DetailsForm.this, SplashActivity.class);
             startActivity(intentSplash);
 
-            int k = 5;
+            int k = getAvailableTime()/(2*pace.getTime());
             ArrayList<Place> masterList;
             ArrayList<Place> kList = new ArrayList<>();
 
@@ -196,7 +245,23 @@ public class DetailsForm extends AppCompatActivity {
                         if (jsonArray.getJSONObject(i).has("name")) {
                             poi.setName(jsonArray.getJSONObject(i).optString("name"));
                             poi.setRating(jsonArray.getJSONObject(i).optString("rating"));
-
+                            if (jsonArray.getJSONObject(i).has("categories")) {
+                                StringBuilder cat = new StringBuilder();
+                                JSONArray catArray = jsonArray.getJSONObject(i).getJSONArray("categories");
+                                if (catArray.length() == 1) {
+                                    cat.append(catArray.getJSONObject(0).optString("title"));
+                                }
+                                else if (catArray.length() == 2) {
+                                    cat.append(catArray.getJSONObject(0).optString("title"));
+                                    cat.append("and ").append(catArray.getJSONObject(1).optString("title"));
+                                } else {
+                                    for (int j = 0; j < catArray.length() - 1; j++) {
+                                        cat.append(catArray.getJSONObject(j).optString("title")).append(", ");
+                                    }
+                                    cat.append("and ").append(catArray.getJSONObject(catArray.length() - 1).optString("title"));
+                                }
+                                poi.setCategory(cat.toString());
+                            }
                             if (jsonArray.getJSONObject(i).has("coordinates"))
                             {
                                 poi.setLatLng(Double.parseDouble(jsonArray.getJSONObject(i).getJSONObject("coordinates").optString("latitude")),
@@ -221,13 +286,22 @@ public class DetailsForm extends AppCompatActivity {
                 }
             }
 
-            kList.add(currPlace);
-            for (int i = 0; i < k; i++) {
+            Intent intentPref = new Intent(DetailsForm.this, UserPreferencesScreen.class);
+
+            Bundle extra = new Bundle();
+            extra.putSerializable("preferences", parseList);
+            extra.putSerializable("currPlace", currPlace);
+            intentPref.putExtra("extra", extra);
+            intentPref.putExtra("k", k);
+            startActivity(intentPref);
+
+            /*kList.add(currPlace);
+            for (int i = 0; i < Math.max(k, parseList.size()); i++) {
                 kList.add(parseList.get(i));
             }
 
             OptimalRoutingTask dmtask = new OptimalRoutingTask();
-            dmtask.execute(kList);
+            dmtask.execute(kList);*/
 
             return null;
         }
@@ -259,7 +333,7 @@ public class DetailsForm extends AppCompatActivity {
             Intent intentSplash = new Intent(DetailsForm.this, SplashActivity.class);
             startActivity(intentSplash);
 
-            int k = 5;
+            int k = getAvailableTime()/(2*pace.getTime());
             ArrayList<Place> masterList;
             ArrayList<Place> kList = new ArrayList<>();
 

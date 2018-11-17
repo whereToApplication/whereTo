@@ -20,7 +20,7 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:layout_centerInParent="true"
-            android:id="@+id/centerImage"
+            android:id="@+id/contBtn"
             android:src="@drawable/shoelogo"/>
     </com.skyfishjy.library.RippleBackground>
 

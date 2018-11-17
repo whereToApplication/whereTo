@@ -9,6 +9,7 @@ public class Place implements Serializable {
     private String category;
     private String rating;
     private String opennow;
+    private double userPref = 0.5;
     private double latitude,longitude;
     public Place()
     {
@@ -47,11 +48,20 @@ public class Place implements Serializable {
         this.longitude=lon;
     }
 
+
     public double getLatitude() {
         return latitude;
     }
 
     public double getLongitude() {
         return longitude;
+    }
+
+    public double getUserPref() {
+        return userPref;
+    }
+
+    public void setUserPref(double userPref) {
+        this.userPref = userPref;
     }
 }

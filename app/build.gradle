@@ -32,4 +32,6 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.skyfishjy.ripplebackground:library:1.0.1'
     implementation 'com.github.clans:fab:1.6.4'
+    implementation 'info.hoang8f:android-segmented:1.0.6'
+    implementation 'com.rilixtech:google-material-typeface:3.0.1.1.original'
 }

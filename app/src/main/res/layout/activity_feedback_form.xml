@@ -24,6 +24,7 @@
         android:layout_height="wrap_content"
         android:layout_alignStart="@+id/feedbackText"
         android:layout_alignParentBottom="true"
+        android:layout_marginStart="111dp"
         android:layout_marginBottom="68dp"
         android:text="submit" />
 </RelativeLayout>
