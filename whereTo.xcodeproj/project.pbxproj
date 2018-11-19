@@ -21,6 +21,7 @@
 		5530E56E217E9DC30046A3D6 /* heldKarpAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5530E56D217E9DC30046A3D6 /* heldKarpAlgorithm.swift */; };
 		55574D47218BFF83000906E7 /* HeldKarpTSPTrialVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55574D46218BFF83000906E7 /* HeldKarpTSPTrialVersion.swift */; };
 		557B42A2218D2A65009A0AEE /* Place.swift in Sources */ = {isa = PBXBuildFile; fileRef = 557B42A1218D2A65009A0AEE /* Place.swift */; };
+		559F333D21A27F500022F4DF /* EnvironmentVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 559F333C21A27F500022F4DF /* EnvironmentVariables.swift */; };
 		55A835B82198F49B000E1178 /* UserPreferenceViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55A835B72198F49B000E1178 /* UserPreferenceViewController.swift */; };
 		55CADF262192555300E49B90 /* AnimatedGradientPathRenderer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55CADF252192555300E49B90 /* AnimatedGradientPathRenderer.swift */; };
 		55FDA844214F70740081EC28 /* fabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 55FDA843214F70740081EC28 /* fabViewController.swift */; };
@@ -69,6 +70,7 @@
 		5530E56D217E9DC30046A3D6 /* heldKarpAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = heldKarpAlgorithm.swift; sourceTree = "<group>"; };
 		55574D46218BFF83000906E7 /* HeldKarpTSPTrialVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = HeldKarpTSPTrialVersion.swift; path = ../HeldKarpTSPTrialVersion.swift; sourceTree = "<group>"; };
 		557B42A1218D2A65009A0AEE /* Place.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Place.swift; sourceTree = "<group>"; };
+		559F333C21A27F500022F4DF /* EnvironmentVariables.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnvironmentVariables.swift; sourceTree = "<group>"; };
 		55A835B72198F49B000E1178 /* UserPreferenceViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferenceViewController.swift; sourceTree = "<group>"; };
 		55CADF252192555300E49B90 /* AnimatedGradientPathRenderer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimatedGradientPathRenderer.swift; sourceTree = "<group>"; };
 		55FDA843214F70740081EC28 /* fabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = fabViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +163,7 @@
 				550EAB4A214DA88500C5AFF5 /* MapViewController.swift */,
 				55FDA843214F70740081EC28 /* fabViewController.swift */,
 				B4A807DF217BBD2500FA39F8 /* optionsViewController.swift */,
+				559F333C21A27F500022F4DF /* EnvironmentVariables.swift */,
 				5530E56D217E9DC30046A3D6 /* heldKarpAlgorithm.swift */,
 				B47569A5217BE2AC00204F60 /* AlgorithmController.swift */,
 				557B42A1218D2A65009A0AEE /* Place.swift */,
@@ -476,6 +479,7 @@
 				55A835B82198F49B000E1178 /* UserPreferenceViewController.swift in Sources */,
 				552DF2802199046A00CB291F /* PreferenceCell.swift in Sources */,
 				557B42A2218D2A65009A0AEE /* Place.swift in Sources */,
+				559F333D21A27F500022F4DF /* EnvironmentVariables.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

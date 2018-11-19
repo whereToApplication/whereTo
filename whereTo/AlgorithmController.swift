@@ -27,7 +27,7 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
     let ORIG_PAR: String = "&origins=";
     let DEST_PAR: String = "&destinations=";
     let KEY_PAR: String = "&key=";
-    let API_KEY: String = "AIzaSyAr-MIu6A-LmtXGsm94fDfIjICLguluajQ";
+    let API_KEY: String = EnvironmentVariables.init().GoogleAPIKey;
     var route: [Int] = [];
 
     var gotRoutes: Bool = false;
