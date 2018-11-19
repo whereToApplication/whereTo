@@ -138,20 +138,34 @@ extension UserPreferenceViewController: UITableViewDataSource, UITableViewDelega
         return categories.count;
     }
     
+    
+    
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//        let cell = tableView.cellForRow(at: indexPath)!
+//        if like == true {
+//            cell.contentView.backgroundColor = UIColor.blue
+//            like = false
+//        }
+//    }
+//    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let category = self.categories[indexPath.row]
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "PreferenceCell") as! PreferenceCell
         
+        cell.selectionStyle = UITableViewCellSelectionStyle.blue;
+        
+        
         cell.setCategory(category: category)
         
         let thumbsUpTap = CustomTapGestureRecognizer(target: self, action: #selector(self.onThumbsUp))
         thumbsUpTap.category = category;
+        thumbsUpTap.cell = cell;
         cell.thumbsUp.isUserInteractionEnabled = true
         cell.thumbsUp.addGestureRecognizer(thumbsUpTap);
-        
         let thumbsDownTap = CustomTapGestureRecognizer(target: self, action: #selector(self.onThumbsDown))
         thumbsDownTap.category = category;
+        thumbsDownTap.cell = cell;
         cell.thumbsDown.isUserInteractionEnabled = true
         cell.thumbsDown.addGestureRecognizer(thumbsDownTap)
         
@@ -162,8 +176,8 @@ extension UserPreferenceViewController: UITableViewDataSource, UITableViewDelega
         return 200.0;
     }
     
-    
     @objc func onThumbsUp(sender: CustomTapGestureRecognizer) {
+        sender.cell?.contentView.backgroundColor = UIColor.green
         if let category = sender.category {
             voteUpCategories.insert(category);
             if voteDownCategories.contains(category) {
@@ -173,6 +187,7 @@ extension UserPreferenceViewController: UITableViewDataSource, UITableViewDelega
     }
     
     @objc func onThumbsDown(sender: CustomTapGestureRecognizer) {
+        sender.cell?.contentView.backgroundColor = UIColor.red
         if let category = sender.category {
             voteDownCategories.insert(category);
             if voteUpCategories.contains(category) {
@@ -185,4 +200,5 @@ extension UserPreferenceViewController: UITableViewDataSource, UITableViewDelega
 
 class CustomTapGestureRecognizer: UITapGestureRecognizer {
     var category: String?
+    var cell : PreferenceCell?
 }
