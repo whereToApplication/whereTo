@@ -21,7 +21,7 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
     private var locationManager: CLLocationManager!
     private var latitude: Double = 0.0
     private var longitude: Double = 0.0
-    var k = 9
+    var k = 0;
     var delta = 0
     let sigma = 0.4
     var spotList: [Place] = []
@@ -62,10 +62,8 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
 
-    @IBAction func paceAction(_ sender: UISegmentedControl) {
-        paceText = sender.titleForSegment(at: sender.selectedSegmentIndex) ?? ""
-//        k = kCalculator()
-    }
+    @IBOutlet weak var placePickerView: UIPickerView!
+    
 
 
     @IBAction func modeAction(_ sender: UISegmentedControl) {
@@ -86,9 +84,7 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
     
 
     @IBAction func submit(_ sender: UIButton) {
-        if radiusText.count > 0 && eventsText.count > 0 && paceText.count > 0 {
-//            performSegue(withIdentifier: "algorithmIdentifier", sender: self)
-            
+        if radiusText.count > 0 && eventsText.count > 0 && k > 0 {
             if k <= 0 {
                 let alert = UIAlertController(title: "Error", message: "That's too little time, if you want to go \(paceText)", preferredStyle: .alert)
                 alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Be sure to pick everything"), style: .default, handler: { _ in
@@ -112,13 +108,6 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let destination = segue.destination as? AlgorithmController {
-            destination.radius = self.radiusText
-            destination.event = self.eventsText
-            destination.pace = self.paceText
-            destination.options1 = self.spotList
-            destination.time = self.timeText
-        }
         if let destination = segue.destination as? UserPreferenceViewController {
             destination.categories = Array(self.tempcategories)
             destination.places = self.spotList;
@@ -126,10 +115,13 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
             destination.eventsText = self.eventsText
             destination.paceText = self.paceText
             destination.timeText = self.timeText
+            destination.k = self.k
         }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.placePickerView.delegate = self;
+        self.placePickerView.dataSource = self;
         var theDateAnHourFromNow = NSDate().addingTimeInterval(3600)
         dates.setDate(theDateAnHourFromNow as Date, animated: true)
         timeText = "60"
@@ -161,11 +153,9 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
         latitude = locValue.latitude
         longitude = locValue.longitude
         if !updated {
-//            testLaunchClicked();
             updated = true;
         }
 
-//        print("locations = \(latitude) \(longitude)")
     }
     
     override func didReceiveMemoryWarning() {
@@ -207,17 +197,6 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
                 
                 self.spotList = newPlaces;
                 
-//                if self.k > newPlaces.count {
-//                    self.spotList = newPlaces;
-//                    self.done = true
-//                } else {
-//                    for count in 0 ... self.k  {
-//                        self.spotList.append(newPlaces[count]);
-//                    }
-//
-//                    self.masterList = newPlaces
-//
-//                }
                 
                 self.performSegue(withIdentifier: "preferenceIdentifier", sender: self);
             }
@@ -225,15 +204,24 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     
-//    func kCalculator() -> Int {
-//        if paceText == "Slow" {
-//            return min(abs(Int(timeText)!)/90, 9)
-//        } else if paceText == "Normal" {
-//            return min(abs(Int(timeText)!)/45, 9)
-//        } else if paceText == "Fast" {
-//            return min(abs(Int(timeText)!)/15, 9)
-//        }
-//
-//        return 0
-//    }
+    
+}
+
+
+extension optionsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 1;
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return 9;
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return String(row + 1);
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        k = row + 1;
+    }
 }

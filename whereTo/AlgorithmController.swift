@@ -17,6 +17,7 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
     var radius: String = ""
     var event: String = ""
     var pace: String = ""
+    var k: Int = 0;
     var time: String = ""
     @IBOutlet weak var goLabel: UIImageView!
     var options1: [Place] = []
@@ -77,7 +78,7 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
                             var count: Int = 1;
                             var minBadTime = Double.greatestFiniteMagnitude;
                             var bestWorstRoute: [Int] = [];
-                            while userTime > 0 && count < 10 {
+                            while userTime > 0 && count <= self.k {
                                 userTime = Int(self.time)!;
                                 var rowSliceMatrix = Array(distMatrix[0...count]);
                                 var tempWholeSliceMatrix : [[Double]] = [];
@@ -92,7 +93,7 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
                                     prevVertex += 1;
                                 }
                                 userTime -= Int(totalTime)/60; //totalTime is in seconds
-                                if (userTime <= 0 && count < 10) {
+                                if (userTime <= 0 && count <= self.k) {
                                     if totalTime < minBadTime {
                                         minBadTime = totalTime;
                                         bestWorstRoute = optimalRoute as! [Int];

@@ -117,6 +117,7 @@ class UserPreferenceViewController: UIViewController {
             destination.pace = self.paceText
             destination.options1 = self.spotList
             destination.time = self.timeText
+            destination.k = self.k; 
         }
     }
     
@@ -161,9 +162,6 @@ extension UserPreferenceViewController: UITableViewDataSource, UITableViewDelega
         return 200.0;
     }
     
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        onThumbsUp(sender: <#T##CustomTapGestureRecognizer#>)
-//    }
     
     @objc func onThumbsUp(sender: CustomTapGestureRecognizer) {
         if let category = sender.category {
