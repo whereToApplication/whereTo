@@ -8,8 +8,8 @@
 
 import Foundation
 import UIKit
-import SwiftyJSON
 import Alamofire
+import SwiftyJSON
 import MapKit
 
 class AlgorithmController: UIViewController, CLLocationManagerDelegate {
@@ -77,7 +77,7 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
                             var count: Int = 1;
                             var minBadTime = Double.greatestFiniteMagnitude;
                             var bestWorstRoute: [Int] = [];
-                            while userTime > 0 && count <= 10 {
+                            while userTime > 0 && count < 10 {
                                 userTime = Int(self.time)!;
                                 var rowSliceMatrix = Array(distMatrix[0...count]);
                                 var tempWholeSliceMatrix : [[Double]] = [];
@@ -178,8 +178,8 @@ class AlgorithmController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         mapView?.delegate = self;
-        let optimalRoutes = GoogleMapsDistanceMatrixAPI();
         showLoadingScreen()
+        let optimalRoutes = GoogleMapsDistanceMatrixAPI();
         
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(self.goBtn))
         goLabel.isUserInteractionEnabled = true

@@ -11,8 +11,11 @@ target 'whereTo' do
     pod 'GoogleMaps'
     pod 'Pulsator'
     pod 'JJFloatingActionButton'
+    pod 'Fabric'
+    pod 'Crashlytics'
     pod 'MaterialComponents/Buttons'
     pod "ModelMapper"
+    
   target 'whereToTests' do
     inherit! :search_paths
     # Pods for testing
