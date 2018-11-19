@@ -6,9 +6,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.TextView;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -19,6 +21,7 @@ class PreferencesListAdapter extends ArrayAdapter<Place> implements RadioGroup.O
     private final Context mContext;
     private final int mResource;
     private Place place;
+    private int selected = -1;
 
     PreferencesListAdapter(@NonNull Context context, List<Place> objects) {
         super(context, R.layout.layout_preferenceitem, objects);
@@ -38,8 +41,15 @@ class PreferencesListAdapter extends ArrayAdapter<Place> implements RadioGroup.O
         TextView prefText = convertView.findViewById(R.id.prefqTxt);
         prefText.setText(qformat1 + category + qformat2);
 
+        RadioButton yesBtn = convertView.findViewById(R.id.yesBtn);
+        RadioButton noBtn = convertView.findViewById(R.id.noBtn);
+
         SegmentedGroup radiusGroup = convertView.findViewById(R.id.prefGroup);
         radiusGroup.setOnCheckedChangeListener(this);
+        if (place.getUserPref() > 0.5)
+            yesBtn.setChecked(true);
+        else if (place.getUserPref() < 0.5)
+            noBtn.setChecked(true);
 
         return convertView;
     }

@@ -26,7 +26,7 @@
             android:layout_width="210dp"
             android:layout_height="210dp"
             android:layout_centerInParent="true"
-            android:src="@drawable/shoelogo" />
+            android:src="@drawable/wtlogo" />
     </com.skyfishjy.library.RippleBackground>
 
     <TextView

@@ -10,7 +10,7 @@ import android.os.Bundle;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
-import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.TimePicker;
@@ -28,16 +28,16 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.concurrent.ExecutionException;
 
 import info.hoang8f.android.segmented.SegmentedGroup;
 
-public class DetailsForm extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
+public class HomeScreenActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
     TimePicker timePicker;
     private Radius radius;
     private ActivityDo activity;
     private TravelType travelType;
+    private String transit;
     private Pace pace;
 
     @Override
@@ -64,6 +64,12 @@ public class DetailsForm extends AppCompatActivity implements RadioGroup.OnCheck
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
+        });
+
+        Button fbBtn = findViewById(R.id.fbBtn);
+        fbBtn.setOnClickListener(v -> {
+            Intent fintent = new Intent(HomeScreenActivity.this, FeedbackActivity.class);
+            startActivity(fintent);
         });
     }
 
@@ -92,15 +98,19 @@ public class DetailsForm extends AppCompatActivity implements RadioGroup.OnCheck
             //transit
             case R.id.walkBtn:
                 travelType = TravelType.WALK;
+                transit = "walking";
                 break;
             case R.id.driveBtn:
                 travelType = TravelType.DRIVE;
+                transit = "driving";
                 break;
             case R.id.publicBtn:
-                travelType = TravelType.WALK;
+                travelType = TravelType.DRIVE;
+                transit = "driving";
                 break;
             case R.id.mixBtn:
                 travelType = TravelType.DRIVE;
+                transit = "driving";
                 break;
 
             //pace
@@ -114,11 +124,6 @@ public class DetailsForm extends AppCompatActivity implements RadioGroup.OnCheck
                 pace = Pace.FAST;
                 break;
         }
-    }
-
-    public void goToFeedback(View view) {
-        Intent fintent = new Intent(DetailsForm.this, FeedbackForm.class);
-        startActivity(fintent);
     }
 
     public int getAvailableTime() {
@@ -139,14 +144,17 @@ public class DetailsForm extends AppCompatActivity implements RadioGroup.OnCheck
 
     public void goTo() throws ExecutionException, InterruptedException {
         if (ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            Toast.makeText(DetailsForm.this, "First enable LOCATION ACCESS in settings.", Toast.LENGTH_LONG).show();
+            Toast.makeText(HomeScreenActivity.this, "First enable LOCATION ACCESS in settings.", Toast.LENGTH_LONG).show();
             return;
         }
         LocationManager lm = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        assert lm != null;
         Location location = lm.getLastKnownLocation(LocationManager.GPS_PROVIDER);
         Log.d("LOCATION: ",location.toString());
         String currLat = Double.toString(location.getLatitude());
         String currLong = Double.toString(location.getLongitude());
+        /*String currLat = "33.7747968";
+        String currLong = "-84.3907072";*/
 
         if (radius == null || activity == null || travelType == null || pace == null) {
             Toast.makeText(this, "Make all the selections!", Toast.LENGTH_LONG).show();
@@ -168,9 +176,11 @@ public class DetailsForm extends AppCompatActivity implements RadioGroup.OnCheck
         if (activity == ActivityDo.EAT) {
             FoodSelectTask ftask = new FoodSelectTask();
             ftask.execute(currLat, currLong, Integer.toString(maxRad), act);
+            return;
         } else {
             SightSelectTask stask = new SightSelectTask();
             stask.execute(currLat, currLong, Integer.toString(maxRad), act);
+            return;
         }
     }
 
@@ -193,23 +203,29 @@ public class DetailsForm extends AppCompatActivity implements RadioGroup.OnCheck
 
         @Override
         protected Void doInBackground(String... params) {
-            Intent intentSplash = new Intent(DetailsForm.this, SplashActivity.class);
+            Intent intentSplash = new Intent(HomeScreenActivity.this, SplashActivity.class);
             startActivity(intentSplash);
 
             int k = getAvailableTime()/(2*pace.getTime());
-            ArrayList<Place> masterList;
-            ArrayList<Place> kList = new ArrayList<>();
+
+            if (k == 0) k = 1;
+            else if (k > 9) k = 9;
 
             currLat = params[0];
             currLong = params[1];
             rad = params[2];
             activitySelect = params[3];
-            if (activitySelect.equals("Sights"))
-                placeType = placeTypePTG;
-            else if (activitySelect.equals("Roam"))
-                placeType = placeTypeTTD;
-            else
-                placeType = placeTypeSTE;
+            switch (activitySelect) {
+                case "Sights":
+                    placeType = placeTypePTG;
+                    break;
+                case "Roam":
+                    placeType = placeTypeTTD;
+                    break;
+                default:
+                    placeType = placeTypeSTE;
+                    break;
+            }
 
             Place currPlace = new Place();
             currPlace.setName("Your Location");
@@ -219,7 +235,7 @@ public class DetailsForm extends AppCompatActivity implements RadioGroup.OnCheck
 
             URL url;
             HttpURLConnection urlConnection = null;
-            String resultString = "";
+            StringBuilder resultString = new StringBuilder();
             JSONObject jsonObject;
             ArrayList<Place> parseList = new ArrayList();
 
@@ -234,10 +250,10 @@ public class DetailsForm extends AppCompatActivity implements RadioGroup.OnCheck
                 int data = reader.read();
                 while (data != -1) {
                     char current = (char) data;
-                    resultString += current;
+                    resultString.append(current);
                     data = reader.read();
                 }
-                jsonObject = new JSONObject(resultString);
+                jsonObject = new JSONObject(resultString.toString());
                 if (jsonObject.has("businesses")) {
                     JSONArray jsonArray = jsonObject.getJSONArray("businesses");
                     for (int i = 0; i < jsonArray.length(); i++) {
@@ -252,7 +268,7 @@ public class DetailsForm extends AppCompatActivity implements RadioGroup.OnCheck
                                     cat.append(catArray.getJSONObject(0).optString("title"));
                                 }
                                 else if (catArray.length() == 2) {
-                                    cat.append(catArray.getJSONObject(0).optString("title"));
+                                    cat.append(catArray.getJSONObject(0).optString("title")).append(" ");
                                     cat.append("and ").append(catArray.getJSONObject(1).optString("title"));
                                 } else {
                                     for (int j = 0; j < catArray.length() - 1; j++) {
@@ -271,6 +287,16 @@ public class DetailsForm extends AppCompatActivity implements RadioGroup.OnCheck
                         parseList.add(poi);
                     }
                 }
+
+                Intent intentPref = new Intent(HomeScreenActivity.this, UserPreferencesActivity.class);
+
+                Bundle extra = new Bundle();
+                extra.putSerializable("preferences", parseList);
+                extra.putSerializable("currPlace", currPlace);
+                intentPref.putExtra("extra", extra);
+                intentPref.putExtra("k", k);
+                intentPref.putExtra("transit", transit);
+                startActivity(intentPref);
             } catch (MalformedURLException e) {
                 System.out.print(e + "IOException");
                 e.printStackTrace();
@@ -285,24 +311,6 @@ public class DetailsForm extends AppCompatActivity implements RadioGroup.OnCheck
                     urlConnection.disconnect();
                 }
             }
-
-            Intent intentPref = new Intent(DetailsForm.this, UserPreferencesScreen.class);
-
-            Bundle extra = new Bundle();
-            extra.putSerializable("preferences", parseList);
-            extra.putSerializable("currPlace", currPlace);
-            intentPref.putExtra("extra", extra);
-            intentPref.putExtra("k", k);
-            startActivity(intentPref);
-
-            /*kList.add(currPlace);
-            for (int i = 0; i < Math.max(k, parseList.size()); i++) {
-                kList.add(parseList.get(i));
-            }
-
-            OptimalRoutingTask dmtask = new OptimalRoutingTask();
-            dmtask.execute(kList);*/
-
             return null;
         }
     }
@@ -330,12 +338,10 @@ public class DetailsForm extends AppCompatActivity implements RadioGroup.OnCheck
 
         @Override
         protected Void doInBackground(String... params) {
-            Intent intentSplash = new Intent(DetailsForm.this, SplashActivity.class);
+            Intent intentSplash = new Intent(HomeScreenActivity.this, SplashActivity.class);
             startActivity(intentSplash);
 
             int k = getAvailableTime()/(2*pace.getTime());
-            ArrayList<Place> masterList;
-            ArrayList<Place> kList = new ArrayList<>();
 
             currLat = params[0];
             currLong = params[1];
@@ -390,11 +396,25 @@ public class DetailsForm extends AppCompatActivity implements RadioGroup.OnCheck
                                                 getJSONObject("location").optString("lng"));
                                         poi.setLatLng(lat,lng);
                                         poi.setRating("3");
+
+                                        if (jsonArray.getJSONObject(i).getJSONObject("venue").has("categories")) {
+                                            StringBuilder cat = new StringBuilder();
+                                            JSONArray catArray = jsonArray.getJSONObject(i).getJSONObject("venue").getJSONArray("categories");
+                                            if (catArray.length() == 1) {
+                                                cat.append(catArray.getJSONObject(0).optString("pluralName"));
+                                            }
+                                            else if (catArray.length() == 2) {
+                                                cat.append(catArray.getJSONObject(0).optString("pluralName") + " ");
+                                                cat.append("and ").append(catArray.getJSONObject(1).optString("pluralName"));
+                                            } else {
+                                                for (int j = 0; j < catArray.length() - 1; j++) {
+                                                    cat.append(catArray.getJSONObject(j).optString("pluralName")).append(", ");
+                                                }
+                                                cat.append("and ").append(catArray.getJSONObject(catArray.length() - 1).optString("title"));
+                                            }
+                                            poi.setCategory(cat.toString());
+                                        }
                                     }
-                                }
-                                if (jsonArray.getJSONObject(i).has("categories")) {
-                                    poi.setCategory(jsonArray.getJSONObject(i).getJSONObject("categories").
-                                            optString("name"));
                                 }
                                 parseList.add(poi);
                             }
@@ -402,12 +422,6 @@ public class DetailsForm extends AppCompatActivity implements RadioGroup.OnCheck
                     }
                 }
 
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
@@ -415,114 +429,16 @@ public class DetailsForm extends AppCompatActivity implements RadioGroup.OnCheck
                     urlConnection.disconnect();
                 }
             }
-            kList.add(currPlace);
-            for (int i = 0; i < k; i++) {
-                kList.add(parseList.get(i));
-            }
+            Intent intentPref = new Intent(HomeScreenActivity.this, UserPreferencesActivity.class);
 
-            OptimalRoutingTask dmtask = new OptimalRoutingTask();
-            dmtask.execute(kList);
+            Bundle extra = new Bundle();
+            extra.putSerializable("preferences", parseList);
+            extra.putSerializable("currPlace", currPlace);
+            intentPref.putExtra("extra", extra);
+            intentPref.putExtra("k", k);
+            intentPref.putExtra("transit", transit);
+            startActivity(intentPref);
 
-            return null;
-        }
-    }
-
-    class OptimalRoutingTask extends AsyncTask<ArrayList<Place>, Void, Void> {
-        final String DISTMATRIX_BASE = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric";
-        final String ORIG_PAR = "&origins=";
-        final String DEST_PAR = "&destinations=";
-        final String KEY_PAR = "&key=";
-        final String API_KEY = "AIzaSyAr-MIu6A-LmtXGsm94fDfIjICLguluajQ";
-        @Override
-        protected Void doInBackground(ArrayList<Place>... al) {
-            ArrayList<Place> kList = al[0];
-            double[][] distMatrix = new double[kList.size()][kList.size()];
-
-            StringBuilder sb = new StringBuilder();
-            if (kList != null && kList.size() != 0) {
-                sb.append(Double.toString(kList.get(0).getLatitude()));
-                sb.append(",");
-                sb.append(Double.toString(kList.get(0).getLongitude()));
-                for (int i = 1; i < kList.size(); i++) {
-                    sb.append("|");
-                    sb.append(Double.toString(kList.get(i).getLatitude()));
-                    sb.append(",");
-                    sb.append(Double.toString(kList.get(i).getLongitude()));
-                }
-            }
-            String origdest = sb.toString();
-            String urlString = DISTMATRIX_BASE + ORIG_PAR + origdest + DEST_PAR + origdest + KEY_PAR + API_KEY;
-
-            URL url;
-            HttpURLConnection urlConnection = null;
-            String resultString = "";
-
-            try {
-                url = new URL(urlString);
-                urlConnection = (HttpURLConnection) url.openConnection();
-
-                InputStream in = urlConnection.getInputStream();
-                InputStreamReader reader = new InputStreamReader(in);
-
-                int data = reader.read();
-                while (data != -1) {
-                    char current = (char) data;
-                    resultString += current;
-                    data = reader.read();
-                }
-                JSONObject jsonObject = new JSONObject(resultString);
-                if (jsonObject.has("rows")) {
-                    JSONArray rowsArray = jsonObject.getJSONArray("rows");
-                    for (int i = 0; i < rowsArray.length(); i++) {
-                        if (rowsArray.getJSONObject(i).has("elements")) {
-                            JSONArray columnsArray = rowsArray.getJSONObject(i).
-                                    getJSONArray("elements");
-                            for (int j = 0; j < columnsArray.length(); j++) {
-                                if (columnsArray.getJSONObject(j).has("duration")) {
-                                    if (columnsArray.getJSONObject(j).getJSONObject("duration").
-                                            has("value")) {
-                                        int durSeconds = columnsArray.getJSONObject(j).getJSONObject("duration").
-                                                getInt("value");
-                                        double durMinutes = ((double) durSeconds) / 60;
-                                        distMatrix[i][j] = durMinutes;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-                }
-            }
-
-            HeldKarpTSP hk = new HeldKarpTSP();
-
-            LinkedList<Integer> path = (LinkedList<Integer>) hk.optimalRoute(distMatrix)[1];
-            ArrayList<Place> placesRoute = new ArrayList<>();
-            int i = 0;
-            while (i < path.size()) {
-                placesRoute.add(kList.get(path.get(i)));
-                i++;
-            }
-            /*String route = "";
-            for (Place p : placesRoute) {
-                route += "-> " + p.getName();
-            }
-            System.out.println("ROUTE: " + route);*/
-
-            Intent mapsIntent = new Intent(getApplicationContext(), MapsActivity.class);
-            mapsIntent.putExtra("route", placesRoute);
-            startActivity(mapsIntent);
             return null;
         }
     }

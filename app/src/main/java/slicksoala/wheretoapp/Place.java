@@ -1,7 +1,5 @@
 package slicksoala.wheretoapp;
 
-import android.os.Parcelable;
-
 import java.io.Serializable;
 
 public class Place implements Serializable {

@@ -3,7 +3,6 @@ package slicksoala.wheretoapp;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
@@ -13,9 +12,9 @@ import java.net.URL;
 
 import javax.net.ssl.HttpsURLConnection;
 
-public class FeedbackForm extends AppCompatActivity {
+public class FeedbackActivity extends AppCompatActivity {
 
-    final static String url = "https://where2trip.herokuapp.com/feedback";
+    final static String url = "https://where2trip.herokuapp.com/api/feedback";
     EditText feedbackTxt;
     Button submitBtn;
 
@@ -39,10 +38,10 @@ public class FeedbackForm extends AppCompatActivity {
             }
         });
         postThread.start();
-        Toast.makeText(FeedbackForm.this,
+        Toast.makeText(FeedbackActivity.this,
                 "Feedback received! Thank you for your inputs!",
                 Toast.LENGTH_LONG).show();
-        Intent backIntent = new Intent(this, DetailsForm.class);
+        Intent backIntent = new Intent(this, HomeScreenActivity.class);
         startActivity(backIntent);
     }
 

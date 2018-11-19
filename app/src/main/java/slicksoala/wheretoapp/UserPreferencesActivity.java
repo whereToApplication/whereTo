@@ -1,14 +1,20 @@
 package slicksoala.wheretoapp;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.Button;
+import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.RadioButton;
+import android.widget.TextView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -23,8 +29,15 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
 
-public class UserPreferencesScreen extends AppCompatActivity {
+import info.hoang8f.android.segmented.SegmentedGroup;
+
+public class UserPreferencesActivity extends AppCompatActivity {
+    private ArrayList<Integer> selectedPrefs;
+    private ArrayList<Place> places;
+    private String transit;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,8 +48,13 @@ public class UserPreferencesScreen extends AppCompatActivity {
 
         Intent intent = getIntent();
         Bundle extra = intent.getBundleExtra("extra");
-        ArrayList<Place> places = (ArrayList<Place>) extra.getSerializable("preferences");
-        PreferencesListAdapter prefAdapter = new PreferencesListAdapter(
+        places = (ArrayList<Place>) extra.getSerializable("preferences");
+        transit = intent.getStringExtra("transit");
+        selectedPrefs = new ArrayList<>(places.size());
+        for (int i = 0; i < places.size(); i++) {
+            selectedPrefs.add(-1);
+        }
+        PrefListAdapter prefAdapter = new PrefListAdapter(
                 this, places);
         preferencesListView.setAdapter(prefAdapter);
 
@@ -51,7 +69,7 @@ public class UserPreferencesScreen extends AppCompatActivity {
 
             int i = 0;
             int pos = 0;
-            while (i < Math.max(k, places.size()) && pos < places.size()) {
+            while (i < Math.min(k, places.size()) && pos < places.size()) {
                 if (places.get(pos).getUserPref() >= 0.5) {
                     Log.d("place", places.get(pos).getName());
                     kList.add(places.get(pos));
@@ -73,7 +91,7 @@ public class UserPreferencesScreen extends AppCompatActivity {
         final String API_KEY = "AIzaSyAr-MIu6A-LmtXGsm94fDfIjICLguluajQ";
         @Override
         protected Void doInBackground(ArrayList<Place>... al) {
-            Intent intentSplash = new Intent(UserPreferencesScreen.this, SplashActivity.class);
+            Intent intentSplash = new Intent(UserPreferencesActivity.this, SplashActivity.class);
             startActivity(intentSplash);
             ArrayList<Place> kList = al[0];
             double[][] distMatrix = new double[kList.size()][kList.size()];
@@ -162,8 +180,55 @@ public class UserPreferencesScreen extends AppCompatActivity {
 
             Intent mapsIntent = new Intent(getApplicationContext(), MapsActivity.class);
             mapsIntent.putExtra("route", placesRoute);
+            mapsIntent.putExtra("places", places);
+            mapsIntent.putExtra("transit", transit);
             startActivity(mapsIntent);
             return null;
         }
+    }
+
+
+    class PrefListAdapter extends ArrayAdapter<Place>{
+        private final Context mContext;
+        private final int mResource;
+        private Place place;
+        private int position;
+
+        PrefListAdapter(@NonNull Context context, List<Place> objects) {
+            super(context, R.layout.layout_preferenceitem, objects);
+            mContext = context;
+            mResource = R.layout.layout_preferenceitem;
+        }
+        @NonNull
+        @Override
+        public View getView(int position, View convertView, @NonNull ViewGroup parent) {
+            this.position = position;
+            place = Objects.requireNonNull(getItem(position));
+            String qformat1 = "Do you like ";
+            String category = place.getCategory();
+            String qformat2 = "?";
+            LayoutInflater inflater = LayoutInflater.from(mContext);
+            convertView = inflater.inflate(mResource, parent, false);
+
+            TextView prefText = convertView.findViewById(R.id.prefqTxt);
+            prefText.setText(qformat1 + category + qformat2);
+
+            RadioButton yesBtn = convertView.findViewById(R.id.yesBtn);
+            yesBtn.setOnClickListener(v -> {
+                selectedPrefs.set(position, 0);
+                place.setUserPref(1.0);
+            });
+            RadioButton noBtn = convertView.findViewById(R.id.noBtn);
+            noBtn.setOnClickListener(v -> {
+                selectedPrefs.set(position, 1);
+                place.setUserPref(0.0);
+            });
+
+            SegmentedGroup ynGroup = convertView.findViewById(R.id.prefGroup);
+            if (selectedPrefs.get(position) != -1)
+                ((RadioButton)ynGroup.getChildAt(selectedPrefs.get(position))).setChecked(true);
+            return convertView;
+        }
+
     }
 }

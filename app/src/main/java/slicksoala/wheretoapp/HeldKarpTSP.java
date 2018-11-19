@@ -4,16 +4,13 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.HashSet;
-import java.util.Deque;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 import java.util.ArrayList;
 import java.util.Collections;
 
-public class HeldKarpTSP {
-
-    private static int INFINITY = 100000000;
+class HeldKarpTSP {
 
 
     private static class Index {
@@ -53,7 +50,7 @@ public class HeldKarpTSP {
         }
     }
 
-    public Object[] optimalRoute(double[][] distance) {
+    Object[] optimalRoute(double[][] distance) {
 
         //stores intermediate values in map
         Map<Index, Double> minCostDP = new HashMap<>();
@@ -67,7 +64,7 @@ public class HeldKarpTSP {
                     continue;
                 }
                 Index index = Index.createIndex(currentVertex, set);
-                double minCost = INFINITY;
+                double minCost = 100000000;
                 int minPrevVertex = 0;
                 //to avoid ConcurrentModificationException copy set into another set while iterating
                 Set<Integer> copySet = new HashSet<>(set);
