@@ -167,7 +167,7 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
         
         
         let auth_header = [
-            "Authorization": "Bearer IRT-fzwU1f8luW7wcdWJ5wSzmTOWoJuYKAOMZJtlv-D6s-MVhzGwu7MLn77_A2NWUohglYO_WZhBgejDmHINDKSSP-jzSKFoa_DeL3TdYGrezK1TFeYaHLagsmvLW3Yx",
+            "Authorization": EnvironmentVariables.init().YelpAPIKey,
             ]
         
         var urlText = "https://api.yelp.com/v3/businesses/search?term=\(eventsText)&latitude=\(self.latitude)&longitude=\(self.longitude)&radius=\(radiusText)"
