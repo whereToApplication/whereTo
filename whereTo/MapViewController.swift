@@ -52,6 +52,7 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
     override func viewDidLoad() {
         super.viewDidLoad()
         placeName.text = name
+        
         mapView.centerCoordinate = CLLocationCoordinate2D(latitude: Double(dlatitude) ?? Double(slatitude)!, longitude: Double(self.dlongitude) ?? Double(self.slongitude)!)
         let myAnnotation: MKPointAnnotation = MKPointAnnotation()
         myAnnotation.coordinate = CLLocationCoordinate2DMake(Double(dlatitude) ?? Double(slatitude)!, Double(dlongitude) ?? Double(slongitude)!)
@@ -60,6 +61,8 @@ class MapViewController: UIViewController, MKMapViewDelegate, CLLocationManagerD
         mapView.addAnnotation(myAnnotation)
         centerMapOnLocation(location: initialLocation as! CLLocation)
         placeName.fitTextToBounds()
+        
+        
         let singleTap = UITapGestureRecognizer(target: self, action: #selector(self.goBtn))
         goLabel.isUserInteractionEnabled = true
         goLabel.addGestureRecognizer(singleTap)

@@ -25,6 +25,15 @@ class ViewController: UIViewController {
 
 
 extension UIView {
+//    @IBInspectable
+//    var fontSize: CGFloat {
+//        get {
+//            return layer.fontSize
+//        }
+//        set {
+//            layer.fontSize = newValue
+//        }
+//    }
     @IBInspectable
     var cornerRadius: CGFloat {
         get {

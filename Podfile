@@ -6,12 +6,16 @@ target 'whereTo' do
   use_frameworks!
 
   # Pods for whereTo
-	pod 'Alamofire', '~> 4.7'
+  pod 'Alamofire', '~> 4.7'
     pod 'SwiftyJSON'
     pod 'GoogleMaps'
     pod 'Pulsator'
     pod 'JJFloatingActionButton'
+    pod 'Fabric'
+    pod 'Crashlytics'
     pod 'MaterialComponents/Buttons'
+    pod "ModelMapper"
+    
   target 'whereToTests' do
     inherit! :search_paths
     # Pods for testing

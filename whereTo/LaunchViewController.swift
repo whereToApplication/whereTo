@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import Alamofire
+// import Alamofire
 import MapKit
 import SwiftyJSON
 import Pulsator
@@ -130,34 +130,30 @@ class LaunchViewController: UIViewController, UIPickerViewDataSource, UIPickerVi
         testLaunch.isUserInteractionEnabled = true
         testLaunch.addGestureRecognizer(singleTap)
 
-//        let floaty = Floaty()
-//        floaty.addItem("Hello, World!", icon: UIImage(named: "trekking")!)
-//        self.view.addSubview(floaty)
-        // Do any additional setup after loading the view.
     }
     
     @objc func testLaunchClicked() {
         print("action " + action)
-        Alamofire.request("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(latitude),\(longitude)&radius=\(distance)&type=\(action)&key=AIzaSyBfiWNwy-JuUD59MQqEa_PkEiIlmVmVSu0", method: HTTPMethod.get, encoding: JSONEncoding.default, headers: nil).responseJSON {
-            response in
-            if let jsonValue = response.result.value {
-                let json = SwiftyJSON.JSON(jsonValue)
-                print(json["results"])
-                print(json["results"].count)
-                let randnum = Int(arc4random_uniform(UInt32(json["results"].count)))
-                print(json["results"][randnum]["name"])
-                self.locationname = json["results"][randnum]["name"].stringValue
-                self.locationlatitude = json["results"][randnum]["geometry"]["location"]["lat"].stringValue
-                self.locationlongitude = json["results"][randnum]["geometry"]["location"]["lng"].stringValue
-                self.performSegue(withIdentifier: "mapSegue", sender: self)
-            }
-        }
+//        Alamofire.request("https://maps.googleapis.com/maps/api/place/nearbysearch/json?location=\(latitude),\(longitude)&radius=\(distance)&type=\(action)&key=AIzaSyBfiWNwy-JuUD59MQqEa_PkEiIlmVmVSu0", method: HTTPMethod.get, encoding: JSONEncoding.default, headers: nil).responseJSON {
+//            response in
+//            if let jsonValue = response.result.value {
+//                let json = SwiftyJSON.JSON(jsonValue)
+//                print(json["results"])
+//                print(json["results"].count)
+//                let randnum = Int(arc4random_uniform(UInt32(json["results"].count)))
+//                print(json["results"][randnum]["name"])
+//                self.locationname = json["results"][randnum]["name"].stringValue
+//                self.locationlatitude = json["results"][randnum]["geometry"]["location"]["lat"].stringValue
+//                self.locationlongitude = json["results"][randnum]["geometry"]["location"]["lng"].stringValue
+//                self.performSegue(withIdentifier: "mapSegue", sender: self)
+//            }
+//        }
     }
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         guard let locValue: CLLocationCoordinate2D = manager.location?.coordinate else { return }
         latitude = locValue.latitude
         longitude = locValue.longitude
-        print("locations = \(latitude) \(longitude)")
+//        print("locations = \(latitude) \(longitude)")
     }
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
