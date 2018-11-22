@@ -20,7 +20,7 @@ class UserPreferenceViewController: UIViewController {
     var spotList: [Place] = [];
     var voteUpCategories: Set<String> = Set<String>.init();
     var voteDownCategories: Set<String> = Set<String>.init();
-    
+    var delta = 0; 
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -103,7 +103,17 @@ class UserPreferenceViewController: UIViewController {
             for count in 0 ... self.k  {
                 self.spotList.append(places[count]);
             }
-
+            
+            //here is the uniqueness algorithm where uniqueness == randomization. delta = the score given by the user during set-up
+            //the 0 spot is user location so must ensure we don't overwrite that. 
+            var visitedSet: Set<Int> = Set<Int>.init();
+            for count in 0 ..< self.delta {
+                var j = Int.random(in: self.k ..< places.count);
+                if !visitedSet.contains(j) {
+                    swap(&spotList[count+1], &places[j]);
+                    visitedSet.insert(j);
+                }
+            }
         }
         
         performSegue(withIdentifier: "tableToAlgoIdentifier", sender: self)

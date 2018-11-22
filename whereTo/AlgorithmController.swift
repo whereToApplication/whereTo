@@ -234,7 +234,7 @@ extension AlgorithmController: MKMapViewDelegate {
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
             let renderer = AnimatedGradientPathRenderer(overlay: overlay)
             renderer.strokeColor = UIColor.orange
-            renderer.lineWidth = 3
+            renderer.lineWidth = 100
             return renderer
     }
 

@@ -32,6 +32,11 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
     var modeText: String = ""
     var tempcategories: Set<String> = Set<String>.init();
 
+    @IBOutlet weak var userTypeSlider: UISlider!
+    @IBAction func userType(_ sender: UISlider) {
+        sender.setValue(sender.value.rounded(.down), animated: true)
+        delta = Int(sender.value);
+    }
     @IBOutlet weak var dates: UIDatePicker!
     @IBAction func timeAction(_ sender: UIDatePicker) {
         let date = sender
@@ -82,7 +87,31 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
-
+    @IBAction func onFeedbackButtonClicked(_ sender: Any) {
+        let alert = UIAlertController(title: "Feedback", message: "Let us know how we can improve whereTo?", preferredStyle: .alert)
+        alert.addTextField { textField in
+            let heightConstraint = NSLayoutConstraint(item: textField, attribute: .height, relatedBy: .equal, toItem: nil, attribute: .notAnAttribute, multiplier: 1, constant: 100)
+            textField.addConstraint(heightConstraint)
+        }
+        alert.addAction(UIAlertAction(title: NSLocalizedString("Submit", comment: "Be sure to pick everything"), style: .default, handler: { _ in
+            let feedbackText = alert.textFields?[0].text ?? ""
+            let urlString = "http://where2trip.herokuapp.com/feedback"
+            let encodedUrl = urlString.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed);
+            let body : Parameters = [
+                "feedback": feedbackText
+            ]
+            Alamofire.request(encodedUrl!, method: .post, parameters: body, encoding: JSONEncoding.default, headers: nil).responseString {
+                response in
+                print(response)
+                let alert = UIAlertController(title: "Submitted!", message: "Your feedback has been submitted", preferredStyle: .alert)
+                alert.addAction(UIAlertAction(title: NSLocalizedString("OK", comment: "Be sure to pick everything"), style: .default, handler: { _ in
+                    NSLog("The \"OK\" alert occured.")
+                }))
+                self.present(alert, animated: true, completion: nil)
+            }
+        }))
+    }
+    
     @IBAction func submit(_ sender: UIButton) {
         if radiusText.count > 0 && eventsText.count > 0 && k > 0 {
             if k <= 0 {
@@ -116,6 +145,7 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
             destination.paceText = self.paceText
             destination.timeText = self.timeText
             destination.k = self.k
+            destination.delta = self.delta;
         }
     }
     override func viewDidLoad() {
@@ -197,7 +227,8 @@ class optionsViewController: UIViewController, CLLocationManagerDelegate {
                 
                 self.spotList = newPlaces;
                 
-                
+                //normalize the delta w.r.t. the #of places to visit
+                self.delta = self.delta/self.k;
                 self.performSegue(withIdentifier: "preferenceIdentifier", sender: self);
             }
         }
@@ -225,3 +256,4 @@ extension optionsViewController: UIPickerViewDataSource, UIPickerViewDelegate {
         k = row + 1;
     }
 }
+
