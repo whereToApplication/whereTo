@@ -65,6 +65,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mapFragment.getMapAsync(this);
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent backHomeIntent = new Intent(this, HomeScreenActivity.class);
+        startActivity(backHomeIntent);
+    }
+
     public void onRerollClick(View view) {
         ArrayList<Place> kList = new ArrayList<>();
         kList.add(currPlace);

@@ -1,0 +1,349 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:segmentedgroup="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".HomeScreenActivity">
+
+    <LinearLayout
+        android:id="@+id/filler1"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="vertical"></LinearLayout>
+
+    <TextView
+        android:id="@+id/timeLabel"
+        android:layout_width="wrap_content"
+        android:layout_height="25dp"
+        android:layout_gravity="center"
+        android:fontFamily="@font/carrois_gothic_sc"
+        android:text="What time do you want to be back by?"
+        android:textColor="@color/colorPrimary"
+        android:textSize="20sp" />
+
+    <TimePicker
+        android:id="@+id/timePicker"
+        android:layout_width="match_parent"
+        android:layout_height="95dp"
+        android:layout_gravity="center"
+        android:timePickerMode="spinner" />
+
+    <LinearLayout
+        android:id="@+id/filler2"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="9"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/activityFill"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="13"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <LinearLayout
+            android:id="@+id/filler3"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/activityLabel"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="15"
+            android:fontFamily="@font/carrois_gothic_sc"
+            android:text="ACTIVITY"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="italic" />
+
+        <LinearLayout
+            android:id="@+id/filler4"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <info.hoang8f.android.segmented.SegmentedGroup
+            android:id="@+id/activityGroup"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:layout_weight="76"
+            android:orientation="horizontal"
+            segmentedgroup:sc_border_width="2dp"
+            segmentedgroup:sc_corner_radius="10dp"
+            segmentedgroup:sc_tint_color="@color/colorPrimaryDark">
+
+            <RadioButton
+                android:id="@+id/sightsBtn"
+                style="@style/RadioButton"
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                android:layout_weight="23"
+                android:text="Sights" />
+
+            <RadioButton
+                android:id="@+id/foodBtn"
+                style="@style/RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="23"
+                android:text="Food" />
+
+            <RadioButton
+                android:id="@+id/roamBtn"
+                style="@style/RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="23"
+                android:text="Roam" />
+        </info.hoang8f.android.segmented.SegmentedGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/filler5"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/transitFill"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="13"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <LinearLayout
+            android:id="@+id/filler6"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/transitLabel"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="15"
+            android:fontFamily="@font/carrois_gothic_sc"
+            android:text="TRANSIT"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="italic" />
+
+        <LinearLayout
+            android:id="@+id/filler7"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <info.hoang8f.android.segmented.SegmentedGroup
+            android:id="@+id/travelGroup"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:layout_weight="76"
+            android:orientation="horizontal"
+            segmentedgroup:sc_border_width="2dp"
+            segmentedgroup:sc_corner_radius="10dp"
+            segmentedgroup:sc_tint_color="@color/colorPrimaryDark">
+
+            <RadioButton
+                android:id="@+id/walkBtn"
+                style="@style/RadioButton"
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                android:layout_alignTop="@+id/travelGroup"
+                android:layout_weight="15"
+                android:text="Walk" />
+
+            <RadioButton
+                android:id="@+id/driveBtn"
+                style="@style/RadioButton"
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:text="Drive" />
+
+            <RadioButton
+                android:id="@+id/publicBtn"
+                style="@style/RadioButton"
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:text="Public" />
+
+            <RadioButton
+                android:id="@+id/mixBtn"
+                style="@style/RadioButton"
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                android:layout_weight="15"
+                android:text="Mix" />
+        </info.hoang8f.android.segmented.SegmentedGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/filler8"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="5"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/paceFill"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="13"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <LinearLayout
+            android:id="@+id/filler10"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="horizontal"
+            android:weightSum="100">
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/paceLabel"
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="15"
+            android:fontFamily="@font/carrois_gothic_sc"
+            android:text="PACE"
+            android:textAlignment="center"
+            android:textColor="@color/colorPrimary"
+            android:textSize="20sp"
+            android:textStyle="italic" />
+
+        <LinearLayout
+            android:id="@+id/filler11"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="2"
+            android:orientation="horizontal">
+
+        </LinearLayout>
+
+        <info.hoang8f.android.segmented.SegmentedGroup
+            android:id="@+id/paceGroup"
+            android:layout_width="10dp"
+            android:layout_height="match_parent"
+            android:layout_weight="76"
+            android:orientation="horizontal"
+            segmentedgroup:sc_border_width="2dp"
+            segmentedgroup:sc_corner_radius="10dp"
+            segmentedgroup:sc_tint_color="@color/colorPrimaryDark">
+
+            <RadioButton
+                android:id="@+id/chillBtn"
+                style="@style/RadioButton"
+                android:layout_width="3dp"
+                android:layout_height="match_parent"
+                android:layout_weight="23"
+                android:text="Chill" />
+
+            <RadioButton
+                android:id="@+id/moderateBtn"
+                style="@style/RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="23"
+                android:text="Moderate" />
+
+            <RadioButton
+                android:id="@+id/fastBtn"
+                style="@style/RadioButton"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="23"
+                android:text="Fast" />
+        </info.hoang8f.android.segmented.SegmentedGroup>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/filler12"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="12"
+        android:orientation="vertical">
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/filler13"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="20"
+        android:orientation="horizontal">
+
+        <LinearLayout
+            android:id="@+id/filler14"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="20"
+            android:orientation="horizontal"></LinearLayout>
+
+        <ImageView
+            android:id="@+id/contBtn"
+            android:layout_width="112dp"
+            android:layout_height="79dp"
+            android:layout_marginBottom="16dp"
+            android:src="@drawable/gobutton" />
+
+        <LinearLayout
+            android:id="@+id/filler15"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="20"
+            android:orientation="horizontal"></LinearLayout>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/fbBtn"
+        android:layout_width="wrap_content"
+        android:layout_height="4dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginEnd="33dp"
+        android:layout_marginBottom="36dp"
+        android:layout_weight="5"
+        android:background="@color/colorPrimaryDark"
+        android:fontFamily="@font/convergence"
+        android:text="Feedback"
+        android:textColor="@android:color/background_light" />
+
+</LinearLayout>

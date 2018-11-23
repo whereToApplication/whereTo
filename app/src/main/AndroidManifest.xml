@@ -13,7 +13,8 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme.NoActionBar"
+        android:usesCleartextTraffic="true">
         <activity android:name=".HomeScreenActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -46,7 +47,13 @@
             android:required="false" />
 
         <activity android:name=".FeedbackActivity" />
-        <activity android:name=".UserPreferencesActivity"></activity>
+        <activity android:name=".UserPreferencesActivity" />
+
+        <meta-data
+            android:name="io.fabric.ApiKey"
+            android:value="4cb34da491c0c86e1efffe7ca1283b099f00f972" />
+
+        <activity android:name=".PlacesFetchSplash"></activity>
     </application>
 
 </manifest>

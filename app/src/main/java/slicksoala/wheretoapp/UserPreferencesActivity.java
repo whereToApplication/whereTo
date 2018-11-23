@@ -83,6 +83,12 @@ public class UserPreferencesActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onBackPressed() {
+        Intent backHomeIntent = new Intent(this, HomeScreenActivity.class);
+        startActivity(backHomeIntent);
+    }
+
     class OptRoutingTask extends AsyncTask<ArrayList<Place>, Void, Void> {
         final String DISTMATRIX_BASE = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric";
         final String ORIG_PAR = "&origins=";
@@ -97,7 +103,7 @@ public class UserPreferencesActivity extends AppCompatActivity {
             double[][] distMatrix = new double[kList.size()][kList.size()];
 
             StringBuilder sb = new StringBuilder();
-            if (kList != null && kList.size() != 0) {
+            if (kList.size() != 0) {
                 sb.append(Double.toString(kList.get(0).getLatitude()));
                 sb.append(",");
                 sb.append(Double.toString(kList.get(0).getLongitude()));
@@ -113,7 +119,7 @@ public class UserPreferencesActivity extends AppCompatActivity {
 
             URL url;
             HttpURLConnection urlConnection = null;
-            String resultString = "";
+            StringBuilder resultString = new StringBuilder();
 
             try {
                 url = new URL(urlString);
@@ -125,10 +131,10 @@ public class UserPreferencesActivity extends AppCompatActivity {
                 int data = reader.read();
                 while (data != -1) {
                     char current = (char) data;
-                    resultString += current;
+                    resultString.append(current);
                     data = reader.read();
                 }
-                JSONObject jsonObject = new JSONObject(resultString);
+                JSONObject jsonObject = new JSONObject(resultString.toString());
                 if (jsonObject.has("rows")) {
                     JSONArray rowsArray = jsonObject.getJSONArray("rows");
                     for (int i = 0; i < rowsArray.length(); i++) {
