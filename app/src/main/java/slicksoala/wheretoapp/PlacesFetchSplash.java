@@ -22,16 +22,50 @@ import java.util.ArrayList;
 
 public class PlacesFetchSplash extends AppCompatActivity {
 
+    int k;
+    String act;
+    String transit;
+    FoodSelectTask ftask;
+    SightSelectTask stask;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.splash_places_fetch);
+        setContentView(R.layout.screen_splash);
         RippleBackground rippleBackground = (RippleBackground) findViewById(R.id.ripple);
         rippleBackground.startRippleAnimation();
 
+        Intent intent = getIntent();
+        act = intent.getStringExtra("activity");
+        k = intent.getIntExtra("k", 1);
+        String currLat = intent.getStringExtra("latitude");
+        String currLong = intent.getStringExtra("longitude");
+        String maxRad = intent.getStringExtra("range");
+        transit = intent.getStringExtra("transit");
 
-        
+
+        if (act.equals("Food")) {
+            ftask = new FoodSelectTask();
+            ftask.execute(currLat, currLong, maxRad, act);
+            return;
+        } else {
+            stask = new SightSelectTask();
+            stask.execute(currLat, currLong, maxRad, act);
+            return;
+        }
     }
+
+    @Override
+    public void onBackPressed() {
+        if (act.equals("Food")) {
+            ftask.cancel(true);
+        } else {
+            stask.cancel(true);
+        }
+        Intent backHomeIntent = new Intent(this, HomeScreenActivity.class);
+        startActivity(backHomeIntent);
+    }
+
 
     class FoodSelectTask extends AsyncTask<String, Void, Void> {
         //https://api.yelp.com/v3/businesses/search?term=food&latitude=33.78508547&longitude=-84.3879824&radius=1000
@@ -53,15 +87,9 @@ public class PlacesFetchSplash extends AppCompatActivity {
         boolean results;
         ArrayList<Place> parseList;
         Place currPlace;
-        int k;
 
         @Override
         protected Void doInBackground(String... params) {
-
-            k = getAvailableTime()/(2*pace.getTime());
-
-            if (k == 0) k = 1;
-            else if (k > 8) k = 8;
 
             currLat = params[0];
             currLong = params[1];
@@ -206,15 +234,9 @@ public class PlacesFetchSplash extends AppCompatActivity {
         boolean results;
         ArrayList<Place> parseList;
         Place currPlace;
-        int k;
 
         @Override
         protected Void doInBackground(String... params) {
-
-            k = getAvailableTime()/(2*pace.getTime());
-
-            if (k == 0) k = 1;
-            else if (k > 8) k = 8;
 
             currLat = params[0];
             currLong = params[1];

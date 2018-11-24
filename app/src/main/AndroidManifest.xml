@@ -22,7 +22,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".SplashActivity" />
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
              (See the file "res/values/google_maps_api.xml").
@@ -53,7 +52,8 @@
             android:name="io.fabric.ApiKey"
             android:value="4cb34da491c0c86e1efffe7ca1283b099f00f972" />
 
-        <activity android:name=".PlacesFetchSplash"></activity>
+        <activity android:name=".PlacesFetchSplash" />
+        <activity android:name=".RoutingSplash"></activity>
     </application>
 
 </manifest>

@@ -78,8 +78,11 @@ public class UserPreferencesActivity extends AppCompatActivity {
                 pos++;
             }
 
-            OptRoutingTask dmtask = new OptRoutingTask();
-            dmtask.execute(kList);
+            Intent routing = new Intent(this, RoutingSplash.class);
+            routing.putExtra("places", places);
+            routing.putExtra("kList", kList);
+            routing.putExtra("transit", transit);
+            startActivity(routing);
         });
     }
 
@@ -88,112 +91,7 @@ public class UserPreferencesActivity extends AppCompatActivity {
         Intent backHomeIntent = new Intent(this, HomeScreenActivity.class);
         startActivity(backHomeIntent);
     }
-
-    class OptRoutingTask extends AsyncTask<ArrayList<Place>, Void, Void> {
-        final String DISTMATRIX_BASE = "https://maps.googleapis.com/maps/api/distancematrix/json?units=metric";
-        final String ORIG_PAR = "&origins=";
-        final String DEST_PAR = "&destinations=";
-        final String KEY_PAR = "&key=";
-        final String API_KEY = "AIzaSyAr-MIu6A-LmtXGsm94fDfIjICLguluajQ";
-        @Override
-        protected Void doInBackground(ArrayList<Place>... al) {
-            Intent intentSplash = new Intent(UserPreferencesActivity.this, SplashActivity.class);
-            startActivity(intentSplash);
-            ArrayList<Place> kList = al[0];
-            double[][] distMatrix = new double[kList.size()][kList.size()];
-
-            StringBuilder sb = new StringBuilder();
-            if (kList.size() != 0) {
-                sb.append(Double.toString(kList.get(0).getLatitude()));
-                sb.append(",");
-                sb.append(Double.toString(kList.get(0).getLongitude()));
-                for (int i = 1; i < kList.size(); i++) {
-                    sb.append("|");
-                    sb.append(Double.toString(kList.get(i).getLatitude()));
-                    sb.append(",");
-                    sb.append(Double.toString(kList.get(i).getLongitude()));
-                }
-            }
-            String origdest = sb.toString();
-            String urlString = DISTMATRIX_BASE + ORIG_PAR + origdest + DEST_PAR + origdest + KEY_PAR + API_KEY;
-
-            URL url;
-            HttpURLConnection urlConnection = null;
-            StringBuilder resultString = new StringBuilder();
-
-            try {
-                url = new URL(urlString);
-                urlConnection = (HttpURLConnection) url.openConnection();
-
-                InputStream in = urlConnection.getInputStream();
-                InputStreamReader reader = new InputStreamReader(in);
-
-                int data = reader.read();
-                while (data != -1) {
-                    char current = (char) data;
-                    resultString.append(current);
-                    data = reader.read();
-                }
-                JSONObject jsonObject = new JSONObject(resultString.toString());
-                if (jsonObject.has("rows")) {
-                    JSONArray rowsArray = jsonObject.getJSONArray("rows");
-                    for (int i = 0; i < rowsArray.length(); i++) {
-                        if (rowsArray.getJSONObject(i).has("elements")) {
-                            JSONArray columnsArray = rowsArray.getJSONObject(i).
-                                    getJSONArray("elements");
-                            for (int j = 0; j < columnsArray.length(); j++) {
-                                if (columnsArray.getJSONObject(j).has("duration")) {
-                                    if (columnsArray.getJSONObject(j).getJSONObject("duration").
-                                            has("value")) {
-                                        int durSeconds = columnsArray.getJSONObject(j).getJSONObject("duration").
-                                                getInt("value");
-                                        double durMinutes = ((double) durSeconds) / 60;
-                                        distMatrix[i][j] = durMinutes;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (JSONException e) {
-                e.printStackTrace();
-            } catch (Exception e) {
-                e.printStackTrace();
-            } finally {
-                if (urlConnection != null) {
-                    urlConnection.disconnect();
-                }
-            }
-
-            HeldKarpTSP hk = new HeldKarpTSP();
-
-            LinkedList<Integer> path = (LinkedList<Integer>) hk.optimalRoute(distMatrix)[1];
-            ArrayList<Place> placesRoute = new ArrayList<>();
-            int i = 0;
-            while (i < path.size()) {
-                placesRoute.add(kList.get(path.get(i)));
-                i++;
-            }
-            /*String route = "";
-            for (Place p : placesRoute) {
-                route += "-> " + p.getName();
-            }
-            System.out.println("ROUTE: " + route);*/
-
-            Intent mapsIntent = new Intent(getApplicationContext(), MapsActivity.class);
-            mapsIntent.putExtra("route", placesRoute);
-            mapsIntent.putExtra("places", places);
-            mapsIntent.putExtra("transit", transit);
-            startActivity(mapsIntent);
-            return null;
-        }
-    }
-
-
+    
     class PrefListAdapter extends ArrayAdapter<Place>{
         private final Context mContext;
         private final int mResource;
