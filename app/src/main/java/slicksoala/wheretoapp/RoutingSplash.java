@@ -25,7 +25,6 @@ public class RoutingSplash extends AppCompatActivity {
 
     private String transit;
     private ArrayList<Place> places;
-    private ArrayList<Place> kList;
     OptRoutingTask dmtask;
 
     @Override
@@ -37,7 +36,7 @@ public class RoutingSplash extends AppCompatActivity {
 
         Intent intent = getIntent();
         places = (ArrayList<Place>) intent.getSerializableExtra("places");
-        kList = (ArrayList<Place>) intent.getSerializableExtra("kList");
+        ArrayList<Place> kList = (ArrayList<Place>) intent.getSerializableExtra("kList");
         transit = intent.getStringExtra("transit");
 
         dmtask = new OptRoutingTask();
@@ -148,7 +147,6 @@ public class RoutingSplash extends AppCompatActivity {
 
             return null;
         }
-
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
             Intent mapsIntent = new Intent(getApplicationContext(), MapsActivity.class);

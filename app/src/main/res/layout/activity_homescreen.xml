@@ -300,7 +300,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="12"
-        android:orientation="vertical">
+        android:orientation="horizontal">
 
     </LinearLayout>
 
@@ -336,11 +336,10 @@
     <Button
         android:id="@+id/fbBtn"
         android:layout_width="wrap_content"
-        android:layout_height="4dp"
+        android:layout_height="22dp"
         android:layout_marginStart="28dp"
         android:layout_marginEnd="33dp"
         android:layout_marginBottom="36dp"
-        android:layout_weight="5"
         android:background="@color/colorPrimaryDark"
         android:fontFamily="@font/convergence"
         android:text="Feedback"

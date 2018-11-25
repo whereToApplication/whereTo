@@ -206,7 +206,7 @@ public class HomeScreenActivity extends AppCompatActivity implements RadioGroup.
                 return;
             }
 
-            int maxRad = travelType.getAvgSpeed() * availableTime/2;
+            int maxRad = travelType.getAvgSpeed() * availableTime/4;
 
             String act = activity.toString();
             if (maxRad > 40000)

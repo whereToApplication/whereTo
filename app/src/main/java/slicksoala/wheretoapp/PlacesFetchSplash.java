@@ -146,9 +146,9 @@ public class PlacesFetchSplash extends AppCompatActivity {
                                 poi.setName(itemsArray.getJSONObject(i).optString("name"));
                                 poi.setRating(itemsArray.getJSONObject(i).optString("rating"));
                                 if (itemsArray.getJSONObject(i).has("categories")) {
-                                    StringBuilder cat = new StringBuilder();
+                                    //StringBuilder cat = new StringBuilder();
                                     JSONArray catArray = itemsArray.getJSONObject(i).getJSONArray("categories");
-                                    if (catArray.length() == 1) {
+                                    /*if (catArray.length() == 1) {
                                         cat.append(catArray.getJSONObject(0).optString("title"));
                                     }
                                     else if (catArray.length() == 2) {
@@ -160,7 +160,10 @@ public class PlacesFetchSplash extends AppCompatActivity {
                                         }
                                         cat.append("and ").append(catArray.getJSONObject(catArray.length() - 1).optString("title"));
                                     }
-                                    poi.setCategory(cat.toString());
+                                    poi.setCategory(cat.toString());*/
+                                    for (int j = 0; j < catArray.length(); j++) {
+                                        poi.addCategory(catArray.getJSONObject(j).optString("title"));
+                                    }
                                 }
                                 if (itemsArray.getJSONObject(i).has("coordinates"))
                                 {
@@ -297,9 +300,9 @@ public class PlacesFetchSplash extends AppCompatActivity {
                                             poi.setRating("3");
 
                                             if (itemsArray.getJSONObject(i).getJSONObject("venue").has("categories")) {
-                                                StringBuilder cat = new StringBuilder();
+                                                //StringBuilder cat = new StringBuilder();
                                                 JSONArray catArray = itemsArray.getJSONObject(i).getJSONObject("venue").getJSONArray("categories");
-                                                if (catArray.length() == 1) {
+                                                /*if (catArray.length() == 1) {
                                                     cat.append(catArray.getJSONObject(0).optString("pluralName"));
                                                 }
                                                 else if (catArray.length() == 2) {
@@ -311,7 +314,10 @@ public class PlacesFetchSplash extends AppCompatActivity {
                                                     }
                                                     cat.append("and ").append(catArray.getJSONObject(catArray.length() - 1).optString("title"));
                                                 }
-                                                poi.setCategory(cat.toString());
+                                                poi.setCategory(cat.toString());*/
+                                                for (int j = 0; j < catArray.length(); j++) {
+                                                    poi.addCategory(catArray.getJSONObject(j).optString("pluralName"));
+                                                }
                                             }
                                         }
                                     }
@@ -337,7 +343,7 @@ public class PlacesFetchSplash extends AppCompatActivity {
             if (results) {
                 Intent intentPref = new Intent(PlacesFetchSplash.this, UserPreferencesActivity.class);
                 Bundle extra = new Bundle();
-                extra.putSerializable("preferences", parseList);
+                extra.putSerializable("places", parseList);
                 extra.putSerializable("currPlace", currPlace);
                 intentPref.putExtra("extra", extra);
                 intentPref.putExtra("k", k);

@@ -1,20 +1,22 @@
 package slicksoala.wheretoapp;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 
 public class Place implements Serializable {
     private String name;
     private String category;
+    private ArrayList<String> categories;
     private String rating;
-    private String opennow;
-    private double userPref = 0.5;
+    private double userPref;
     private double latitude,longitude;
     public Place()
     {
         this.name="";
         this.category="";
         this.rating="";
-        this.opennow="";
+        this.categories = new ArrayList<String>();
+        this.userPref = 0.5;
     }
     public String getName() {
         return name;
@@ -34,19 +36,10 @@ public class Place implements Serializable {
     public void setRating(String rating) {
         this.rating = rating;
     }
-    public String getOpen() {
-        return opennow;
-    }
-    public void setOpenNow(String open) {
-        this.opennow = open;
-    }
-    public void setLatLng(double lat,double lon)
-    {
+    public void setLatLng(double lat,double lon) {
         this.latitude=lat;
         this.longitude=lon;
     }
-
-
     public double getLatitude() {
         return latitude;
     }
@@ -58,8 +51,13 @@ public class Place implements Serializable {
     public double getUserPref() {
         return userPref;
     }
-
     public void setUserPref(double userPref) {
         this.userPref = userPref;
+    }
+    public void addCategory(String category) {
+        this.categories.add(category);
+    }
+    public ArrayList<String> getCategories() {
+        return categories;
     }
 }
